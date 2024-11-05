@@ -2,13 +2,14 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-namespace MainMenu
+namespace Splash
 {
-    public class UIMainMenu : MonoBehaviour
+    public class UISplash : MonoBehaviour
     {
         public void LoadScene(int index)
         {
             SceneManager.LoadScene(index);
+            Debug.Log("Open");
         }
 
         public void QuitGame()
@@ -27,7 +28,7 @@ namespace MainMenu
 
         private void Update()
         {
-            if (Input.GetMouseButtonDown(0) && !IsPointerOverUI())
+            if (Input.GetMouseButtonDown(0) /*&& !IsPointerOverUI()*/)
                 LoadScene(1);
         }
 
