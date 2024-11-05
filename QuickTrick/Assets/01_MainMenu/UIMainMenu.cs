@@ -11,7 +11,7 @@ namespace MainMenu
     {
 
         private void Start()
-        {
+        { 
             //PlayerRef
             //NetworkRunner.StartGame();
             
