@@ -6,13 +6,26 @@ namespace Splash
 {
     public class UISplash : MonoBehaviour
     {
-        public void LoadScene(int index)
+        public void OnEnable()
         {
-            SceneManager.LoadScene(index);
-            Debug.Log("Open");
+            // 게임 시작 시 적용 할 것...예) PC의 경우 커서 보이게/안보이게
+        }
+        public void OnExitButtonCLick()
+        {
+            QuitGame();
         }
 
-        public void QuitGame()
+        public void OnScreenClick()
+        {
+            LoadScene(1);
+        }
+
+        void LoadScene(int index)
+        {
+            SceneManager.LoadScene(index);
+        }
+
+        void QuitGame()
         {
             Application.Quit();
 
@@ -21,22 +34,11 @@ namespace Splash
             #endif
         }
 
-        public void OnEnable()
-        {
-            // 게임 시작 시 적용 할 것...예) PC의 경우 커서 보이게/안보이게
-        }
-
-        private void Update()
-        {
-            if (Input.GetMouseButtonDown(0) /*&& !IsPointerOverUI()*/)
-                LoadScene(1);
-        }
-
+        /*
         private bool IsPointerOverUI()
         {
             return EventSystem.current.IsPointerOverGameObject();
         }
+        */
     }
-
-
 }
