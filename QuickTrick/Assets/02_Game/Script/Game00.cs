@@ -12,7 +12,11 @@ public class Game00 : MonoBehaviour
     public TextMeshProUGUI log;
     public float givenTime = 5.0f;
 
-    private void Start()
+    // 매우 러프한 스케치
+    // 코루틴 인터페이스로 만들자
+    // 중간에 실행할 함수 (색깔 바꾸기) 를 변수로 받아서 채워넣기만 하는 꼴로 설계
+
+    private void OnEnable()
     {
         green.SetActive(false);
         blue.SetActive(false);

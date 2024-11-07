@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class NetworkManager : MonoBehaviour
 {
     static NetworkManager instance;
-    static NetworkManager Instance { get { return instance; } }
+    public static NetworkManager Instance { get { Init(); return instance; } }
 
     public string RoomName { get; set; }
 
@@ -16,57 +16,44 @@ public class NetworkManager : MonoBehaviour
     private NetworkRunner _networkRunnerPrefab;
     private NetworkRunner networkRunner;
 
-    [SerializeField, Tooltip("매칭 대기 중에 띄워질 대기UI")]
-    private CanvasGroup waitingUI;
-
     private const int maxPlayer = 2;
-    [SerializeField] private float maxWaitingTime = 5.0f;
-    /*
-    private void Awake()
-    {
-        Application.targetFrameRate = 60;
+    private float maxWaitingTime = 30.0f;
 
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-        }
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-    }*/
 
     private void Start()
     {
-        // 대기 UI 처음에 숨김
-        HideWaitingUI();
+        Init();
     }
-
-    //랜덤 게임 참여
-    public void OnPlayButtonClick()
+    
+    static void Init()
     {
-        // play버튼 비황성화 및 효과
-        ShowWaitingUI();
+        if (instance == null)
+        {
+            GameObject go = GameObject.Find("@NetworkManager");
+            if (go == null)
+            {
+                go = new GameObject { name = "@NetworkManager" };
+                go.AddComponent<NetworkManager>();
+            }
 
-        MatchGame(true); // 랜덤 게임 참여
+            DontDestroyOnLoad(go);
+            instance = go.GetComponent<NetworkManager>();
+        }
     }
 
-    // 아직 개발 X, 커스텀 대결
-    public void OnCustomPlayButtonClick()
-    {
-        ShowWaitingUI();
-        // MatchGame(false);
-    }
-
-    public async void MatchGame(bool joinRandomRoom)
+    // 커스텀 매칭 필요시 joinRandomRoom 사용
+    public async void MatchGame(bool joinRandomRoom = true)
     {
         await Disconnect();
+        UIManager.Instance.mainMenuUI = Define.MainMenuUI.CONNECTINGSERVER;
 
         // 네트워크 러너 초기화
-        networkRunner = Instantiate(_networkRunnerPrefab);
+        networkRunner = Instantiate(_networkRunnerPrefab); // 프리팹 확실하게 저장 필요
         DontDestroyOnLoad(networkRunner);
         var result = await networkRunner.StartGame(new StartGameArgs()
         {
             GameMode = GameMode.Shared,
-            SessionName = joinRandomRoom ? string.Empty : RoomName,
+            SessionName = joinRandomRoom ? string.Empty : RoomName, // 세션 이름은 joinRandomRoom이 true이면 empty, false이면 룸네임(나중에 인풋 받아서 저장)으로 한다
             SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>(),
             PlayerCount= maxPlayer,
             MatchmakingMode = Fusion.Photon.Realtime.MatchmakingMode.FillRoom,
@@ -74,6 +61,7 @@ public class NetworkManager : MonoBehaviour
 
         if (result.Ok)            // 매칭 성공
         {
+            UIManager.Instance.mainMenuUI = Define.MainMenuUI.WAITING;
             StartCoroutine(WaitFor2Players());
         }
         else            // 매칭 실패
@@ -89,8 +77,9 @@ public class NetworkManager : MonoBehaviour
         {
             if (networkRunner.SessionInfo.PlayerCount == maxPlayer)
             {
-                HideWaitingUI();
-                StartGame();
+                UIManager.Instance.mainMenuUI = Define.MainMenuUI.FINDROOM;
+                // yield return new WaitForSeconds(2f); // 2초 후 입장
+                GoToGame();
                 yield break;
             }
 
@@ -104,30 +93,25 @@ public class NetworkManager : MonoBehaviour
 
     private async void OnTimeOut()
     {
+        UIManager.Instance.mainMenuUI = Define.MainMenuUI.TIMEOUT;
         await Disconnect();
-        ShowTimeOutPopup();
     }
 
-    // 플레이어 모였는지 재차 확인
-    private void StartGame()
+    private async void GoToGame()
     {
         if (networkRunner != null && networkRunner.SessionInfo != null)
         {
-            if (networkRunner.SessionInfo.PlayerCount == maxPlayer)
-            {
-                GoToGame();
-            }
+            Debug.Log("Success to play");
+            SceneManager.LoadScene(2);
+        }
+        else
+        {
+            await Disconnect();
         }
     }
 
-    private void GoToGame()
-    {
-        Debug.Log("Success to play");
-        //networkRunner.LoadScene(SceneRef.FromIndex(2), LoadSceneMode.Additive);
-        //networkRunner.UnloadScene(SceneRef.FromIndex(1));
-        SceneManager.LoadScene(2);
-    }
-
+    // 상황에 따라 다른 로그를 사용하는 Disconnect 방법...일단 나중에
+    /*
     private void QuitGame()
     {
         if (networkRunner != null)
@@ -136,17 +120,8 @@ public class NetworkManager : MonoBehaviour
             // 나가기
         }
     }
+    */
 
-
-    private void ShowWaitingUI()
-    {
-        waitingUI.alpha = 1;
-    }
-
-    private void HideWaitingUI()
-    {
-        waitingUI.alpha = 0;
-    }
 
     public async Task Disconnect()
     {
@@ -158,10 +133,4 @@ public class NetworkManager : MonoBehaviour
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-
-    public void ShowTimeOutPopup()
-    {
-
-    }
-
 }
