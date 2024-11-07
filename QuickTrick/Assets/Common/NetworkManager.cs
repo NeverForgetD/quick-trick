@@ -19,6 +19,7 @@ public class NetworkManager : MonoBehaviour
     private const int maxPlayer = 2;
     private float maxWaitingTime = 10.0f;
 
+    public float elapsedTime { get; private set; }
 
     private void Start()
     {
@@ -84,13 +85,13 @@ public class NetworkManager : MonoBehaviour
 
     private IEnumerator WaitFor2Players()
     {
-        float elapsedTime = 0f;
+        elapsedTime = 0f;
         while (elapsedTime < maxWaitingTime)
         {
             if (networkRunner.SessionInfo.PlayerCount == maxPlayer)
             {
                 UIManager.Instance.ChangeMainMenuUI("FINDROOM");
-                // yield return new WaitForSeconds(2f); // 2초 후 입장
+                yield return new WaitForSeconds(1f); // UI 추가를 위해 잠시 대기 (삭제해도 괜찮음) _ 
                 GoToGame();
                 yield break;
             }
@@ -105,8 +106,10 @@ public class NetworkManager : MonoBehaviour
 
     private async void OnTimeOut()
     {
-        UIManager.Instance.ChangeMainMenuUI("TIMEOUT");
+        // disconnect 없애고 버튼으로 만들기
+        // disconnect or try again
         await Disconnect();
+        UIManager.Instance.ChangeMainMenuUI("TIMEOUT");
     }
 
     private async void GoToGame()
@@ -145,5 +148,6 @@ public class NetworkManager : MonoBehaviour
         networkRunner = null;
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        UIManager.Instance.ChangeMainMenuUI("None");
     }
 }
