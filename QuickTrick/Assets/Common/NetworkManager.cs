@@ -12,7 +12,7 @@ public class NetworkManager : MonoBehaviour
 
     public string RoomName { get; set; }
 
-    [SerializeField, Tooltip("게임 시작 했을 때 생성될 네트워크 러너 프리팹")]
+    //[SerializeField, Tooltip("게임 시작 했을 때 생성될 네트워크 러너 프리팹")]
     private NetworkRunner _networkRunnerPrefab;
     private NetworkRunner networkRunner;
 
@@ -41,6 +41,17 @@ public class NetworkManager : MonoBehaviour
         }
     }
 
+    private void InitiateRunner()
+    {
+        if (_networkRunnerPrefab == null)
+        {
+            _networkRunnerPrefab = Resources.Load<NetworkRunner>("Prefabs/NetworkRunner");
+        }
+
+        networkRunner = Instantiate(_networkRunnerPrefab); // 프리팹 확실하게 저장 필요
+        DontDestroyOnLoad(networkRunner);
+    }
+
     // 커스텀 매칭 필요시 joinRandomRoom 사용
     public async void MatchGame(bool joinRandomRoom = true)
     {
@@ -48,8 +59,9 @@ public class NetworkManager : MonoBehaviour
         UIManager.Instance.mainMenuUI = Define.MainMenuUI.CONNECTINGSERVER;
 
         // 네트워크 러너 초기화
-        networkRunner = Instantiate(_networkRunnerPrefab); // 프리팹 확실하게 저장 필요
-        DontDestroyOnLoad(networkRunner);
+        InitiateRunner();
+        //networkRunner = Instantiate(_networkRunnerPrefab); // 프리팹 확실하게 저장 필요
+        //DontDestroyOnLoad(networkRunner);
         var result = await networkRunner.StartGame(new StartGameArgs()
         {
             GameMode = GameMode.Shared,
@@ -110,6 +122,8 @@ public class NetworkManager : MonoBehaviour
         }
     }
 
+    
+
     // 상황에 따라 다른 로그를 사용하는 Disconnect 방법...일단 나중에
     /*
     private void QuitGame()
@@ -121,7 +135,6 @@ public class NetworkManager : MonoBehaviour
         }
     }
     */
-
 
     public async Task Disconnect()
     {
