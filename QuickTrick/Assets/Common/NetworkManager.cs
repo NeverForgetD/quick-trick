@@ -17,7 +17,7 @@ public class NetworkManager : MonoBehaviour
     private NetworkRunner networkRunner;
 
     private const int maxPlayer = 2;
-    private float maxWaitingTime = 30.0f;
+    private float maxWaitingTime = 10.0f;
 
 
     private void Start()
@@ -56,7 +56,7 @@ public class NetworkManager : MonoBehaviour
     public async void MatchGame(bool joinRandomRoom = true)
     {
         await Disconnect();
-        UIManager.Instance.mainMenuUI = Define.MainMenuUI.CONNECTINGSERVER;
+        UIManager.Instance.ChangeMainMenuUI("CONNECTINGSERVER");
 
         // 네트워크 러너 초기화
         InitiateRunner();
@@ -73,7 +73,7 @@ public class NetworkManager : MonoBehaviour
 
         if (result.Ok)            // 매칭 성공
         {
-            UIManager.Instance.mainMenuUI = Define.MainMenuUI.WAITING;
+            UIManager.Instance.ChangeMainMenuUI("WAITING");
             StartCoroutine(WaitFor2Players());
         }
         else            // 매칭 실패
@@ -89,7 +89,7 @@ public class NetworkManager : MonoBehaviour
         {
             if (networkRunner.SessionInfo.PlayerCount == maxPlayer)
             {
-                UIManager.Instance.mainMenuUI = Define.MainMenuUI.FINDROOM;
+                UIManager.Instance.ChangeMainMenuUI("FINDROOM");
                 // yield return new WaitForSeconds(2f); // 2초 후 입장
                 GoToGame();
                 yield break;
@@ -105,7 +105,7 @@ public class NetworkManager : MonoBehaviour
 
     private async void OnTimeOut()
     {
-        UIManager.Instance.mainMenuUI = Define.MainMenuUI.TIMEOUT;
+        UIManager.Instance.ChangeMainMenuUI("TIMEOUT");
         await Disconnect();
     }
 
