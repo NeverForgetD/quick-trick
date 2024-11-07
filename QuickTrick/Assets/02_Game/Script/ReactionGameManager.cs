@@ -56,9 +56,9 @@ public class ReactionGameManager : NetworkBehaviour
     private void CheckForGameWinner()
     {
         if (player1Wins >= winsRequiredForVictory)
-            AnnounceFinalWinner(1);
+            RPC_AnnounceFinalWinner(1);
         else if (player1Wins >= winsRequiredForVictory)
-            AnnounceFinalWinner(2);
+            RPC_AnnounceFinalWinner(2);
         else
         {
             StartNewRound(); // 3번 먼저 이긴 우승자가 나오기 전까지 새로운 라운드 시작
@@ -67,7 +67,7 @@ public class ReactionGameManager : NetworkBehaviour
 
     // 최종 승자 결정
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)] // RPC
-    public void AnnounceFinalWinner(int winningPlayerID)
+    public void RPC_AnnounceFinalWinner(int winningPlayerID)
     {
         isGameActive = false;
         // 승리,패배 UI 표시나 종료 처리 등
