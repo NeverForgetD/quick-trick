@@ -14,12 +14,22 @@ public class ReactionGameManager : NetworkBehaviour
 
     private const int winsRequiredForVictory= 3; // 최종 우승에 필요한 승리 횟수
 
+    //
+    private PlayerRef player1;
+    private PlayerRef player2;
+
     public override void Spawned()
     {
         if (Object.HasStateAuthority) // 이 코드는 서버 또는 권한을 가진 클라이언트에서만 실행된다.
         {
+            AssignPlayer();
             StartNewGame();
         }
+    }
+
+    void AssignPlayer()
+    {
+
     }
 
     // 게임 시작 및 초기화
