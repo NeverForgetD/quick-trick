@@ -11,6 +11,8 @@ public class ReactionGameManager : NetworkBehaviour
     [Networked] private int player2Wins { get; set; } // 플레이어2 승리 횟수
     [Networked] int roundCount { get; set; } // 현재 라운드 수
     [Networked] private bool isGameActive { get; set; } // 게임 활성화 여부
+    [Networked] private int randomGameIndex { get; set; } // 미니 게임 종류(인덱스)
+    [Networked] private Define.GameMode gameMode { get; set; } // 미니 게임 종류
 
     private const int winsRequiredForVictory= 3; // 최종 우승에 필요한 승리 횟수
 
@@ -22,6 +24,7 @@ public class ReactionGameManager : NetworkBehaviour
     {
         if (Object.HasStateAuthority) // 이 코드는 서버 또는 권한을 가진 클라이언트에서만 실행된다.
         {
+            Debug.Log("여기까지 실행 된다");
             AssignPlayer();
             StartNewGame();
         }
@@ -29,7 +32,7 @@ public class ReactionGameManager : NetworkBehaviour
 
     void AssignPlayer()
     {
-
+        
     }
 
     // 게임 시작 및 초기화
@@ -48,7 +51,17 @@ public class ReactionGameManager : NetworkBehaviour
         {
             // 라운드 시작 관련 초기화 코드
             // 어떤 모드 게임할 지 결정
+            RPC_ChoseRandomGame();
+
         }
+    }
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)] // RPC
+    public void RPC_ChoseRandomGame()
+    {
+        randomGameIndex = UnityEngine.Random.Range(0, (int)Define.GameMode.MaxCount); // 랜덤값말고 나중에 룰렛 등으로 하는것도 고려
+        gameMode = (Define.GameMode)randomGameIndex;
+
+        Debug.Log(gameMode);
     }
 
     // 각 라운드의 승자 업데이트 및 게임 상태 확인
