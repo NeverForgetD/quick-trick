@@ -21,4 +21,14 @@ public class Define
         TIMEOUT,
 
     }
+
+    public enum RunnerStatus
+    {
+        NONE,
+        CONNECTINGSERVER,
+        WAITING,
+        FINDROOM,
+        TIMEOUT,
+        DISCONNECTING,
+    }
 }

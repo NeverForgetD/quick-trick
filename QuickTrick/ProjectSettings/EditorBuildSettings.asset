@@ -14,6 +14,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/02_Game/02_Game.unity
     guid: 2684e36ac2572a447915790ffeca6a3b
+  - enabled: 0
+    path: Assets/Test/Test1.unity
+    guid: 3786d3fded23bb04395e36596b9e23cc
+  - enabled: 0
+    path: Assets/Test/Test2.unity
+    guid: 41dd375582474294e8970a71db61ed79
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 331be4805285b00498e06bc98da22b41, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 1c690c6a2f12aca4da8076df31f31fce, type: 2}

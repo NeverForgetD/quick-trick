@@ -61,7 +61,7 @@ public class NetworkManager : MonoBehaviour
     public async void MatchGame(bool joinRandomRoom = true)
     {
         await Disconnect();
-        UIManager.Instance.ChangeMainMenuUI("CONNECTINGSERVER");
+        //UIManager.Instance.ChangeMainMenuUI("CONNECTINGSERVER");
 
         // 네트워크 러너 & 게임매니저 프리팹 초기화
         InitPrefabs();
@@ -77,27 +77,9 @@ public class NetworkManager : MonoBehaviour
             MatchmakingMode = Fusion.Photon.Realtime.MatchmakingMode.FillRoom,
         });
         
-        /*
-        var startArguments = new StartGameArgs()
-        {
-            GameMode = GameMode.Shared,
-            SessionName = joinRandomRoom ? string.Empty : RoomName, // 세션 이름은 joinRandomRoom이 true이면 empty, false이면 룸네임(나중에 인풋 받아서 저장)으로 한다
-            SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>(),
-            PlayerCount = maxPlayer,
-            MatchmakingMode = Fusion.Photon.Realtime.MatchmakingMode.FillRoom,
-        };
-
-        var startTask = networkRunner.StartGame(startArguments);
-        await startTask;
-        if (startTask.Result.Ok)
-        {
-            Debug.Log("시작");
-        }
-        */
-        
         if (result.Ok)            // 매칭 성공
         {
-            UIManager.Instance.ChangeMainMenuUI("WAITING");
+            //UIManager.Instance.ChangeMainMenuUI("WAITING");
             StartCoroutine(WaitFor2Players());
         }
         else            // 매칭 실패
@@ -114,7 +96,7 @@ public class NetworkManager : MonoBehaviour
         {
             if (networkRunner.SessionInfo.PlayerCount == maxPlayer)
             {
-                UIManager.Instance.ChangeMainMenuUI("FINDROOM");
+                //UIManager.Instance.ChangeMainMenuUI("FINDROOM");
                 yield return new WaitForSeconds(1f); // UI 추가를 위해 잠시 대기 (삭제해도 괜찮음) _ 
                 GoToGame();
                 yield break;
@@ -133,7 +115,7 @@ public class NetworkManager : MonoBehaviour
         // disconnect 없애고 버튼으로 만들기
         // disconnect or try again
         await Disconnect();
-        UIManager.Instance.ChangeMainMenuUI("TIMEOUT");
+        //UIManager.Instance.ChangeMainMenuUI("TIMEOUT");
     }
 
     // 흠 테스트 부분
@@ -174,6 +156,6 @@ public class NetworkManager : MonoBehaviour
         networkRunner = null;
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        UIManager.Instance.ChangeMainMenuUI("None");
+        //UIManager.Instance.ChangeMainMenuUI("None");
     }
 }

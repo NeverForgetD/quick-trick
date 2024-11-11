@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIMainMenu : MonoBehaviour
 {
@@ -16,15 +17,15 @@ public class UIMainMenu : MonoBehaviour
     private void OnEnable()
     {
         // 상태 변경 이벤트 구독
-        UIManager.Instance.OnMainMenuUIChanged -= HandleMainMenuUI;
-        UIManager.Instance.OnMainMenuUIChanged += HandleMainMenuUI;
+        //UIManager.Instance.OnMainMenuUIChanged -= HandleMainMenuUI;
+        //UIManager.Instance.OnMainMenuUIChanged += HandleMainMenuUI;
     }
 
     private void OnDisable()
     {
         // 상태 변경 이벤트 구독 취소
-        UIManager.Instance.OnMainMenuUIChanged += HandleMainMenuUI;
-        UIManager.Instance.OnMainMenuUIChanged -= HandleMainMenuUI;
+        //UIManager.Instance.OnMainMenuUIChanged += HandleMainMenuUI;
+        //UIManager.Instance.OnMainMenuUIChanged -= HandleMainMenuUI;
     }
 
 
@@ -36,8 +37,7 @@ public class UIMainMenu : MonoBehaviour
     public void OnPlayButtonClick()
     {
         // play버튼 비황성화 및 효과
-
-        NetworkManager.Instance.MatchGame(true); // 랜덤 게임 참여
+        SceneManager.LoadScene(2);
     }
 
     private void HandleMainMenuUI(Define.MainMenuUI newState)

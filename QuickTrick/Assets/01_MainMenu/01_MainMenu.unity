@@ -246,6 +246,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guide UI
       objectReference: {fileID: 0}
+    - target: {fileID: 2109749924136880045, guid: 084c5184ed7330045a133d682313291f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4866653389604149151, guid: 084c5184ed7330045a133d682313291f, type: 3}
       propertyPath: m_Alpha
       value: 1
@@ -564,7 +568,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1271053482}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b22b669764eab8c4a9525fe7a0254ffa, type: 3}
   m_Name: 
