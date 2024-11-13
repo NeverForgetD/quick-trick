@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class MatchMaker : MonoBehaviour
 {
     // 네트워크 러너 관련
-    [SerializeField, Tooltip("네트워크 러너 프리팹")]
+    [SerializeField, Tooltip("네트워크 러너 프리팹, 지정안해줘도 알아서 찾음")]
     private NetworkRunner RunnerPrefab;
     private NetworkRunner _runnerInstance;
     private static string _shutdownStatus;
@@ -19,7 +19,7 @@ public class MatchMaker : MonoBehaviour
     private const int maxPlayerCount = 2; // 플레이어 수
 
     //매칭 대기 관련
-    private const float maxWaitingTime = 10f; // 매칭 최대 대기 시간 (초) _ 30초로 변경, 테스트환경 10초
+    private const float maxWaitingTime = 5f; // 매칭 최대 대기 시간 (초) _ 30초로 변경, 테스트환경 n초
     public float elapsedTime { get; private set; } // 현재 대기 시간 (초)
 
     private void Start()
@@ -33,9 +33,10 @@ public class MatchMaker : MonoBehaviour
             RunnerPrefab = Resources.Load<NetworkRunner>("Prefabs/NetworkRunner");
 
         _runnerInstance = Instantiate(RunnerPrefab);
+        DontDestroyOnLoad(_runnerInstance);
     }
 
-    private async void MatchGame(bool joinRandomRoom = true)
+    public async void MatchGame(bool joinRandomRoom = true)
     {
         await Disconnect();
         UIManager.Instance.UpdateRunnerStatus("CONNECTINGSERVER");
@@ -72,6 +73,10 @@ public class MatchMaker : MonoBehaviour
         else
         {
             //실패
+            //UIManager.Instance.UpdateRunnerStatus("");
+            // 실패하는 경우가 없기는 하지만 나중에 에러 메시지 출력 기능 추가해야한다.
+            await Disconnect();
+            SceneManager.LoadScene(1);
         }
     }
 
@@ -94,30 +99,45 @@ public class MatchMaker : MonoBehaviour
             Debug.Log($"경과 시간 : {elapsedTime}, 참여 인원 : {_runnerInstance.SessionInfo.PlayerCount}");
         }
 
-        OnTimeOut();
+        // 1초 미만의 시간차로 접속이 되면 한 클라이언트만 룸에 참가되는 오류 방지
+        if (_runnerInstance.SessionInfo.PlayerCount == maxPlayerCount)
+        {
+            StartGame();
+        }
+        else
+        {
+            OnTimeOut();
+        }
     }
 
+    public GameObject testGameMode;
     private void StartGame()
     {
         // 메인게임 스크립트의 게임시작 메서드 실행
+        UIManager.Instance.UpdateRunnerStatus("GAME");
+        Instantiate(testGameMode);
     }
 
-    /*
+    
     public void OnTimeOut()
     {
-        // 다시 매칭, 메뉴로 돌아가기 UI 띄우기
-        // 일단 연결 해제
-        
+        UIManager.Instance.UpdateRunnerStatus("TIMEOUT");
+    }
+    
+
+    // TEMP
+    /*
+    private async void OnTimeOut()
+    {
+        //await Disconnect();
+        //SceneManager.LoadScene(1);
+        //디스커넥트 안 하고 다시 매칭 했을 떄도 유효한 지 확인해야함
+
+
     }
     */
 
-    // TEMP
-    private async void OnTimeOut()
-    {
-        await Disconnect();
-        SceneManager.LoadScene(1);
-    }
-
+    // 아직 안 쓰는 기능
     public async void DisconnectClicked()
     {
         await Disconnect();
@@ -126,8 +146,7 @@ public class MatchMaker : MonoBehaviour
     public async void BackToMenu()
     {
         await Disconnect();
-
-        //SceneManager.LoadScene();
+        SceneManager.LoadScene(1);
     }
 
     public async Task Disconnect()

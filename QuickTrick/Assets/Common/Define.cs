@@ -14,11 +14,6 @@ public class Define
 
     public enum MainMenuUI
     {
-        NONE,
-        CONNECTINGSERVER,
-        WAITING,
-        FINDROOM,
-        TIMEOUT,
 
     }
 
@@ -27,8 +22,8 @@ public class Define
         NONE,
         CONNECTINGSERVER,
         WAITING,
-        FINDROOM,
         TIMEOUT,
         DISCONNECTING,
+        GAME,
     }
 }
