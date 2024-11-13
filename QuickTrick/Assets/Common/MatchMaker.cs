@@ -19,7 +19,7 @@ public class MatchMaker : MonoBehaviour
     private const int maxPlayerCount = 2; // 플레이어 수
 
     //매칭 대기 관련
-    private const float maxWaitingTime = 5f; // 매칭 최대 대기 시간 (초) _ 30초로 변경, 테스트환경 n초
+    private const float maxWaitingTime = 10f; // 매칭 최대 대기 시간 (초) _ 30초로 변경, 테스트환경 n초
     public float elapsedTime { get; private set; } // 현재 대기 시간 (초)
 
     private void Start()

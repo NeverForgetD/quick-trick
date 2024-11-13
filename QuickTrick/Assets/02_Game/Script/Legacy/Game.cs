@@ -38,7 +38,7 @@ public class Game : NetworkBehaviour
 
     // 서버에서 클릭 가능 여부를 설정하는 메서드
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
-    public void RPC_SetClickAlloewd() // 이 부분 에러 고치자
+    public void RPC_SetClickAlloewd()
     {
         isClickAllowed = true;
         Debug.Log("클릭 가능");
