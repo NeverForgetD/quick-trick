@@ -14,6 +14,11 @@ public class MatchMaker : MonoBehaviour
     private NetworkRunner _runnerInstance;
     private static string _shutdownStatus;
 
+    // 게임 시작 시 스폰될 네트워크 오브젝트
+    [SerializeField, Tooltip("게임매니저(네트워크 오브젝트) 프리팹, 지정안해줘도 알아서 찾음")]
+    private NetworkObject GameManagerPrefab;
+    private NetworkObject _gameManagerInstance;
+
     // 매칭 정보 관련
     public TMP_InputField RoomText;
     private const int maxPlayerCount = 2; // 플레이어 수
@@ -42,7 +47,7 @@ public class MatchMaker : MonoBehaviour
         UIManager.Instance.UpdateRunnerStatus("CONNECTINGSERVER");
 
         // PlayerPrefs.SetString("PlayerName", NickNameText.text);
-
+        //InitGameManager();
         InitRunner();
 
         var events = _runnerInstance.GetComponent<NetworkEvents>();
@@ -110,12 +115,22 @@ public class MatchMaker : MonoBehaviour
         }
     }
 
-    public GameObject testGameMode;
     private void StartGame()
     {
         // 메인게임 스크립트의 게임시작 메서드 실행
         UIManager.Instance.UpdateRunnerStatus("GAME");
-        Instantiate(testGameMode);
+
+        //네트워크 오브젝트 스폰
+        SpawnNetworkObject();
+    }
+
+    private void SpawnNetworkObject()
+    {
+        if (GameManagerPrefab == null)
+        {
+            GameManagerPrefab = Resources.Load<NetworkObject>("Prefabs/GameManager");
+        }
+        _gameManagerInstance = _runnerInstance.Spawn(GameManagerPrefab);
     }
 
     

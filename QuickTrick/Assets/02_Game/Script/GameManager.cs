@@ -8,9 +8,9 @@ using UnityEngine;
 public class GameManager : NetworkBehaviour
 {
     // 플레이어 세팅 관련
-    public Player localPlayer { get; private set; } // 플레이어 테스트 진행중
-    [Tooltip("플레이어 프리팹")]
-    public Player _playerPrefab;
+    public Player localPlayer { get; private set; } // 플레이어
+    [SerializeField ,Tooltip("플레이어 프리팹")]
+    private Player _playerPrefab;
 
     // 게임에 필요한 정보 관련
     [Networked] private int player1Wins { get ; set; } // 플레이어1 승리 횟수
@@ -24,25 +24,20 @@ public class GameManager : NetworkBehaviour
 
     public override void Spawned()
     {
-        if (_playerPrefab == null)
-        {
-            _playerPrefab = Resources.Load<Player>("Prefabs/Player");
-        }
-
-        localPlayer = Runner.Spawn(_playerPrefab, Vector3.zero, Quaternion.identity, Runner.LocalPlayer);
-        Runner.SetPlayerObject(Runner.LocalPlayer, localPlayer.Object);
-
-        if (Object.HasStateAuthority) // 이 코드는 서버 또는 권한을 가진 클라이언트에서만 실행된다.
+        if (Object.HasStateAuthority) // GameManager는 클라이언트당 한 개가 스폰돼서 총 2개...해당 클라이언트의 것만 StateAuthority를 가진다.
         {
             AssignPlayer();
             StartNewGame();
-            Debug.Log("GM의 스폰 함수가 성공적으로 발동");
         }
     }
 
     void AssignPlayer()
     {
-        
+        if (_playerPrefab == null)
+            _playerPrefab = Resources.Load<Player>("Prefabs/Player");
+
+        localPlayer = Runner.Spawn(_playerPrefab, Vector3.zero, Quaternion.identity, Runner.LocalPlayer);
+        Runner.SetPlayerObject(Runner.LocalPlayer, localPlayer.Object);
     }
 
     // 게임 시작 및 초기화
