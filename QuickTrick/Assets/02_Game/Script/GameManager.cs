@@ -1,35 +1,207 @@
 using Fusion;
-using TMPro;
+using System;
+using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
+using static Define;
 
-public class GameManager : NetworkBehaviour
+public class GameManager : NetworkBehaviour, IPlayerJoined
 {
+    // 게임 로직 관련
+    [Networked] int player1Score { get; set; } // 플레이어 1 승리 횟수_Host
+    [Networked] int player2Score { get; set; } // 플레이어 2 승리 횟수_Client
+    [Networked] Define.GameMode selectedGameMode { get; set; } // 미니 게임 종류
+    [Networked] float triggerTime { get; set; } // 트리거 대기시간
+    [Networked] bool triggerOn { get; set; } // 트리거 이벤트 시작
+    [Networked] bool isGameActive { get; set; } // 게임이 유효한지
+
+    private const int scoreRequiresToWin = 3; // 이기기 위해 필요한 판 수
+
+    // 플레이어 관련
+    public Player localPlayer { get; private set; }
+    [SerializeField] Player playerPrefab;
+
+    public override void Spawned()
+    {
+
+        if (Object.HasStateAuthority)
+        {
+            Debug.Log("GM Spawned");
+            //StartNewGame();
+        }
+    }
+
+    public void PlayerJoined(PlayerRef playerRef)
+    {
+        if (HasStateAuthority == false)
+            return;
+
+        var player = Runner.Spawn(playerPrefab, Vector3.zero, Quaternion.identity, playerRef);
+        Runner.SetPlayerObject(playerRef, player.Object);
+
+        if (localPlayer == null || localPlayer.Object == null || localPlayer.Object.IsValid == false)
+        {
+            var playerObject = Runner.GetPlayerObject(Runner.LocalPlayer);
+            localPlayer = playerObject != null ? playerObject.GetComponent<Player>() : null;
+        }
+    }
+
+    void StartNewGame()
+    {
+        player1Score = 0;
+        player2Score = 0;
+        isGameActive = true;
+        StartRound();
+    }
+
+
+    async void StartRound()
+    {
+        // if (!isGameActive) { return; } // 이 부분 수정
+
+        if (Object.HasStateAuthority)
+        {
+                // 클릭 못 하게 방지
+                triggerOn = false; // 언제부터 클릭 안 하게 할 지 고민하고 적용한다.
+
+            // 랜덤한 미니게임 결정 및 동기화
+            int randomGameIndex = UnityEngine.Random.Range(0, (int)Define.GameMode.MaxCount);
+            // selectedGameMode = (Define.GameMode)randomGameIndex;
+            RPC_UpdateSelectedGame(randomGameIndex); // TODO
+
+            await Task.Delay(3000); // 삭제
+            // 뽑기 애니메이션 재생
+            RPC_PlayGachaAnimation();
+            int waitGachaTime = MiniGameManager.Instance.waitGachaTime;
+            //await Task.Delay(waitGachaTime); // 뽑기 애니메이션 시간 대기 시간
+            await Task.Delay(3000);
+
+            // 트리거 시간 결정 및 동기화
+            triggerTime = UnityEngine.Random.Range(2f, 8f);
+
+            // 미니게임 로드 및 대기
+            RPC_StartMiniGame();
+            //await Task.Delay(1000); // 애니메이션마다 다르게설정...?
+
+
+            //await Task.Delay((int)(triggerTime * 1000));
+
+            // 트리거 이벤트 발생
+            triggerOn = true;
+            RPC_EnableTriggerEvent();
+        }
+    }
+
+    #region RPC
+
+    // RPC
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    private void RPC_UpdateSelectedGame(int index)
+    {
+        MiniGameManager.Instance.UpdateSelectedMiniGame(index);
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    private void RPC_PlayGachaAnimation()
+    {
+        MiniGameManager.Instance.PlayGachaAnimation();
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    private void RPC_UpdateTriggerTime(float n_Time)
+    {
+        MiniGameManager.Instance.UpdateTriggerTime(n_Time);
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    private void RPC_StartMiniGame()
+    {
+        int playerID = Runner.LocalPlayer.PlayerId;
+        MiniGameManager.Instance.StartMiniGame(playerID);
+    }
+
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    private void RPC_EnableTriggerEvent()
+    {
+        //MiniGameManager.Instance.ShowClickPrompt();
+    }
+    #endregion
+
+    // 플레이어 클릭 기다리는 비동기 메서드
+    async Task WaitForPlayer()
+    {
+        while(false) // 둘 다 클릭 안 함
+        {
+
+        }
+
+        // 두 플레이어 모두 클릭했으면 종료
+        if (true)
+        {
+            //break;
+        }
+
+        await Task.Yield(); // 다음 프레임까지 대기
+    }
+
+    void DetermineWiiner()
+    {
+        
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    #region legacy
+    /*
     // 플레이어 세팅 관련
-    public Player localPlayer { get; private set; } // 플레이어
     [SerializeField ,Tooltip("플레이어 프리팹")]
     private Player _playerPrefab;
+    public Player localPlayer { get; private set; } // 플레이어 인스턴스
 
     // 게임에 필요한 정보 관련
-    [Networked] private int player1Wins { get ; set; } // 플레이어1 승리 횟수
-    [Networked] private int player2Wins { get; set; } // 플레이어2 승리 횟수
+    [Networked] private int player1Wins { get; set; } // 플레이어1 승리 횟수_호스트 (IsServer)
+    [Networked] private int player2Wins { get; set; } // 플레이어2 승리 횟수_게스트
     [Networked] int roundCount { get; set; } // 현재 라운드 수
     [Networked] private bool isGameActive { get; set; } // 게임 활성화 여부
     [Networked] private int randomGameIndex { get; set; } // 미니 게임 종류(인덱스)
     [Networked] private Define.GameMode gameMode { get; set; } // 미니 게임 종류
 
+    
+
     private const int winsRequiredForVictory= 3; // 최종 우승에 필요한 승리 횟수
 
+    public TextMeshProUGUI text;
     public override void Spawned()
     {
         if (Object.HasStateAuthority) // GameManager는 클라이언트당 한 개가 스폰돼서 총 2개...해당 클라이언트의 것만 StateAuthority를 가진다.
         {
             //AssignPlayer();
             //StartNewGame();
+            //text.text = "has authority";
         }
-        Debug.Log(Runner.IsServer);
-        Debug.Log(Object.HasStateAuthority);
-        Debug.Log(Runner.LocalPlayer.PlayerId);
-
+        //Debug.Log(Runner.IsServer);
+        //Debug.Log(localPlayer.IsHost);
+        //Debug.Log(Object.HasStateAuthority);
+        //Debug.Log(Runner.LocalPlayer.PlayerId);
     }
 
     void AssignPlayer()
@@ -58,17 +230,26 @@ public class GameManager : NetworkBehaviour
             // 라운드 시작 관련 초기화 코드
             // 어떤 모드 게임할 지 결정
             RPC_ChoseRandomGame();
-
         }
     }
+
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)] // RPC
     public void RPC_ChoseRandomGame()
     {
         randomGameIndex = UnityEngine.Random.Range(0, (int)Define.GameMode.MaxCount); // 랜덤값말고 나중에 룰렛 등으로 하는것도 고려
         gameMode = (Define.GameMode)randomGameIndex;
 
-        Debug.Log(gameMode);
+        //Debug.Log(gameMode);
+        text.text = gameMode.ToString();
+        // 게임 모드 불러오기
     }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)] // RPC
+    public void RPC_LoadGame()
+    {
+        //
+    }
+
 
     // 각 라운드의 승자 업데이트 및 게임 상태 확인
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)] // RPC
@@ -108,11 +289,13 @@ public class GameManager : NetworkBehaviour
         if (winningPlayer == PlayerRef.None) return;
 
         // 승리자 업데이트
-        /*
+        
         if (winningPlayer == Runner.GetPlayerRef(0))
             player1Wins++;
         else if (winningPlayer == PlayerRef.)
             player2Wins++;
-        */
+        
     }
+*/
+    #endregion
 }

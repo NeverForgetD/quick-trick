@@ -7,9 +7,7 @@ public class Player : NetworkBehaviour
 {
     public override void Spawned()
     {
-        if (HasStateAuthority)
-        {
-            //Debug.Log("플레이어 has StateQuthority----------------------");
-        }
+        // Runner.SetPlayerObject();
     }
+
 }

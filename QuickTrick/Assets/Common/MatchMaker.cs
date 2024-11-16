@@ -29,7 +29,7 @@ public class MatchMaker : MonoBehaviour
 
     private void Start()
     {
-        MatchGame();
+        // MatchGame();
     }
 
     private void InitRunner()
@@ -120,7 +120,10 @@ public class MatchMaker : MonoBehaviour
         UIManager.Instance.UpdateRunnerStatus("GAME");
 
         //네트워크 오브젝트 스폰
-        SpawnNetworkObject();
+        if (_runnerInstance.IsServer)
+        {
+            //SpawnNetworkObject();
+        }
     }
 
     private void SpawnNetworkObject()
@@ -180,6 +183,7 @@ public class MatchMaker : MonoBehaviour
 
         //UI 원래대로
         UIManager.Instance.UpdateRunnerStatus("NONE");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void OnShutDown(NetworkRunner runner, ShutdownReason reason)
