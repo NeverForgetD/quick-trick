@@ -47,7 +47,6 @@ public class MatchMaker : MonoBehaviour
         UIManager.Instance.UpdateRunnerStatus("CONNECTINGSERVER");
 
         // PlayerPrefs.SetString("PlayerName", NickNameText.text);
-        //InitGameManager();
         InitRunner();
 
         var events = _runnerInstance.GetComponent<NetworkEvents>();
@@ -58,7 +57,7 @@ public class MatchMaker : MonoBehaviour
 
         var startArguments = new StartGameArgs()
         {
-            GameMode = GameMode.Shared,
+            GameMode = GameMode.AutoHostOrClient,
             Scene = sceneInfo,
             PlayerCount = maxPlayerCount,
             MatchmakingMode = Fusion.Photon.Realtime.MatchmakingMode.FillRoom,

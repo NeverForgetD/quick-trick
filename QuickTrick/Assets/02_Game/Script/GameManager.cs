@@ -1,8 +1,5 @@
 using Fusion;
-using Fusion.Sockets;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : NetworkBehaviour
@@ -26,9 +23,13 @@ public class GameManager : NetworkBehaviour
     {
         if (Object.HasStateAuthority) // GameManager는 클라이언트당 한 개가 스폰돼서 총 2개...해당 클라이언트의 것만 StateAuthority를 가진다.
         {
-            AssignPlayer();
-            StartNewGame();
+            //AssignPlayer();
+            //StartNewGame();
         }
+        Debug.Log(Runner.IsServer);
+        Debug.Log(Object.HasStateAuthority);
+        Debug.Log(Runner.LocalPlayer.PlayerId);
+
     }
 
     void AssignPlayer()

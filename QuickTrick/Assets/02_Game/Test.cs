@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static Unity.Collections.Unicode;
 
 public class Test : MonoBehaviour
 {
@@ -17,7 +18,12 @@ public class Test : MonoBehaviour
     private void ShowRoomNumber()
     {
         InitInstance();
-        testText.text = $"Session name : {_runnerInstance.SessionInfo.Name}, player : {_runnerInstance.SessionInfo.PlayerCount}";
+        string text = $"Session name : {_runnerInstance.SessionInfo.Name}\n," +
+            $"player : {_runnerInstance.SessionInfo.PlayerCount}\n," +
+            $"player ID : {_runnerInstance.LocalPlayer.PlayerId}\n," +
+            $"IsServer : {_runnerInstance.IsServer}";
+        testText.text = text;
+
     }
 
     private void OnEnable()
