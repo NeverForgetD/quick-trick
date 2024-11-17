@@ -5,12 +5,13 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static Define;
 
-public class GameManager : NetworkBehaviour, IPlayerJoined
+public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
 {
     // 게임 로직 관련
     [Networked] int player1Score { get; set; } // 플레이어 1 승리 횟수_Host
     [Networked] int player2Score { get; set; } // 플레이어 2 승리 횟수_Client
     [Networked] Define.GameMode selectedGameMode { get; set; } // 미니 게임 종류
+    [Networked] TickTimer tickTimer { get; set; }
     [Networked] float triggerTime { get; set; } // 트리거 대기시간
     [Networked] bool triggerOn { get; set; } // 트리거 이벤트 시작
     [Networked] bool isGameActive { get; set; } // 게임이 유효한지
@@ -31,6 +32,7 @@ public class GameManager : NetworkBehaviour, IPlayerJoined
         }
     }
 
+    // 플레이어 입장 시 로컬 플레이어 생성 및 러너에 저장
     public void PlayerJoined(PlayerRef playerRef)
     {
         if (HasStateAuthority == false)
@@ -46,11 +48,28 @@ public class GameManager : NetworkBehaviour, IPlayerJoined
         }
     }
 
-    void StartNewGame()
+    // 플레이어 퇴장 시
+    public void PlayerLeft(PlayerRef player)
+    {
+        if (HasStateAuthority == false)
+            return;
+
+        // 필요 시 누구 나갔을 때 남은 플레이어 승리 메서드 구현
+    }
+
+    public override void Despawned(NetworkRunner runner, bool hasState)
+    {
+        // 로컬 플레이어 초기화
+        localPlayer = null;
+    }
+
+
+    public void StartNewGame()
     {
         player1Score = 0;
         player2Score = 0;
         isGameActive = true;
+
         StartRound();
     }
 
@@ -61,20 +80,23 @@ public class GameManager : NetworkBehaviour, IPlayerJoined
 
         if (Object.HasStateAuthority)
         {
-                // 클릭 못 하게 방지
-                triggerOn = false; // 언제부터 클릭 안 하게 할 지 고민하고 적용한다.
+            // 클릭 못 하게 방지
+            triggerOn = false; // 언제부터 클릭 안 하게 할 지 고민하고 적용한다.
 
             // 랜덤한 미니게임 결정 및 동기화
             int randomGameIndex = UnityEngine.Random.Range(0, (int)Define.GameMode.MaxCount);
             // selectedGameMode = (Define.GameMode)randomGameIndex;
             RPC_UpdateSelectedGame(randomGameIndex); // TODO
 
-            await Task.Delay(3000); // 삭제
+            await WaitForTickTimer(5);
+            //await Task.Delay(3000); // 삭제
             // 뽑기 애니메이션 재생
             RPC_PlayGachaAnimation();
             int waitGachaTime = MiniGameManager.Instance.waitGachaTime;
             //await Task.Delay(waitGachaTime); // 뽑기 애니메이션 시간 대기 시간
-            await Task.Delay(3000);
+            //await Task.Delay(3000);
+
+            await WaitForTickTimer(3);
 
             // 트리거 시간 결정 및 동기화
             triggerTime = UnityEngine.Random.Range(2f, 8f);
@@ -129,28 +151,20 @@ public class GameManager : NetworkBehaviour, IPlayerJoined
     }
     #endregion
 
-    // 플레이어 클릭 기다리는 비동기 메서드
-    async Task WaitForPlayer()
+    // TickTimer 만료까지 비동기 대기
+    async Task WaitForTickTimer(int sec)
     {
-        while(false) // 둘 다 클릭 안 함
+        tickTimer = TickTimer.CreateFromSeconds(Runner, sec);
+        while (!tickTimer.Expired(Runner))
         {
-
+            await Task.Yield(); // 다음 프레임까지 대기
         }
-
-        // 두 플레이어 모두 클릭했으면 종료
-        if (true)
-        {
-            //break;
-        }
-
-        await Task.Yield(); // 다음 프레임까지 대기
     }
 
     void DetermineWiiner()
     {
         
     }
-
 
 
 

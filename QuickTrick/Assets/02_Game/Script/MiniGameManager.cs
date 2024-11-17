@@ -39,7 +39,7 @@ public class MiniGameManager : MonoBehaviour
         // 애니메이션 플레이 시작 시전 포함 얼마나 기다려야 하는지 반환
 
         // test
-        text.text = "playing Gacha animation";
+        text.text = $"playing Gacha animation {selectedGameMode}";
         waitGachaTime = 3000;
     }
 
