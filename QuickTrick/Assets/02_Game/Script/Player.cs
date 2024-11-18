@@ -18,14 +18,13 @@ public class Player : NetworkBehaviour
 
     private int playerID;
 
-    public TextMeshProUGUI text;
+    public CanvasGroup canvas;
 
     public override void Spawned()
     {
         if (Object.HasInputAuthority)
         {
             ResetTrigger();
-            text.text = Runner.LocalPlayer.PlayerId.ToString();
             playerID = Runner.LocalPlayer.PlayerId;
             Debug.Log($"이 컴퓨터에서는 로컬플레이어 ID가 {Runner.LocalPlayer.PlayerId}");
         }
@@ -39,6 +38,7 @@ public class Player : NetworkBehaviour
         if (Object.HasInputAuthority && triggerOn && triggerStartTime == 0f)
         {
             triggerStartTime = Time.time;
+            canvas.alpha = 1f;
         }
 
         // 트리거 시작 됐는 지 확인, 그리고 버튼 누르면 누를 수 없게 방지
@@ -68,6 +68,8 @@ public class Player : NetworkBehaviour
     {
         triggerStartTime = 0f;
         responseTime = 0f;
+
+        canvas.alpha = 0f;
     }
 
     [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]

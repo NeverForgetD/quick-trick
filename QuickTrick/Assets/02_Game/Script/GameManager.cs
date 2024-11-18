@@ -20,6 +20,7 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
 
     private const int scoreRequiresToWin = 3; // 이기기 위해 필요한 판 수
 
+    // 매 판 ClearData로 초기화 / 네트워크 안 함
     private Dictionary<int, float> playersResponseTime = new Dictionary<int, float>();
     private bool isResultSent;
 
@@ -94,8 +95,7 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
         player2Score = 0;
         isGameActive = true;
 
-        isResultSent = false;
-        playersResponseTime.Clear();
+        ClearData();
 
         StartRound();
     }
@@ -128,10 +128,11 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
             // 두 플레이어가
             await WaitForPlayerResultArrive();
 
-            await WaitForTickTimer(1);
+            //await WaitForTickTimer(1);
+
             DetermineWiiner();
             // 트리거 이벤트 발생
-            RPC_EnableTriggerEvent();
+            //RPC_AnnounceWinner()
         }
     }
 
@@ -159,10 +160,14 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
     }
 
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
-    private void RPC_EnableTriggerEvent()
+    private void RPC_AnnounceWinner(int playerID, float opponentResponseTime)
     {
-        //MiniGameManager.Instance.ShowClickPrompt();
+        int winnerID = DetermineWiiner();
+        
+        //MiniGameManager.Instance.AnnounceWinner(winnerID,);
     }
+
+
     #endregion
 
 
@@ -180,64 +185,55 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
     private void ReceivePlayerClicked(int playerID, float responseTime, bool isValid)
     {
         text.text = $"player{playerID} :::::: {responseTime}";
-
-        playersResponseTime[playerID] = responseTime;
+        if (!isValid)
+        {
+            // playerID는 부정출발한거다!
+        }
+        playersResponseTime.Add(playerID, responseTime);
+        
+        //Debug.Log($"count is {playersResponseTime.Count}");
 
         if (playersResponseTime.Count == 2 && !isResultSent)
         {
             isResultSent = true;
         }
     }
-    
-    private void ReceivePlayerResponseAnimationPlayed()
-    {
-        // 리스폰스 애니메이션이 끝나면 아래 await 끝낸다.
-    }
 
     async Task WaitForPlayerResultArrive()
     {
-        while(isResultSent) // sec 초가 지나지 않았거나, 두 플레이어가 모두 클릭했으면...
+        tickTimer = TickTimer.CreateFromSeconds(Runner, 5);
+
+        while (!isResultSent || !tickTimer.Expired(Runner)) // 5sec 초가 지나지 않았거나, 두 플레이어가 모두 클릭했으면...
         {
             await Task.Yield();
         }
     }
 
-    void DetermineWiiner()
+
+    int DetermineWiiner()
     {
-        /*
+        // 시간초과자가 있다면 isResultSent가 false일 것이다.
+        if (!isResultSent)
+        {
+            // 시간초과자 있음
+        }
         if (playersResponseTime[1] > playersResponseTime[2]) // player2 win
         {
-            text.text = $"player{playersResponseTime[2]} Win!!";
+            text.text = $"player2 ::: {playersResponseTime[2]} Win!!";
+            return 2;
         }
         else
         {
-            text.text = $"player{playersResponseTime[1]} Win!!";
+            text.text = $"player1 ::: {playersResponseTime[1]} Win!!";
+            return 1;
         }
-        */
-        foreach (KeyValuePair<int, float> entry in playersResponseTime)
-        {
-            Debug.Log($"player{entry.Key} : {entry.Value}");
-        }
-
-        playersResponseTime.Clear();
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    void ClearData()
+    {
+        playersResponseTime.Clear();
+        isResultSent = false;
+    }
 
 
     #region legacy
