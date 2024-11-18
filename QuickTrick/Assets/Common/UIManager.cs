@@ -8,8 +8,6 @@ public class UIManager : MonoBehaviour // UI. 반영 상태를 알려주는 enum을 저장하
     static UIManager instance;
     public static UIManager Instance { get { Init(); return instance; } }
 
-    public Define.MainMenuUI runnerStatus { get; private set; }
-
     public delegate void RunnerStatusUpdated(Define.RunnerStatus newState); // 상태 변경 시 호출될 델리게이트
     public event RunnerStatusUpdated OnRunnerStatusUpdated; // 상태 변경 이벤트
 

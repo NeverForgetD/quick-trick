@@ -1220,7 +1220,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: miniGM
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1481,7 +1481,6 @@ MonoBehaviour:
   RunnerPrefab: {fileID: 667176303807065481, guid: 6654f2bb20c0d6c4da6a6b2f345a71f9, type: 3}
   GameManagerPrefab: {fileID: -1494485008803614005, guid: 4e4171b8ef237504ba21d4fd93a73f9c, type: 3}
   RoomText: {fileID: 0}
-  startButton: {fileID: 0}
 --- !u!4 &1750027025
 Transform:
   m_ObjectHideFlags: 0
@@ -1774,6 +1773,10 @@ PrefabInstance:
     - target: {fileID: -1494485008803614005, guid: 4e4171b8ef237504ba21d4fd93a73f9c, type: 3}
       propertyPath: SortKey
       value: 2518454672
+      objectReference: {fileID: 0}
+    - target: {fileID: 1944163488490741519, guid: 4e4171b8ef237504ba21d4fd93a73f9c, type: 3}
+      propertyPath: m_text
+      value: GMTEXT
       objectReference: {fileID: 0}
     - target: {fileID: 2052945882144468874, guid: 4e4171b8ef237504ba21d4fd93a73f9c, type: 3}
       propertyPath: m_LocalPosition.x

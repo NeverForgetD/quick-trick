@@ -1,6 +1,8 @@
 using Fusion;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using static Define;
@@ -10,43 +12,65 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
     // 게임 로직 관련
     [Networked] int player1Score { get; set; } // 플레이어 1 승리 횟수_Host
     [Networked] int player2Score { get; set; } // 플레이어 2 승리 횟수_Client
-    [Networked] Define.GameMode selectedGameMode { get; set; } // 미니 게임 종류
+    [Networked] int randomGameIndex { get; set; } // 미니 게임 종류_인덱스로 저장 및 전달
     [Networked] TickTimer tickTimer { get; set; }
     [Networked] float triggerTime { get; set; } // 트리거 대기시간
-    [Networked] bool triggerOn { get; set; } // 트리거 이벤트 시작
+    //[Networked] bool triggerOn { get; set; } // 트리거 이벤트 시작
     [Networked] bool isGameActive { get; set; } // 게임이 유효한지
 
     private const int scoreRequiresToWin = 3; // 이기기 위해 필요한 판 수
 
+    private Dictionary<int, float> playersResponseTime = new Dictionary<int, float>();
+    private bool isResultSent;
+
     // 플레이어 관련
     public Player localPlayer { get; private set; }
     [SerializeField] Player playerPrefab;
+
+    public TextMeshProUGUI text;
+
+    public GameManager Instance { get; private set; }
+
+    private void OnEnable()
+    {
+        Player.OnPlayerClicked += ReceivePlayerClicked;
+    }
+
+    private void OnDisable()
+    {
+        Player.OnPlayerClicked -= ReceivePlayerClicked;
+    }
 
     public override void Spawned()
     {
 
         if (Object.HasStateAuthority)
         {
-            Debug.Log("GM Spawned");
             //StartNewGame();
         }
     }
 
     // 플레이어 입장 시 로컬 플레이어 생성 및 러너에 저장
+    
     public void PlayerJoined(PlayerRef playerRef)
     {
         if (HasStateAuthority == false)
             return;
 
+        //Debug.Log($"\nplayer joined {Runner.LocalPlayer.PlayerId}\n");
+
         var player = Runner.Spawn(playerPrefab, Vector3.zero, Quaternion.identity, playerRef);
         Runner.SetPlayerObject(playerRef, player.Object);
-
+        
         if (localPlayer == null || localPlayer.Object == null || localPlayer.Object.IsValid == false)
         {
             var playerObject = Runner.GetPlayerObject(Runner.LocalPlayer);
             localPlayer = playerObject != null ? playerObject.GetComponent<Player>() : null;
         }
+        //Debug.Log($"\nplayer joined {Runner.LocalPlayer.PlayerId}\n");
+        Debug.Log($"YYY player joined {playerRef.PlayerId}");
     }
+    
 
     // 플레이어 퇴장 시
     public void PlayerLeft(PlayerRef player)
@@ -70,6 +94,9 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
         player2Score = 0;
         isGameActive = true;
 
+        isResultSent = false;
+        playersResponseTime.Clear();
+
         StartRound();
     }
 
@@ -80,36 +107,30 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
 
         if (Object.HasStateAuthority)
         {
-            // 클릭 못 하게 방지
-            triggerOn = false; // 언제부터 클릭 안 하게 할 지 고민하고 적용한다.
 
             // 랜덤한 미니게임 결정 및 동기화
-            int randomGameIndex = UnityEngine.Random.Range(0, (int)Define.GameMode.MaxCount);
-            // selectedGameMode = (Define.GameMode)randomGameIndex;
+            randomGameIndex = UnityEngine.Random.Range(0, (int)Define.GameMode.MaxCount);
             RPC_UpdateSelectedGame(randomGameIndex); // TODO
 
-            await WaitForTickTimer(5);
-            //await Task.Delay(3000); // 삭제
             // 뽑기 애니메이션 재생
             RPC_PlayGachaAnimation();
-            int waitGachaTime = MiniGameManager.Instance.waitGachaTime;
-            //await Task.Delay(waitGachaTime); // 뽑기 애니메이션 시간 대기 시간
-            //await Task.Delay(3000);
 
-            await WaitForTickTimer(3);
+            int waitGachaTime = MiniGameManager.Instance.waitGachaTime;
+            await WaitForTickTimer(waitGachaTime);
 
             // 트리거 시간 결정 및 동기화
             triggerTime = UnityEngine.Random.Range(2f, 8f);
 
-            // 미니게임 로드 및 대기
-            RPC_StartMiniGame();
-            //await Task.Delay(1000); // 애니메이션마다 다르게설정...?
+            // 미니게임 로드 및 대기 & 트리거 타임 전달
+            RPC_StartMiniGame(triggerTime);
 
+            // await
+            // 두 플레이어가
+            await WaitForPlayerResultArrive();
 
-            //await Task.Delay((int)(triggerTime * 1000));
-
+            await WaitForTickTimer(1);
+            DetermineWiiner();
             // 트리거 이벤트 발생
-            triggerOn = true;
             RPC_EnableTriggerEvent();
         }
     }
@@ -131,18 +152,11 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
     }
 
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
-    private void RPC_UpdateTriggerTime(float n_Time)
+    private void RPC_StartMiniGame(float triggerTime)
     {
-        MiniGameManager.Instance.UpdateTriggerTime(n_Time);
+        MiniGameManager.Instance.UpdateTriggerTime(triggerTime);
+        MiniGameManager.Instance.StartMiniGame();
     }
-
-    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
-    private void RPC_StartMiniGame()
-    {
-        int playerID = Runner.LocalPlayer.PlayerId;
-        MiniGameManager.Instance.StartMiniGame(playerID);
-    }
-
 
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     private void RPC_EnableTriggerEvent()
@@ -151,19 +165,61 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
     }
     #endregion
 
+
     // TickTimer 만료까지 비동기 대기
     async Task WaitForTickTimer(int sec)
     {
         tickTimer = TickTimer.CreateFromSeconds(Runner, sec);
         while (!tickTimer.Expired(Runner))
         {
-            await Task.Yield(); // 다음 프레임까지 대기
+            await Task.Yield();
+        }
+    }
+
+    // 플레이어가 클릭하면 정보가 이리로 온다.
+    private void ReceivePlayerClicked(int playerID, float responseTime, bool isValid)
+    {
+        text.text = $"player{playerID} :::::: {responseTime}";
+
+        playersResponseTime[playerID] = responseTime;
+
+        if (playersResponseTime.Count == 2 && !isResultSent)
+        {
+            isResultSent = true;
+        }
+    }
+    
+    private void ReceivePlayerResponseAnimationPlayed()
+    {
+        // 리스폰스 애니메이션이 끝나면 아래 await 끝낸다.
+    }
+
+    async Task WaitForPlayerResultArrive()
+    {
+        while(isResultSent) // sec 초가 지나지 않았거나, 두 플레이어가 모두 클릭했으면...
+        {
+            await Task.Yield();
         }
     }
 
     void DetermineWiiner()
     {
-        
+        /*
+        if (playersResponseTime[1] > playersResponseTime[2]) // player2 win
+        {
+            text.text = $"player{playersResponseTime[2]} Win!!";
+        }
+        else
+        {
+            text.text = $"player{playersResponseTime[1]} Win!!";
+        }
+        */
+        foreach (KeyValuePair<int, float> entry in playersResponseTime)
+        {
+            Debug.Log($"player{entry.Key} : {entry.Value}");
+        }
+
+        playersResponseTime.Clear();
     }
 
 

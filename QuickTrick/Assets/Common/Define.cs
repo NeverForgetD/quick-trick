@@ -12,11 +12,6 @@ public class Define
         MaxCount, // 연산 편리상 넣은 것...실제로 게임 X
     }
 
-    public enum MainMenuUI
-    {
-
-    }
-
     public enum RunnerStatus
     {
         NONE,
@@ -25,5 +20,12 @@ public class Define
         TIMEOUT,
         DISCONNECTING,
         GAME,
+    }
+
+    public enum GameState
+    {
+        ENTER,
+        STARTGAME,
+        STARTROUND,
     }
 }
