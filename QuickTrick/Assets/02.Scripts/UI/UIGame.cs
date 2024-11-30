@@ -103,9 +103,11 @@ public class UIGame : MonoBehaviour
     private void InitInstance()
     {
         if (_matchMakerInstance == null)
-            _matchMakerInstance = FindObjectOfType<MatchMaker>();
+            _matchMakerInstance = FindFirstObjectByType<MatchMaker>();
+            //_matchMakerInstance = FindObjectOfType<MatchMaker>();
         if (_runnerInstance == null)
-            _runnerInstance = FindObjectOfType<NetworkRunner>();
+            _runnerInstance = FindFirstObjectByType<NetworkRunner>();
+            //_runnerInstance = FindObjectOfType<NetworkRunner>();
     }
 
     void Update()

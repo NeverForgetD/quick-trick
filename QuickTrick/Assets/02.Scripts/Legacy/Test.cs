@@ -12,7 +12,7 @@ public class Test : MonoBehaviour
     private void InitInstance()
     {
         if (_runnerInstance == null)
-            _runnerInstance = FindObjectOfType<NetworkRunner>();
+            _runnerInstance = FindFirstObjectByType<NetworkRunner>();
     }
 
     private void ShowRoomNumber()
