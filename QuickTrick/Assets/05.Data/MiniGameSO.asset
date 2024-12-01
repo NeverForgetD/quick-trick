@@ -12,5 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4137e44cea824404b90bd301bf4ceda0, type: 3}
   m_Name: MiniGameSO
   m_EditorClassIdentifier: 
-  miniGames:
+  miniGamePrefabs:
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 2208635626844024177, guid: 50dbd2ed54035b0498a34c0ac84d2c45, type: 3}
+  miniGameGuideTexts:
+  - 
+  - 
+  - Go! when the three <color=green>green</color> lights on...

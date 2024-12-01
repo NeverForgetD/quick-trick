@@ -206,9 +206,9 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
 
     async Task WaitForPlayerResultArrive()
     {
-        tickTimer = TickTimer.CreateFromSeconds(Runner, 5);
+        tickTimer = TickTimer.CreateFromSeconds(Runner, 2);
 
-        while (!isResultSent || !tickTimer.Expired(Runner)) // 5sec 초가 지나지 않았거나, 두 플레이어가 모두 클릭했으면...
+        while (!isResultSent || !tickTimer.Expired(Runner)) // 2sec 초가 지나지 않았거나, 두 플레이어가 모두 클릭했으면...
         {
             await Task.Yield();
         }

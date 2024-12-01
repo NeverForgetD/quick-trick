@@ -20,10 +20,8 @@ public class MiniGameManager : MonoBehaviour
     }
     #endregion
 
-    /// <summary>
-    /// 미니 게임 프리팹을 배열로 갖는 스크립터블 오브젝트
-    /// </summary>
     [SerializeField] MiniGameSO miniGameSO;
+    public MiniGameSO _MiniGameSo => miniGameSO;
 
     public float player1ReactionTime { get; private set; } // t
     public float player2ReactionTime { get; private set; } // t
@@ -32,6 +30,8 @@ public class MiniGameManager : MonoBehaviour
     public bool triggerOn { get; private set; }
 
     public float triggerTime { get; private set; }
+
+    public GameObject _miniGameInstance {get; private set;}
 
     /// <summary>
     /// 지금은 MGM에서 GM에게 전달해주지만, 이러면 2번 전송된다. GM 자체적으로 운영될 수 있도록 수정해야한다.
@@ -78,8 +78,8 @@ public class MiniGameManager : MonoBehaviour
     public async void StartMiniGame()
     {
         // 미니 게임 띄우는 애니메이션
-        GameObject miniGamePrefab = miniGameSO.miniGamePrefabs[selectedGameIndex];
-        Instantiate(miniGamePrefab);
+        GameObject miniGamePrefab = miniGameSO.GetMiniGamePrefab(selectedGameIndex);
+        _miniGameInstance = Instantiate(miniGamePrefab);
 
         // 게임 설명 (Wait For Green...) && 이때부터 클릭하면 진다 && TriggerTime 이 지나간다.
         miniGameStarted = true;

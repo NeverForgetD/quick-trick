@@ -67,8 +67,6 @@ public class Player : NetworkBehaviour
                 ResetTrigger();
             }
         }
-
-        // canClick 아닌데 누르면, 에러 소리 나게 할까? 일단 중요도 하
     }
 
     private void ResetTrigger()
