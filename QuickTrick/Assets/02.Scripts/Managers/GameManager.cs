@@ -10,19 +10,27 @@ using static Define;
 public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
 {
     // 게임 로직 관련
+    #region Networked
     [Networked] int player1Score { get; set; } // 플레이어 1 승리 횟수_Host
     [Networked] int player2Score { get; set; } // 플레이어 2 승리 횟수_Client
     [Networked] int randomGameIndex { get; set; } // 미니 게임 종류_인덱스로 저장 및 전달
     [Networked] TickTimer tickTimer { get; set; }
     [Networked] float triggerTime { get; set; } // 트리거 대기시간
-    //[Networked] bool triggerOn { get; set; } // 트리거 이벤트 시작
     [Networked] bool isGameActive { get; set; } // 게임이 유효한지
+    #endregion
 
+    #region privates
     private const int scoreRequiresToWin = 3; // 이기기 위해 필요한 판 수
 
-    // 매 판 ClearData로 초기화 / 네트워크 안 함
+    // 매 판 ClearData로 초기화
     private Dictionary<int, float> playersResponseTime = new Dictionary<int, float>();
     private bool isResultSent;
+    #endregion
+
+    #region SerializeField
+    [SerializeField] float minTriggerTime;
+    [SerializeField] float maxTriggerTime;
+    #endregion
 
     // 플레이어 관련
     public Player localPlayer { get; private set; }
@@ -88,7 +96,9 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
         localPlayer = null;
     }
 
-
+    /// <summary>
+    /// 게임 세트를 시작한다.
+    /// </summary>
     public void StartNewGame()
     {
         player1Score = 0;
@@ -100,10 +110,12 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
         StartRound();
     }
 
-
-    async void StartRound()
+    /// <summary>
+    /// 메인 게임 루프(라운드) 게임 종료 조건까지 게임을 진행시킨다.
+    /// </summary>
+    private async void StartRound()
     {
-        // if (!isGameActive) { return; } // 이 부분 수정
+        if (!isGameActive) { return; } // 이 부분 수정
 
         if (Object.HasStateAuthority)
         {
@@ -114,12 +126,10 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
 
             // 뽑기 애니메이션 재생
             RPC_PlayGachaAnimation();
+            await WaitForTickTimer(MiniGameManager.Instance.waitGachaTime);
 
-            int waitGachaTime = MiniGameManager.Instance.waitGachaTime;
-            await WaitForTickTimer(waitGachaTime);
-
-            // 트리거 시간 결정 및 동기화
-            triggerTime = UnityEngine.Random.Range(2f, 8f);
+            // 트리거 시간 결정
+            triggerTime = UnityEngine.Random.Range(minTriggerTime, maxTriggerTime);
 
             // 미니게임 로드 및 대기 & 트리거 타임 전달
             RPC_StartMiniGame(triggerTime);
@@ -136,10 +146,7 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
         }
     }
 
-    #region RPC
-
-    // RPC
-
+    #region RPC Methods
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     private void RPC_UpdateSelectedGame(int index)
     {
@@ -166,8 +173,6 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
         
         //MiniGameManager.Instance.AnnounceWinner(winnerID,);
     }
-
-
     #endregion
 
 
@@ -236,7 +241,7 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
     }
 
 
-    #region legacy
+    #region Legacy
     /*
     // 플레이어 세팅 관련
     [SerializeField ,Tooltip("플레이어 프리팹")]

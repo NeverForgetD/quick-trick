@@ -6,9 +6,9 @@ public class Define
 {
     public enum GameMode // 미니 게임 종류들
     {
-        COLORSHIFT,
-        GUNFIGHT,
-        CARDGAME,
+        //Default00,
+        //QuickDraw01,
+        CarRace02,
         MaxCount, // 연산 편리상 넣은 것...실제로 게임 X
     }
 

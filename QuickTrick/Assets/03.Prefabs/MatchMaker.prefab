@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ee64674fd641614d8642210766de792, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RunnerPrefab: {fileID: 0}
-  GameManagerPrefab: {fileID: 0}
+  RunnerPrefab: {fileID: -7200727465891013159, guid: 9ff08ee4f40c438459527356213e843d, type: 3}
+  GameManagerPrefab: {fileID: 1670903155119631091, guid: 3277799a2fcd6fd4d8364167bf156002, type: 3}
   RoomText: {fileID: 0}

@@ -20,6 +20,7 @@ public class MatchMaker : MonoBehaviour
     private NetworkObject _gameManagerInstance;
 
     // 매칭 정보 관련
+    [Tooltip("커스텀 매칭 이용시 필요")]
     public TMP_InputField RoomText;
     private const int maxPlayerCount = 2; // 플레이어 수
 
@@ -80,7 +81,7 @@ public class MatchMaker : MonoBehaviour
             //UIManager.Instance.UpdateRunnerStatus("");
             // 실패하는 경우가 없기는 하지만 나중에 에러 메시지 출력 기능 추가해야한다.
             await Disconnect();
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(0);
         }
     }
 
@@ -104,6 +105,7 @@ public class MatchMaker : MonoBehaviour
         }
 
         // 1초 미만의 시간차로 접속이 되면 한 클라이언트만 룸에 참가되는 오류 방지
+        //elapsedTime을 작게 설정하면 연산이 많아지니, 이렇게 한다.
         if (_runnerInstance.SessionInfo.PlayerCount == maxPlayerCount)
         {
             StartGame();
@@ -114,9 +116,12 @@ public class MatchMaker : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 플레이어가 모두 모였을 때 호출된다.
+    /// </summary>
     private void StartGame()
     {
-        // 메인게임 스크립트의 게임시작 메서드 실행
+        // UI 반영
         UIManager.Instance.UpdateRunnerStatus("GAME");
 
         //네트워크 오브젝트 스폰
@@ -126,47 +131,19 @@ public class MatchMaker : MonoBehaviour
         }
     }
 
-    // legacy_삭제
-    private void SpawnNetworkObject()
+    /// <summary>
+    /// 매칭시간이 제한시간을 초과했을 경우 UI상태를 TIMEOUT으로 변경
+    /// </summary>
+    public async void OnTimeOut()
     {
-        if (GameManagerPrefab == null)
-        {
-            GameManagerPrefab = Resources.Load<NetworkObject>("Prefabs/GameManager");
-        }
-        _gameManagerInstance = _runnerInstance.Spawn(GameManagerPrefab);
-    }
-
-    
-    public void OnTimeOut()
-    {
+        await Disconnect();
         UIManager.Instance.UpdateRunnerStatus("TIMEOUT");
     }
-    
 
-    // TEMP
-    /*
-    private async void OnTimeOut()
-    {
-        //await Disconnect();
-        //SceneManager.LoadScene(1);
-        //디스커넥트 안 하고 다시 매칭 했을 떄도 유효한 지 확인해야함
-
-
-    }
-    */
-
-    // 아직 안 쓰는 기능
-    public async void DisconnectClicked()
-    {
-        await Disconnect();
-    }
-
-    public async void BackToMenu()
-    {
-        await Disconnect();
-        SceneManager.LoadScene(1);
-    }
-
+    /// <summary>
+    /// 서버와의 연결을 끊는다.
+    /// </summary>
+    /// <returns></returns>
     public async Task Disconnect()
     {
         if (_runnerInstance == null)
@@ -178,7 +155,6 @@ public class MatchMaker : MonoBehaviour
         var events = _runnerInstance.GetComponent<NetworkEvents>();
         events.OnShutdown.RemoveListener(OnShutDown);
 
-
         await _runnerInstance.Shutdown();
         _runnerInstance= null;
 
@@ -187,6 +163,11 @@ public class MatchMaker : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    /// <summary>
+    /// 예상치 못한 셧다울 발생 시 메시지 출력, 씬 리셋후 리로드
+    /// </summary>
+    /// <param name="runner"></param>
+    /// <param name="reason"></param>
     private void OnShutDown(NetworkRunner runner, ShutdownReason reason)
     {
         //  예상치 못한 셧다운 발생 시, 메시지 출력
@@ -196,5 +177,29 @@ public class MatchMaker : MonoBehaviour
         // 씬 리셋 후 리로드
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
+    #region Button Method
+    public void OnConnectButtonClicked()
+    {
+        MatchGame();
+    }
+
+    public async void OnDisconnectClicked()
+    {
+        Debug.Log("Diconnected Clicked");
+        await Disconnect();
+    }
+
+    public async void OnBackToMenuClicked()
+    {
+        Debug.Log("Diconnected Clicked_disconnect와 같음");
+        await Disconnect();
+    }
+
+    public void OnRetryButtonClicked()
+    {
+        MatchGame();
+    }
+    #endregion
 }
 

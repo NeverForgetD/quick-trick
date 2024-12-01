@@ -13,7 +13,14 @@ public class Player : NetworkBehaviour
     // triggerOn
     private bool canClick => MiniGameManager.Instance.miniGameStarted;
     private bool triggerOn => MiniGameManager.Instance.triggerOn;
+    /// <summary>
+    /// 트리거 이벤트가 발생한 시간_클라이언트에서 저장
+    /// </summary>
     private float triggerStartTime;
+
+    /// <summary>
+    /// 플레이어의 반응속도
+    /// </summary>
     private float responseTime;
 
     private int playerID;

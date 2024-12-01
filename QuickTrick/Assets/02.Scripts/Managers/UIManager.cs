@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour // UI. 반영 상태를 알려주는 enum을 저장하는 매니저
 {
+
+    #region Singleton
+
+    #endregion
     static UIManager instance;
     public static UIManager Instance { get { Init(); return instance; } }
 
