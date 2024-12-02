@@ -52,6 +52,7 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
 
     public override void Spawned()
     {
+        Debug.Log("GM Spawned--------------------");
 
         if (Object.HasStateAuthority)
         {
@@ -78,6 +79,11 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
         }
         //Debug.Log($"\nplayer joined {Runner.LocalPlayer.PlayerId}\n");
         Debug.Log($"YYY player joined {playerRef.PlayerId}");
+
+        if (Runner.SessionInfo.PlayerCount == 2)
+        {
+            StartNewGame();
+        }
     }
     
 
@@ -122,7 +128,8 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
 
             // 랜덤한 미니게임 결정 및 동기화
             randomGameIndex = UnityEngine.Random.Range(0, (int)Define.GameMode.MaxCount);
-            RPC_UpdateSelectedGame(randomGameIndex); // TODO
+            randomGameIndex = 2; // 테스트용 test
+            RPC_UpdateSelectedGame(randomGameIndex);
 
             // 뽑기 애니메이션 재생
             RPC_PlayGachaAnimation();
@@ -138,7 +145,6 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
             // 두 플레이어가
             await WaitForPlayerResultArrive();
 
-            //await WaitForTickTimer(1);
 
             DetermineWiiner();
             // 트리거 이벤트 발생
@@ -186,10 +192,16 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
         }
     }
 
-    // 플레이어가 클릭하면 정보가 이리로 온다.
+    /// <summary>
+    /// 플레이어에게서 정보를 받는다.
+    /// </summary>
+    /// <param name="playerID"></param>
+    /// <param name="responseTime"></param>
+    /// <param name="isValid"></param>
     private void ReceivePlayerClicked(int playerID, float responseTime, bool isValid)
     {
         text.text = $"player{playerID} :::::: {responseTime}";
+
         if (!isValid)
         {
             // playerID는 부정출발한거다!
@@ -204,11 +216,15 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
         }
     }
 
+    /// <summary>
+    /// 두 플레이어에게서 정보를 받을 때까지 대기하는 Task
+    /// </summary>
+    /// <returns></returns>
     async Task WaitForPlayerResultArrive()
     {
-        tickTimer = TickTimer.CreateFromSeconds(Runner, 2);
-
-        while (!isResultSent || !tickTimer.Expired(Runner)) // 2sec 초가 지나지 않았거나, 두 플레이어가 모두 클릭했으면...
+        //tickTimer = TickTimer.CreateFromSeconds(Runner, 2);
+        //|| !tickTimer.Expired(Runner)
+        while (!isResultSent)
         {
             await Task.Yield();
         }

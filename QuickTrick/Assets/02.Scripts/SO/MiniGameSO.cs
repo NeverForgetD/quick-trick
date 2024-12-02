@@ -7,7 +7,7 @@ public class MiniGameSO : ScriptableObject
     /// <summary>
     /// 미니게임별 프리팹
     /// </summary>
-    public GameObject[] miniGamePrefabs;
+    public MiniGameBase[] miniGamePrefabs;
 
     /// <summary>
     /// 미니게임별 게임 방법 설명하는 텍스트
@@ -15,7 +15,7 @@ public class MiniGameSO : ScriptableObject
     public string[] miniGameGuideTexts;
 
 
-    public GameObject GetMiniGamePrefab(int index)
+    public MiniGameBase GetMiniGamePrefab(int index)
     {
         if (index < 0 || index >= miniGamePrefabs.Length)
             return null;

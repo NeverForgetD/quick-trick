@@ -9,13 +9,13 @@ using UnityEngine.SceneManagement;
 public class MatchMaker : MonoBehaviour
 {
     // 네트워크 러너 관련
-    [SerializeField, Tooltip("네트워크 러너 프리팹, 지정안해줘도 알아서 찾음")]
+    [SerializeField, Tooltip("네트워크 러너 프리팹")]
     private NetworkRunner RunnerPrefab;
     private NetworkRunner _runnerInstance;
     private static string _shutdownStatus;
 
     // 게임 시작 시 스폰될 네트워크 오브젝트
-    [SerializeField, Tooltip("게임매니저(네트워크 오브젝트) 프리팹, 지정안해줘도 알아서 찾음")]
+    [SerializeField, Tooltip("게임매니저(네트워크 오브젝트) 프리팹")]
     private NetworkObject GameManagerPrefab;
     private NetworkObject _gameManagerInstance;
 
@@ -25,7 +25,7 @@ public class MatchMaker : MonoBehaviour
     private const int maxPlayerCount = 2; // 플레이어 수
 
     //매칭 대기 관련
-    private const float maxWaitingTime = 10f; // 매칭 최대 대기 시간 (초) _ 30초로 변경, 테스트환경 n초
+    private const float maxWaitingTime = 30f; // 매칭 최대 대기 시간 (초) _ 30초로 변경, 테스트환경 n초
     public float elapsedTime { get; private set; } // 현재 대기 시간 (초)
 
     private void Start()
@@ -35,8 +35,10 @@ public class MatchMaker : MonoBehaviour
 
     private void InitRunner()
     {
+        //프로젝트 이전 후 경로 재설정 해줘야한다
         if (RunnerPrefab == null)
-            RunnerPrefab = Resources.Load<NetworkRunner>("Prefabs/NetworkRunner");
+            Debug.LogWarning("MatchMaker에 runner 프리팹 지정이 안 됐습니다");
+            //RunnerPrefab = Resources.Load<NetworkRunner>("Prefabs/NetworkRunner");
 
         _runnerInstance = Instantiate(RunnerPrefab);
         DontDestroyOnLoad(_runnerInstance);
@@ -81,7 +83,7 @@ public class MatchMaker : MonoBehaviour
             //UIManager.Instance.UpdateRunnerStatus("");
             // 실패하는 경우가 없기는 하지만 나중에 에러 메시지 출력 기능 추가해야한다.
             await Disconnect();
-            SceneManager.LoadScene(0);
+            //SceneManager.LoadScene(0);
         }
     }
 
@@ -117,17 +119,16 @@ public class MatchMaker : MonoBehaviour
     }
 
     /// <summary>
-    /// 플레이어가 모두 모였을 때 호출된다.
+    /// 플레이어가 모두 모였을 때 호출된다. 
     /// </summary>
     private void StartGame()
     {
         // UI 반영
         UIManager.Instance.UpdateRunnerStatus("GAME");
-
         //네트워크 오브젝트 스폰
         if (_runnerInstance.IsServer)
         {
-            //SpawnNetworkObject();
+            //
         }
     }
 

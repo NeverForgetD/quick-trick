@@ -1,5 +1,4 @@
 using Febucci.UI;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class MiniGameBase : MonoBehaviour
@@ -19,13 +18,14 @@ public abstract class MiniGameBase : MonoBehaviour
 
     public virtual void OnMiniGameInitialized()
     {
+        // SO에서 정보를 불러와 나타낼 미니게임 설명을 저장한다.
         miniGameSo = MiniGameManager.Instance._MiniGameSo;
         guideTextValue = miniGameSo.GetTextForMiniGame(miniGameIndex);
     }
     #endregion
 
     #region protected Method
-    protected void ShowText()
+    protected void ShowExplanationText()
     {
         typewritter.ShowText(guideTextValue);
     }

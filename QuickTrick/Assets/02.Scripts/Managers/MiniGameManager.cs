@@ -23,15 +23,15 @@ public class MiniGameManager : MonoBehaviour
     [SerializeField] MiniGameSO miniGameSO;
     public MiniGameSO _MiniGameSo => miniGameSO;
 
-    public float player1ReactionTime { get; private set; } // t
-    public float player2ReactionTime { get; private set; } // t
+    //public float player1ReactionTime { get; private set; } // t
+    //public float player2ReactionTime { get; private set; } // t
 
-    public bool miniGameStarted { get; private set; }
+    public bool miniGameReady { get; private set; }
     public bool triggerOn { get; private set; }
 
     public float triggerTime { get; private set; }
 
-    public GameObject _miniGameInstance {get; private set;}
+    public MiniGameBase _miniGameInstance {get; private set;}
 
     /// <summary>
     /// 지금은 MGM에서 GM에게 전달해주지만, 이러면 2번 전송된다. GM 자체적으로 운영될 수 있도록 수정해야한다.
@@ -77,15 +77,48 @@ public class MiniGameManager : MonoBehaviour
     /// </summary>
     public async void StartMiniGame()
     {
+        miniGameReady = false;
         // 미니 게임 띄우는 애니메이션
-        GameObject miniGamePrefab = miniGameSO.GetMiniGamePrefab(selectedGameIndex);
+        MiniGameBase miniGamePrefab = miniGameSO.GetMiniGamePrefab(selectedGameIndex);
         _miniGameInstance = Instantiate(miniGamePrefab);
 
-        // 게임 설명 (Wait For Green...) && 이때부터 클릭하면 진다 && TriggerTime 이 지나간다.
-        miniGameStarted = true;
-        await Task.Delay(2000);
+        _miniGameInstance.OnStandBy();
+        // MiniGameBase에서 Standby 끝날 때까지 대기
+        await WaitForGameReady();
 
-       // TriggerTime 지나간 이후 트리거 이벤트 발생
-       triggerOn = true;
+        await Task.Delay(3000);
+        triggerOn = true;
+        _miniGameInstance.OnTriggerEvent();
+
+        // TriggerTime 지나간 이후 트리거 이벤트 발생
     }
+
+    /// <summary>
+    /// Standby 작업이 끝날 때 까지 대기하는 Task
+    /// </summary>
+    private async Task WaitForGameReady()
+    {
+        while (!miniGameReady)
+        {
+            await Task.Yield();
+        }
+    }
+
+
+    /// <summary>
+    /// MiniGameBase에서 Standby 애니메이션 작업 끝나면 호출, Player에게 전달
+    /// </summary>
+    public void GameReady()
+    {
+        miniGameReady = true;
+    }
+
+    /// <summary>
+    /// Player에서 호출. 클릭 허용하지 않게 변경
+    /// </summary>
+    public void GameDone()
+    {
+        miniGameReady = false;
+    }
+
 }
