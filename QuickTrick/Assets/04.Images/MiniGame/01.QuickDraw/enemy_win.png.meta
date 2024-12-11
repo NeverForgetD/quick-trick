@@ -100,7 +100,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -135,10 +135,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -672,7 +672,29 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      enemy_win_0: 1731257772075005247
+      enemy_win_1: -8034630139759538972
+      enemy_win_10: -2788116175630332452
+      enemy_win_11: 1524397635071055479
+      enemy_win_12: -5606305153082074188
+      enemy_win_13: -8360824957050376855
+      enemy_win_14: -840855659854440906
+      enemy_win_15: -7291855778015615776
+      enemy_win_16: 4406188301839657830
+      enemy_win_17: 416042745774445552
+      enemy_win_18: -4795864600634125090
+      enemy_win_19: 1523515718811491277
+      enemy_win_2: 8814916787240943816
+      enemy_win_20: 4350814401882414661
+      enemy_win_21: 8450880149876357555
+      enemy_win_3: -8482332816622525860
+      enemy_win_4: -4503654453420512066
+      enemy_win_5: -7767930212262273300
+      enemy_win_6: 4317912328054089721
+      enemy_win_7: 5124509921699809083
+      enemy_win_8: 2977891728024194239
+      enemy_win_9: 1574914363917343027
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

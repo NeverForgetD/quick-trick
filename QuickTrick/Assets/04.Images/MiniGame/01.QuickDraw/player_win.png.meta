@@ -100,7 +100,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -135,10 +135,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -672,7 +672,29 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      player_win_0: -3817137570441962885
+      player_win_1: -4950419939238884373
+      player_win_10: -760794126655589431
+      player_win_11: -7392567269767557387
+      player_win_12: 8883996733364618985
+      player_win_13: -6746069406578301724
+      player_win_14: 238615118949570506
+      player_win_15: -970193311448771621
+      player_win_16: 38909169989493805
+      player_win_17: -859472079927944325
+      player_win_18: 444656139350040682
+      player_win_19: 2226294078983027847
+      player_win_2: -7213705825726914685
+      player_win_20: 4354291373659289910
+      player_win_21: 3852473682405224690
+      player_win_3: 59383943971195862
+      player_win_4: 4142402694155466495
+      player_win_5: 31030666613230327
+      player_win_6: -104911947886396924
+      player_win_7: -7180660319763889834
+      player_win_8: -1016835289805816518
+      player_win_9: -8166478597727649035
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
