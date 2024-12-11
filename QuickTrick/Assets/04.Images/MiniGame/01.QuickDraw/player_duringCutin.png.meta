@@ -119,10 +119,10 @@ TextureImporter:
       name: player_duringCutin_0
       rect:
         serializedVersion: 2
-        x: 279
+        x: 0
         y: 0
-        width: 258
-        height: 593
+        width: 896
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,10 +141,10 @@ TextureImporter:
       name: player_duringCutin_1
       rect:
         serializedVersion: 2
-        x: 1175
+        x: 896
         y: 0
-        width: 258
-        height: 593
+        width: 896
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,7 +163,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5fd929f252adde9478daf822cae781e9
     internalID: 0
     vertices: []
     indices: 

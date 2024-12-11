@@ -75,7 +75,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 4096
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -119,10 +119,10 @@ TextureImporter:
       name: sun_idle_0
       rect:
         serializedVersion: 2
-        x: 1647
-        y: 3623
-        width: 514
-        height: 514
+        x: 0
+        y: 2160
+        width: 3840
+        height: 2160
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,10 +141,10 @@ TextureImporter:
       name: sun_idle_1
       rect:
         serializedVersion: 2
-        x: 1647
-        y: 1463
-        width: 514
-        height: 514
+        x: 0
+        y: 0
+        width: 3840
+        height: 2160
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,7 +163,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 8ae4aa1d81ac5bc408bdea1758f80862
     internalID: 0
     vertices: []
     indices: 

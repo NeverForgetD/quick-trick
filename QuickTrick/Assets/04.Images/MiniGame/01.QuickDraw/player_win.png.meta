@@ -179,10 +179,10 @@ TextureImporter:
       name: player_win_0
       rect:
         serializedVersion: 2
-        x: 255
+        x: 0
         y: 0
-        width: 290
-        height: 577
+        width: 896
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -201,10 +201,10 @@ TextureImporter:
       name: player_win_1
       rect:
         serializedVersion: 2
-        x: 495
-        y: 287
-        width: 146
-        height: 106
+        x: 896
+        y: 0
+        width: 896
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -223,10 +223,10 @@ TextureImporter:
       name: player_win_2
       rect:
         serializedVersion: 2
-        x: 1159
+        x: 1792
         y: 0
-        width: 274
-        height: 577
+        width: 896
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -245,10 +245,10 @@ TextureImporter:
       name: player_win_3
       rect:
         serializedVersion: 2
-        x: 2055
+        x: 2688
         y: 0
-        width: 322
-        height: 577
+        width: 896
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -267,10 +267,10 @@ TextureImporter:
       name: player_win_4
       rect:
         serializedVersion: 2
-        x: 2951
+        x: 3584
         y: 0
-        width: 258
-        height: 577
+        width: 896
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -289,10 +289,10 @@ TextureImporter:
       name: player_win_5
       rect:
         serializedVersion: 2
-        x: 3847
+        x: 4480
         y: 0
-        width: 258
-        height: 577
+        width: 896
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -311,10 +311,10 @@ TextureImporter:
       name: player_win_6
       rect:
         serializedVersion: 2
-        x: 4743
+        x: 5376
         y: 0
-        width: 258
-        height: 577
+        width: 896
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -333,10 +333,10 @@ TextureImporter:
       name: player_win_7
       rect:
         serializedVersion: 2
-        x: 5639
+        x: 6272
         y: 0
-        width: 258
-        height: 577
+        width: 896
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -355,10 +355,10 @@ TextureImporter:
       name: player_win_8
       rect:
         serializedVersion: 2
-        x: 5895
-        y: 375
-        width: 10
-        height: 10
+        x: 7168
+        y: 0
+        width: 896
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -377,10 +377,10 @@ TextureImporter:
       name: player_win_9
       rect:
         serializedVersion: 2
-        x: 6535
+        x: 8064
         y: 0
-        width: 258
-        height: 577
+        width: 896
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -399,10 +399,10 @@ TextureImporter:
       name: player_win_10
       rect:
         serializedVersion: 2
-        x: 7431
+        x: 8960
         y: 0
-        width: 258
-        height: 577
+        width: 896
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -421,10 +421,10 @@ TextureImporter:
       name: player_win_11
       rect:
         serializedVersion: 2
-        x: 8327
+        x: 9856
         y: 0
-        width: 258
-        height: 577
+        width: 896
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -443,10 +443,10 @@ TextureImporter:
       name: player_win_12
       rect:
         serializedVersion: 2
-        x: 9223
+        x: 10752
         y: 0
-        width: 258
-        height: 577
+        width: 896
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -465,10 +465,10 @@ TextureImporter:
       name: player_win_13
       rect:
         serializedVersion: 2
-        x: 10119
+        x: 11648
         y: 0
-        width: 258
-        height: 577
+        width: 896
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -483,187 +483,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: player_win_14
-      rect:
-        serializedVersion: 2
-        x: 11015
-        y: 0
-        width: 258
-        height: 577
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ac7d60bbf2bbf4300800000000000000
-      internalID: 238615118949570506
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: player_win_15
-      rect:
-        serializedVersion: 2
-        x: 11911
-        y: 0
-        width: 258
-        height: 577
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: bd3d2a3d25e2982f0800000000000000
-      internalID: -970193311448771621
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: player_win_16
-      rect:
-        serializedVersion: 2
-        x: 3287
-        y: 343
-        width: 10
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d24aab71fab3a8000800000000000000
-      internalID: 38909169989493805
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: player_win_17
-      rect:
-        serializedVersion: 2
-        x: 4991
-        y: 351
-        width: 18
-        height: 18
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b7b578d62ba8214f0800000000000000
-      internalID: -859472079927944325
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: player_win_18
-      rect:
-        serializedVersion: 2
-        x: 1407
-        y: 319
-        width: 58
-        height: 26
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a60e721276cbb2600800000000000000
-      internalID: 444656139350040682
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: player_win_19
-      rect:
-        serializedVersion: 2
-        x: 2383
-        y: 335
-        width: 10
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 78cb65f5ba265ee10800000000000000
-      internalID: 2226294078983027847
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: player_win_20
-      rect:
-        serializedVersion: 2
-        x: 3247
-        y: 327
-        width: 34
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 639728f2fec8d6c30800000000000000
-      internalID: 4354291373659289910
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: player_win_21
-      rect:
-        serializedVersion: 2
-        x: 3295
-        y: 327
-        width: 10
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2f0fd42276cb67530800000000000000
-      internalID: 3852473682405224690
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: cb5ce63446cd8a24794799ba992c535f
     internalID: 0
     vertices: []
     indices: 
@@ -679,15 +503,7 @@ TextureImporter:
       player_win_11: -7392567269767557387
       player_win_12: 8883996733364618985
       player_win_13: -6746069406578301724
-      player_win_14: 238615118949570506
-      player_win_15: -970193311448771621
-      player_win_16: 38909169989493805
-      player_win_17: -859472079927944325
-      player_win_18: 444656139350040682
-      player_win_19: 2226294078983027847
       player_win_2: -7213705825726914685
-      player_win_20: 4354291373659289910
-      player_win_21: 3852473682405224690
       player_win_3: 59383943971195862
       player_win_4: 4142402694155466495
       player_win_5: 31030666613230327

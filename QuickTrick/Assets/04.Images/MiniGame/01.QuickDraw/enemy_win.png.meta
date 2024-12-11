@@ -179,10 +179,10 @@ TextureImporter:
       name: enemy_win_0
       rect:
         serializedVersion: 2
-        x: 255
-        y: 287
-        width: 146
-        height: 106
+        x: 0
+        y: 0
+        width: 896
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -201,10 +201,10 @@ TextureImporter:
       name: enemy_win_1
       rect:
         serializedVersion: 2
-        x: 351
+        x: 896
         y: 0
-        width: 290
-        height: 577
+        width: 896
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -223,10 +223,10 @@ TextureImporter:
       name: enemy_win_2
       rect:
         serializedVersion: 2
-        x: 1255
+        x: 1792
         y: 0
-        width: 274
-        height: 577
+        width: 896
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -245,10 +245,10 @@ TextureImporter:
       name: enemy_win_3
       rect:
         serializedVersion: 2
-        x: 2103
+        x: 2688
         y: 0
-        width: 322
-        height: 577
+        width: 896
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -267,10 +267,10 @@ TextureImporter:
       name: enemy_win_4
       rect:
         serializedVersion: 2
-        x: 3063
+        x: 3584
         y: 0
-        width: 258
-        height: 577
+        width: 896
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -289,10 +289,10 @@ TextureImporter:
       name: enemy_win_5
       rect:
         serializedVersion: 2
-        x: 3959
+        x: 4480
         y: 0
-        width: 258
-        height: 577
+        width: 896
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -311,10 +311,10 @@ TextureImporter:
       name: enemy_win_6
       rect:
         serializedVersion: 2
-        x: 4855
+        x: 5376
         y: 0
-        width: 258
-        height: 577
+        width: 896
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -333,10 +333,10 @@ TextureImporter:
       name: enemy_win_7
       rect:
         serializedVersion: 2
-        x: 5743
-        y: 375
-        width: 10
-        height: 10
+        x: 6272
+        y: 0
+        width: 896
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -355,10 +355,10 @@ TextureImporter:
       name: enemy_win_8
       rect:
         serializedVersion: 2
-        x: 5751
+        x: 7168
         y: 0
-        width: 258
-        height: 577
+        width: 896
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -377,10 +377,10 @@ TextureImporter:
       name: enemy_win_9
       rect:
         serializedVersion: 2
-        x: 6647
+        x: 8064
         y: 0
-        width: 258
-        height: 577
+        width: 896
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -399,10 +399,10 @@ TextureImporter:
       name: enemy_win_10
       rect:
         serializedVersion: 2
-        x: 7543
+        x: 8960
         y: 0
-        width: 258
-        height: 577
+        width: 896
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -421,10 +421,10 @@ TextureImporter:
       name: enemy_win_11
       rect:
         serializedVersion: 2
-        x: 8439
+        x: 9856
         y: 0
-        width: 258
-        height: 577
+        width: 896
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -443,10 +443,10 @@ TextureImporter:
       name: enemy_win_12
       rect:
         serializedVersion: 2
-        x: 9335
+        x: 10752
         y: 0
-        width: 258
-        height: 577
+        width: 896
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -465,10 +465,10 @@ TextureImporter:
       name: enemy_win_13
       rect:
         serializedVersion: 2
-        x: 10231
+        x: 11648
         y: 0
-        width: 258
-        height: 577
+        width: 896
+        height: 640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -483,187 +483,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: enemy_win_14
-      rect:
-        serializedVersion: 2
-        x: 11127
-        y: 0
-        width: 258
-        height: 577
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 636dffe7b3ea454f0800000000000000
-      internalID: -840855659854440906
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: enemy_win_15
-      rect:
-        serializedVersion: 2
-        x: 12023
-        y: 0
-        width: 258
-        height: 577
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0e4eff5cdcf1eca90800000000000000
-      internalID: -7291855778015615776
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: enemy_win_16
-      rect:
-        serializedVersion: 2
-        x: 2975
-        y: 343
-        width: 10
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 66b62a06aece52d30800000000000000
-      internalID: 4406188301839657830
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: enemy_win_17
-      rect:
-        serializedVersion: 2
-        x: 4847
-        y: 351
-        width: 18
-        height: 18
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0f393494ca416c500800000000000000
-      internalID: 416042745774445552
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: enemy_win_18
-      rect:
-        serializedVersion: 2
-        x: 1223
-        y: 319
-        width: 58
-        height: 26
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ed415582e8aa17db0800000000000000
-      internalID: -4795864600634125090
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: enemy_win_19
-      rect:
-        serializedVersion: 2
-        x: 2087
-        y: 335
-        width: 10
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: dcb9b7d697d942510800000000000000
-      internalID: 1523515718811491277
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: enemy_win_20
-      rect:
-        serializedVersion: 2
-        x: 2967
-        y: 327
-        width: 10
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 54edadb95a2316c30800000000000000
-      internalID: 4350814401882414661
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: enemy_win_21
-      rect:
-        serializedVersion: 2
-        x: 2991
-        y: 327
-        width: 34
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3b9b7ccb8be874570800000000000000
-      internalID: 8450880149876357555
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 3ae48191c7b78f549b7ffbed9d756724
     internalID: 0
     vertices: []
     indices: 
@@ -679,15 +503,7 @@ TextureImporter:
       enemy_win_11: 1524397635071055479
       enemy_win_12: -5606305153082074188
       enemy_win_13: -8360824957050376855
-      enemy_win_14: -840855659854440906
-      enemy_win_15: -7291855778015615776
-      enemy_win_16: 4406188301839657830
-      enemy_win_17: 416042745774445552
-      enemy_win_18: -4795864600634125090
-      enemy_win_19: 1523515718811491277
       enemy_win_2: 8814916787240943816
-      enemy_win_20: 4350814401882414661
-      enemy_win_21: 8450880149876357555
       enemy_win_3: -8482332816622525860
       enemy_win_4: -4503654453420512066
       enemy_win_5: -7767930212262273300
