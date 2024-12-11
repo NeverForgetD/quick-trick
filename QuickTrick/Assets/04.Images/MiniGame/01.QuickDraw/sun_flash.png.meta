@@ -222,11 +222,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      sun_flash_0: 5517068171824486139
-      sun_flash_1: 8519031099860050645
-      sun_flash_2: 2868010610917994630
-      sun_flash_3: -5536511082128908900
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

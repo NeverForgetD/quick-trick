@@ -222,11 +222,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      cutin_0: 2579433039564504698
-      cutin_1: 1684819740864633383
-      cutin_2: -2932787660763973270
-      cutin_3: -4173396981269865783
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
