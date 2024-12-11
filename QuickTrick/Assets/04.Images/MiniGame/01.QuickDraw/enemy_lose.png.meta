@@ -1,0 +1,494 @@
+fileFormatVersion: 2
+guid: 4b2c4ae03c30f924cb8db403660d425d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2339768630448317984
+    second: enemy_lose_0
+  - first:
+      213: -7913600773984451364
+    second: enemy_lose_1
+  - first:
+      213: -3099149108598895684
+    second: enemy_lose_2
+  - first:
+      213: 4987478143590474902
+    second: enemy_lose_3
+  - first:
+      213: -8344928667314732302
+    second: enemy_lose_4
+  - first:
+      213: -32928410999167354
+    second: enemy_lose_5
+  - first:
+      213: -3433164433137441087
+    second: enemy_lose_6
+  - first:
+      213: -9065978384934598777
+    second: enemy_lose_7
+  - first:
+      213: 1918966946417234692
+    second: enemy_lose_8
+  - first:
+      213: -5926476301684332595
+    second: enemy_lose_9
+  - first:
+      213: 6928921219523579855
+    second: enemy_lose_10
+  - first:
+      213: 4606027432400489025
+    second: enemy_lose_11
+  - first:
+      213: -1579023014018893707
+    second: enemy_lose_12
+  - first:
+      213: -7654924902813952743
+    second: enemy_lose_13
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: enemy_lose_0
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 0
+        width: 258
+        height: 593
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 026697a3c27887020800000000000000
+      internalID: 2339768630448317984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_lose_1
+      rect:
+        serializedVersion: 2
+        x: 1247
+        y: 0
+        width: 242
+        height: 569
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd4866c260e3d2290800000000000000
+      internalID: -7913600773984451364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_lose_2
+      rect:
+        serializedVersion: 2
+        x: 2143
+        y: 0
+        width: 234
+        height: 569
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbb8ef34e4c9df4d0800000000000000
+      internalID: -3099149108598895684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_lose_3
+      rect:
+        serializedVersion: 2
+        x: 3039
+        y: 0
+        width: 234
+        height: 569
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6942cb162f4173540800000000000000
+      internalID: 4987478143590474902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_lose_4
+      rect:
+        serializedVersion: 2
+        x: 3935
+        y: 0
+        width: 234
+        height: 561
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f24bb4279bd03c80800000000000000
+      internalID: -8344928667314732302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_lose_5
+      rect:
+        serializedVersion: 2
+        x: 4799
+        y: 0
+        width: 258
+        height: 505
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 686606fd8c30b8ff0800000000000000
+      internalID: -32928410999167354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_lose_6
+      rect:
+        serializedVersion: 2
+        x: 5663
+        y: 0
+        width: 258
+        height: 353
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c666534323fa50d0800000000000000
+      internalID: -3433164433137441087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_lose_7
+      rect:
+        serializedVersion: 2
+        x: 6551
+        y: 0
+        width: 282
+        height: 305
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7878a9841bc2f2280800000000000000
+      internalID: -9065978384934598777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_lose_8
+      rect:
+        serializedVersion: 2
+        x: 7447
+        y: 0
+        width: 282
+        height: 313
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4035ae8454a81aa10800000000000000
+      internalID: 1918966946417234692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_lose_9
+      rect:
+        serializedVersion: 2
+        x: 8343
+        y: 0
+        width: 290
+        height: 305
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc7a554143de0cda0800000000000000
+      internalID: -5926476301684332595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_lose_10
+      rect:
+        serializedVersion: 2
+        x: 9127
+        y: 0
+        width: 410
+        height: 241
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcf8e5e5329782060800000000000000
+      internalID: 6928921219523579855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_lose_11
+      rect:
+        serializedVersion: 2
+        x: 9879
+        y: 0
+        width: 554
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14a8fe5cb85ebef30800000000000000
+      internalID: 4606027432400489025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_lose_12
+      rect:
+        serializedVersion: 2
+        x: 10775
+        y: 0
+        width: 554
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 578bc3d4fee261ae0800000000000000
+      internalID: -1579023014018893707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_lose_13
+      rect:
+        serializedVersion: 2
+        x: 11671
+        y: 0
+        width: 554
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9159b71cb5e34c590800000000000000
+      internalID: -7654924902813952743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      enemy_lose_0: 2339768630448317984
+      enemy_lose_1: -7913600773984451364
+      enemy_lose_10: 6928921219523579855
+      enemy_lose_11: 4606027432400489025
+      enemy_lose_12: -1579023014018893707
+      enemy_lose_13: -7654924902813952743
+      enemy_lose_2: -3099149108598895684
+      enemy_lose_3: 4987478143590474902
+      enemy_lose_4: -8344928667314732302
+      enemy_lose_5: -32928410999167354
+      enemy_lose_6: -3433164433137441087
+      enemy_lose_7: -9065978384934598777
+      enemy_lose_8: 1918966946417234692
+      enemy_lose_9: -5926476301684332595
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

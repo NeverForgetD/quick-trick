@@ -1,0 +1,702 @@
+fileFormatVersion: 2
+guid: 49c5a22a01b42e84c82a876b45ddb84f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1731257772075005247
+    second: enemy_win_0
+  - first:
+      213: -8034630139759538972
+    second: enemy_win_1
+  - first:
+      213: 8814916787240943816
+    second: enemy_win_2
+  - first:
+      213: -8482332816622525860
+    second: enemy_win_3
+  - first:
+      213: -4503654453420512066
+    second: enemy_win_4
+  - first:
+      213: -7767930212262273300
+    second: enemy_win_5
+  - first:
+      213: 4317912328054089721
+    second: enemy_win_6
+  - first:
+      213: 5124509921699809083
+    second: enemy_win_7
+  - first:
+      213: 2977891728024194239
+    second: enemy_win_8
+  - first:
+      213: 1574914363917343027
+    second: enemy_win_9
+  - first:
+      213: -2788116175630332452
+    second: enemy_win_10
+  - first:
+      213: 1524397635071055479
+    second: enemy_win_11
+  - first:
+      213: -5606305153082074188
+    second: enemy_win_12
+  - first:
+      213: -8360824957050376855
+    second: enemy_win_13
+  - first:
+      213: -840855659854440906
+    second: enemy_win_14
+  - first:
+      213: -7291855778015615776
+    second: enemy_win_15
+  - first:
+      213: 4406188301839657830
+    second: enemy_win_16
+  - first:
+      213: 416042745774445552
+    second: enemy_win_17
+  - first:
+      213: -4795864600634125090
+    second: enemy_win_18
+  - first:
+      213: 1523515718811491277
+    second: enemy_win_19
+  - first:
+      213: 4350814401882414661
+    second: enemy_win_20
+  - first:
+      213: 8450880149876357555
+    second: enemy_win_21
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: enemy_win_0
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 287
+        width: 146
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f353a2765c9a60810800000000000000
+      internalID: 1731257772075005247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_win_1
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 0
+        width: 290
+        height: 577
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ec4cf905724f7090800000000000000
+      internalID: -8034630139759538972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_win_2
+      rect:
+        serializedVersion: 2
+        x: 1255
+        y: 0
+        width: 274
+        height: 577
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c0cf145d10e45a70800000000000000
+      internalID: 8814916787240943816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_win_3
+      rect:
+        serializedVersion: 2
+        x: 2103
+        y: 0
+        width: 322
+        height: 577
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c52639e9e33b84a80800000000000000
+      internalID: -8482332816622525860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_win_4
+      rect:
+        serializedVersion: 2
+        x: 3063
+        y: 0
+        width: 258
+        height: 577
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ebca3c0d22ecf71c0800000000000000
+      internalID: -4503654453420512066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_win_5
+      rect:
+        serializedVersion: 2
+        x: 3959
+        y: 0
+        width: 258
+        height: 577
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cee1512d0a4c23490800000000000000
+      internalID: -7767930212262273300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_win_6
+      rect:
+        serializedVersion: 2
+        x: 4855
+        y: 0
+        width: 258
+        height: 577
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f7a1f4926e4ceb30800000000000000
+      internalID: 4317912328054089721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_win_7
+      rect:
+        serializedVersion: 2
+        x: 5743
+        y: 375
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b37c1ea7f9aed1740800000000000000
+      internalID: 5124509921699809083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_win_8
+      rect:
+        serializedVersion: 2
+        x: 5751
+        y: 0
+        width: 258
+        height: 577
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbcc474cfb8935920800000000000000
+      internalID: 2977891728024194239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_win_9
+      rect:
+        serializedVersion: 2
+        x: 6647
+        y: 0
+        width: 258
+        height: 577
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33914fc05483bd510800000000000000
+      internalID: 1574914363917343027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_win_10
+      rect:
+        serializedVersion: 2
+        x: 7543
+        y: 0
+        width: 258
+        height: 577
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cdd880f3c1f9e49d0800000000000000
+      internalID: -2788116175630332452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_win_11
+      rect:
+        serializedVersion: 2
+        x: 8439
+        y: 0
+        width: 258
+        height: 577
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7761bde829fb72510800000000000000
+      internalID: 1524397635071055479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_win_12
+      rect:
+        serializedVersion: 2
+        x: 9335
+        y: 0
+        width: 258
+        height: 577
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4bbd910ba276232b0800000000000000
+      internalID: -5606305153082074188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_win_13
+      rect:
+        serializedVersion: 2
+        x: 10231
+        y: 0
+        width: 258
+        height: 577
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96daac5cff168fb80800000000000000
+      internalID: -8360824957050376855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_win_14
+      rect:
+        serializedVersion: 2
+        x: 11127
+        y: 0
+        width: 258
+        height: 577
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 636dffe7b3ea454f0800000000000000
+      internalID: -840855659854440906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_win_15
+      rect:
+        serializedVersion: 2
+        x: 12023
+        y: 0
+        width: 258
+        height: 577
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e4eff5cdcf1eca90800000000000000
+      internalID: -7291855778015615776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_win_16
+      rect:
+        serializedVersion: 2
+        x: 2975
+        y: 343
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66b62a06aece52d30800000000000000
+      internalID: 4406188301839657830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_win_17
+      rect:
+        serializedVersion: 2
+        x: 4847
+        y: 351
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f393494ca416c500800000000000000
+      internalID: 416042745774445552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_win_18
+      rect:
+        serializedVersion: 2
+        x: 1223
+        y: 319
+        width: 58
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed415582e8aa17db0800000000000000
+      internalID: -4795864600634125090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_win_19
+      rect:
+        serializedVersion: 2
+        x: 2087
+        y: 335
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcb9b7d697d942510800000000000000
+      internalID: 1523515718811491277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_win_20
+      rect:
+        serializedVersion: 2
+        x: 2967
+        y: 327
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54edadb95a2316c30800000000000000
+      internalID: 4350814401882414661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy_win_21
+      rect:
+        serializedVersion: 2
+        x: 2991
+        y: 327
+        width: 34
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b9b7ccb8be874570800000000000000
+      internalID: 8450880149876357555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      enemy_win_0: 1731257772075005247
+      enemy_win_1: -8034630139759538972
+      enemy_win_10: -2788116175630332452
+      enemy_win_11: 1524397635071055479
+      enemy_win_12: -5606305153082074188
+      enemy_win_13: -8360824957050376855
+      enemy_win_14: -840855659854440906
+      enemy_win_15: -7291855778015615776
+      enemy_win_16: 4406188301839657830
+      enemy_win_17: 416042745774445552
+      enemy_win_18: -4795864600634125090
+      enemy_win_19: 1523515718811491277
+      enemy_win_2: 8814916787240943816
+      enemy_win_20: 4350814401882414661
+      enemy_win_21: 8450880149876357555
+      enemy_win_3: -8482332816622525860
+      enemy_win_4: -4503654453420512066
+      enemy_win_5: -7767930212262273300
+      enemy_win_6: 4317912328054089721
+      enemy_win_7: 5124509921699809083
+      enemy_win_8: 2977891728024194239
+      enemy_win_9: 1574914363917343027
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
