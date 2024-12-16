@@ -10,8 +10,11 @@ public class Player : NetworkBehaviour
     public static event Action<int, float, bool> OnPlayerClicked;
 
 
+    private const float maxWaitTime = 2f;
+
     private bool isReady => MiniGameManager.Instance.miniGameReady;
     private bool triggerOn => MiniGameManager.Instance.triggerOn;
+
     /// <summary>
     /// 트리거 이벤트가 발생한 시간_클라이언트에서 저장
     /// </summary>
@@ -22,6 +25,9 @@ public class Player : NetworkBehaviour
     /// </summary>
     private float responseTime;
 
+    /// <summary>
+    /// 플레이어 아이디 번호_호스트1 클라이언트2
+    /// </summary>
     private int playerID;
 
     public override void Spawned()
@@ -31,16 +37,15 @@ public class Player : NetworkBehaviour
             ResetTrigger();
             playerID = Runner.LocalPlayer.PlayerId;
             Debug.Log($"이 컴퓨터에서는 로컬플레이어 ID가 {Runner.LocalPlayer.PlayerId}");
+
+            MiniGameManager.Instance.SetPlayerID(playerID);
         }
     }
 
+    #region Update
     private void Update()
     {
-        // triggerOn이 true가 된 시점을 기록
-        if (Object.HasInputAuthority && triggerOn && triggerStartTime == 0f)
-        {
-            triggerStartTime = Time.time;
-        }
+        updateTriggerOn();
 
         // 트리거 시작 됐는 지 확인, 그리고 버튼 누르면 누를 수 없게 방지
         if (isReady)
@@ -48,14 +53,27 @@ public class Player : NetworkBehaviour
             if (Object.HasInputAuthority && Input.GetMouseButtonDown(0))
             {
                 HandlePlayerClick();
-
                 ResetTrigger();
             }
-            // 각자 로컬에서 트리거가 지나고 n초 후에 자동으로 신호를 보내는 것으로 하자!
-            // 테스트 하고 수정하는 것으로
+
+            if (Time.time - triggerStartTime > maxWaitTime)
+            {
+                HandlePlayerNotClick();
+                ResetTrigger();
+            }
         }
     }
 
+    /// <summary>
+    /// triggerOn이 true가 된 시점을 기록
+    /// </summary>
+    private void updateTriggerOn()
+    {
+        if (Object.HasInputAuthority && triggerOn && triggerStartTime == 0f)
+        {
+            triggerStartTime = Time.time;
+        }
+    }
 
     private void HandlePlayerClick()
     {
@@ -64,14 +82,14 @@ public class Player : NetworkBehaviour
         if (triggerOn) //트리거 ON
         {
             responseTime = Time.time - triggerStartTime;
-            MiniGameManager.Instance._miniGameInstance.OnLocalPlayerClicked();
+            MiniGameManager.Instance._miniGameInstance.OnLocalPlayerClicked(responseTime);
             RPC_SendResponseToServer(Runner.LocalPlayer, responseTime);
 
             Debug.Log($"{Runner.LocalPlayer} : {responseTime}");
         }
         else if (!triggerOn) //트리거 OFF_부정출발
         {
-            MiniGameManager.Instance._miniGameInstance.OnLocalPlayerLose();
+            //MiniGameManager.Instance._miniGameInstance.OnLocalPlayerLose();
             RPC_SendResponseToServer(Runner.LocalPlayer, responseTime, false);
         }
     }
@@ -80,8 +98,17 @@ public class Player : NetworkBehaviour
     {
         triggerStartTime = 0f;
         responseTime = 0f;
-        //canvas.alpha = 0f;
     }
+
+    private void HandlePlayerNotClick()
+    {
+        //MiniGameManager.Instance._miniGameInstance.OnLocalPlayerLose();
+        MiniGameManager.Instance.GameDone();
+        RPC_SendResponseToServer(Runner.LocalPlayer, maxWaitTime);
+    }
+
+    #endregion
+
 
     #region RPC
     /// <summary>

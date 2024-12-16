@@ -43,6 +43,10 @@ public class MiniGameManager : MonoBehaviour
     public Define.GameMode selectedGameMode { get; private set; }
     public int selectedGameIndex { get; private set; }
 
+    /// <summary>
+    /// Runner 기준으로 플레이어의  ID를 저장
+    /// </summary>
+    private int playerID = 0;
 
     //test
     public TextMeshProUGUI text;
@@ -60,8 +64,8 @@ public class MiniGameManager : MonoBehaviour
     public void PlayGachaAnimation()
     {
         // test
-        text.text = $"playing Gacha animation {selectedGameMode}";
-        waitGachaTime = 3;
+        text.text = $"playing Gacha animation mode : {selectedGameMode}";
+        waitGachaTime = 5;
     }
 
     public void UpdateTriggerTime(float triggerTimeFromServer)
@@ -86,11 +90,7 @@ public class MiniGameManager : MonoBehaviour
         // MiniGameBase에서 Standby 끝날 때까지 대기
         await WaitForGameReady();
 
-        await Task.Delay(3000);
-        triggerOn = true;
-        _miniGameInstance.OnTriggerEvent();
-
-        // TriggerTime 지나간 이후 트리거 이벤트 발생
+        await RunTrigger();
     }
 
     /// <summary>
@@ -103,6 +103,39 @@ public class MiniGameManager : MonoBehaviour
             await Task.Yield();
         }
     }
+
+    /// <summary>
+    /// 전달받은 triggerTime 이후에 트리거를 키고, 미니게임인스턴스를 통해 시각화한다.
+    /// </summary>
+    /// <returns></returns>
+    private async Task RunTrigger()
+    {
+        await Task.Delay(3000);
+
+        triggerOn = true;
+        _miniGameInstance.OnTriggerEvent();
+    }
+
+    /// <summary>
+    /// 미니게임 입력처리가 끝난 후, 결과 발표 단계
+    /// </summary>
+    public void EndMiniGame(int winnerID, float player1ResponseTime, float player2ResponseTime)
+    {
+        float opponentResponseTime = playerID == 1 ? player2ResponseTime : player1ResponseTime;
+        if (playerID == winnerID)
+        {
+            _miniGameInstance.OnLocalPlayerWin(opponentResponseTime);
+        }
+        else
+        {
+            _miniGameInstance.OnLocalPlayerLose(opponentResponseTime);
+        }
+    }
+
+
+
+
+
 
 
     /// <summary>
@@ -121,4 +154,12 @@ public class MiniGameManager : MonoBehaviour
         miniGameReady = false;
     }
 
+    /// <summary>
+    /// player가 스폰될 때 플레이어가 호스트인지 클라이언트인지 확인해주는 인덱스 발급
+    /// </summary>
+    /// <param name="runnerPlayerID"></param>
+    public void SetPlayerID(int runnerPlayerID)
+    {
+        playerID = runnerPlayerID;
+    }
 }

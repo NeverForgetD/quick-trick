@@ -49,17 +49,17 @@ public abstract class MiniGameBase : MonoBehaviour
     /// <summary>
     /// 플레이어가 눌렀을 때 컷인 재생
     /// </summary>
-    public abstract void OnLocalPlayerClicked();
+    public abstract void OnLocalPlayerClicked(float responseTime);
 
     /// <summary>
     /// 로컬 플레이어 우승
     /// </summary>
-    public abstract void OnLocalPlayerWin();
+    public abstract void OnLocalPlayerWin(float opponentResponseTime);
 
     /// <summary>
     /// 로컬 플레이어 패배
     /// </summary>
-    public abstract void OnLocalPlayerLose();
+    public abstract void OnLocalPlayerLose(float opponentResponseTime);
 
     //public abstract void OnLocalPlayerFail();
     //public abstract void OnOpponentPlayerWarn();

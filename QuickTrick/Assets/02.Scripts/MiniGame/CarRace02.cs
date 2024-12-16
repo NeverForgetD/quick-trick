@@ -25,21 +25,23 @@ public class CarRace02 : MiniGameBase
         //OnStandBy();
 
     }
-    public override void OnLocalPlayerClicked()
+    public override void OnLocalPlayerClicked(float responseTime)
     {
         localPlayer.SetActive(false);
         playerWin.SetActive(true);
         opponentPlayer.SetActive(false);
         opponentLose.SetActive(true);
         Debug.Log("LocalPlayerClicked");
+
+        // 반응시간 표시
     }
 
-    public override void OnLocalPlayerLose()
+    public override void OnLocalPlayerLose(float opponentResponseTime)
     {
         Debug.Log("Lose");
     }
 
-    public override void OnLocalPlayerWin()
+    public override void OnLocalPlayerWin(float opponentResponseTime)
     {
         Debug.Log("Win");
     }

@@ -137,6 +137,8 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
 
             // 트리거 시간 결정
             triggerTime = UnityEngine.Random.Range(minTriggerTime, maxTriggerTime);
+            // TODO
+            // 미니게임마다 주기가 필요한경우(할리갈리) 해당 주기를 전달
 
             // 미니게임 로드 및 대기 & 트리거 타임 전달
             RPC_StartMiniGame(triggerTime);
@@ -145,10 +147,7 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
             // 두 플레이어가
             await WaitForPlayerResultArrive();
 
-
-            DetermineWiiner();
-            // 트리거 이벤트 발생
-            //RPC_AnnounceWinner()
+            RPC_AnnounceWinner();
         }
     }
 
@@ -173,11 +172,10 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
     }
 
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
-    private void RPC_AnnounceWinner(int playerID, float opponentResponseTime)
+    private void RPC_AnnounceWinner()
     {
         int winnerID = DetermineWiiner();
-        
-        //MiniGameManager.Instance.AnnounceWinner(winnerID,);
+        MiniGameManager.Instance.EndMiniGame(winnerID, playersResponseTime[1], playersResponseTime[2]);
     }
     #endregion
 
@@ -200,13 +198,18 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
     /// <param name="isValid"></param>
     private void ReceivePlayerClicked(int playerID, float responseTime, bool isValid)
     {
+        // test
         text.text = $"player{playerID} :::::: {responseTime}";
 
         if (!isValid)
         {
-            // playerID는 부정출발한거다!
+            playersResponseTime.Add(playerID, -1f);
         }
-        playersResponseTime.Add(playerID, responseTime);
+        else
+        {
+            playersResponseTime.Add(playerID, responseTime);
+        }
+
         
         //Debug.Log($"count is {playersResponseTime.Count}");
 
@@ -230,21 +233,17 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
         }
     }
 
-
     int DetermineWiiner()
     {
-        // 시간초과자가 있다면 isResultSent가 false일 것이다.
-        if (!isResultSent)
-        {
-            // 시간초과자 있음
-        }
         if (playersResponseTime[1] > playersResponseTime[2]) // player2 win
         {
+            player2Score++;
             text.text = $"player2 ::: {playersResponseTime[2]} Win!!";
             return 2;
         }
         else
         {
+            player1Score++;
             text.text = $"player1 ::: {playersResponseTime[1]} Win!!";
             return 1;
         }
