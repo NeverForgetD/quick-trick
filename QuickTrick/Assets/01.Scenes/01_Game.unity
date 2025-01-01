@@ -1665,7 +1665,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2065332259
 Transform:
   m_ObjectHideFlags: 0
@@ -1709,21 +1709,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5952864583779081116, guid: bfb235f4c066f194793ceaf935498caf, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6018428395110503296, guid: bfb235f4c066f194793ceaf935498caf, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7377475336928059757, guid: bfb235f4c066f194793ceaf935498caf, type: 3}
       propertyPath: m_Name
       value: Main Title UI
-      objectReference: {fileID: 0}
-    - target: {fileID: 7377475336928059757, guid: bfb235f4c066f194793ceaf935498caf, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7677219258846189556, guid: bfb235f4c066f194793ceaf935498caf, type: 3}
       propertyPath: m_LocalPosition.x
