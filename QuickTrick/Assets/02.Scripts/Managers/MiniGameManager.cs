@@ -23,9 +23,6 @@ public class MiniGameManager : MonoBehaviour
     [SerializeField] MiniGameSO miniGameSO;
     public MiniGameSO _MiniGameSo => miniGameSO;
 
-    //public float player1ReactionTime { get; private set; } // t
-    //public float player2ReactionTime { get; private set; } // t
-
     public bool miniGameReady { get; private set; }
     public bool triggerOn { get; private set; }
 

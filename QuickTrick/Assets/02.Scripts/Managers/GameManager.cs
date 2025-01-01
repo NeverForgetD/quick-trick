@@ -121,7 +121,13 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
     /// </summary>
     private async void StartRound()
     {
-        if (!isGameActive) { return; } // 이 부분 수정
+        if (player1Score == 3 || player2Score == 3)
+            isGameActive = false;
+
+        if (!isGameActive)
+        {
+            EndGame();
+        }
 
         if (Object.HasStateAuthority)
         {
@@ -148,6 +154,8 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
             await WaitForPlayerResultArrive();
 
             RPC_AnnounceWinner();
+            //await WaitForTickTimer(5);
+            //StartRound();
         }
     }
 
@@ -233,6 +241,10 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
         }
     }
 
+    /// <summary>
+    /// 승자의 인덱스를 return
+    /// </summary>
+    /// <returns></returns>
     int DetermineWiiner()
     {
         if (playersResponseTime[1] > playersResponseTime[2]) // player2 win
