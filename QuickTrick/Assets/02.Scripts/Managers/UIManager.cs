@@ -19,10 +19,10 @@ public class UIManager : MonoBehaviour // UI. 반영 상태를 알려주는 enum을 저장하
     {
         if (instance == null)
         {
-            GameObject go = GameObject.Find("@UIManager");
+            GameObject go = GameObject.Find("UIManager");
             if (go == null)
             {
-                go = new GameObject { name = "@UIManager" };
+                go = new GameObject { name = "UIManager" };
                 go.AddComponent<UIManager>();
             }
 
