@@ -126,7 +126,7 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
 
         if (!isGameActive)
         {
-            EndGame();
+            //EndGame();
         }
 
         if (Object.HasStateAuthority)

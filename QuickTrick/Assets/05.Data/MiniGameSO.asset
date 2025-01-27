@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   miniGamePrefabs:
   - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 6411743045229458583, guid: 7f46f4179a563324ba7cb36437345da0, type: 3}
   - {fileID: 3718631805819362042, guid: 50dbd2ed54035b0498a34c0ac84d2c45, type: 3}
   miniGameGuideTexts:
   - 
-  - 
+  - Go! when the sun rise
   - Go! when the three <color=green>green</color> lights <wave a=0.2>OFF</wave>...
