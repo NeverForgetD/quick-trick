@@ -10,19 +10,36 @@ public class UIGacha : MonoBehaviour
     [SerializeField] Image ClosedArmCrane;
     [SerializeField] Image leftCapsule;
     [SerializeField] Image rightCapsule;
-    //[SerializeField] GameObject Title;
+
+    [SerializeField] Image icon00;
+    [SerializeField] Image icon01;
+    [SerializeField] Image icon02;
+    [SerializeField] Image icon03;
     #endregion
+
+    private int miniGameIndex;
 
     private void Start()
     {
-        Debug.Log("go");
+    }
+
+    private void OnEnable()
+    {
+        
         PlayGachaAnimation();
     }
+
+    private void OnDisable()
+    {
+        //DoKill();
+    }
+
 
     #region Dotween Sequence
     public void PlayGachaAnimation()
     {
         Sequence seq = DOTween.Sequence();
+        GetMiniGameIndex();
         // 집게 내려오고
         seq.Append(pile.transform.DOLocalMoveY(-1000, 0.6f).From());
         seq.Append(OpenArmCrane.transform.DOLocalMoveY(725, 0.6f));
@@ -55,23 +72,29 @@ public class UIGacha : MonoBehaviour
         // 캡슐 사라짐
         seq.Append(rightCapsule.DOFade(0, 0.6f));
         seq.Join(leftCapsule.DOFade(0, 0.6f));
-
-        //seq.Append(localPlayer.transform.DOLocalMoveY(-600, 0.6f).From());
-        //seq.Join(localPlayer.transform.DOLocalMoveX(-600, 0.6f).From());
-
-        //seq.Append(signal.transform.DOLocalMoveY(1000, 1).From());
-
-        //seq.AppendCallback(() => { Spark.SetActive(true); });
-        //seq.AppendInterval(0.4f);
-
-
-        //seq.AppendInterval(0.2f);
-        //seq.AppendCallback(() => { ShowExplanationText(); });
-        //seq.AppendInterval(0.8f);
-        // 텍스트 사라지게
-
-
         //seq.AppendCallback(() => { MiniGameManager.Instance.GameReady(); });
+
+        switch (miniGameIndex)
+        {
+            case 0:
+                seq.Append(icon00.DOFade(1, 0.2f));
+                break;
+            case 1:
+                seq.Append(icon01.DOFade(1, 0.2f));
+                break;
+            case 2:
+                seq.Append(icon02.DOFade(1, 0.2f));
+                break;
+            case 3:
+                seq.Append(icon03.DOFade(1, 0.2f));
+                break;
+        }
     }
     #endregion
+
+    private void GetMiniGameIndex()
+    {
+        //miniGameIndex = MiniGameManager.Instance.selectedGameIndex;
+        miniGameIndex = 2;
+    }
 }
