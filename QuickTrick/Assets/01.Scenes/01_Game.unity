@@ -272,7 +272,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &95688734
 Transform:
   m_ObjectHideFlags: 0
@@ -685,11 +685,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 679572981}
-  - {fileID: 616726124}
   - {fileID: 1167329857}
   - {fileID: 997951789}
   - {fileID: 302398524}
   - {fileID: 1530002152}
+  - {fileID: 616726124}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963599382
@@ -1879,13 +1879,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1171350564830423197, guid: bfb235f4c066f194793ceaf935498caf, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1882612967}
+    - target: {fileID: 3201756721034030029, guid: bfb235f4c066f194793ceaf935498caf, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1882612967}
+    - target: {fileID: 5611721305553996793, guid: bfb235f4c066f194793ceaf935498caf, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7377475336928059757, guid: bfb235f4c066f194793ceaf935498caf, type: 3}
       propertyPath: m_Name
       value: Main Title UI
       objectReference: {fileID: 0}
     - target: {fileID: 7377475336928059757, guid: bfb235f4c066f194793ceaf935498caf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7677219258846189556, guid: bfb235f4c066f194793ceaf935498caf, type: 3}
       propertyPath: m_LocalPosition.x
