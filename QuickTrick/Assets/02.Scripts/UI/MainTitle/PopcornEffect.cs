@@ -44,7 +44,7 @@ public class PopcornEffect : MonoBehaviour
             Rigidbody2D rb = ball.GetComponent<Rigidbody2D>();
             if (rb == null)
                 rb = ball.AddComponent<Rigidbody2D>();
-
+            
             // Collider2D 비활성화 후 일정 시간 후 활성화
             Collider2D col = ball.GetComponent<Collider2D>();
             if (col == null)
@@ -55,6 +55,7 @@ public class PopcornEffect : MonoBehaviour
             {
                 col.enabled = true;  // n초 후 충돌 활성화
             });
+            
 
             // 랜덤 방향으로 force 적용 (Inspector의 explosionForce 값 사용)
             Vector2 randomDirection = Random.insideUnitCircle.normalized;
