@@ -237,7 +237,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1079
 --- !u!1 &8915269328268172080
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,5 +283,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 865f985d66effba429de143721f6991b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GachaUI: {fileID: 1805825374240133186, guid: eb95dac4c6d6cf447bcb8dee4cb9c861, type: 3}
   miniGameSO: {fileID: 0}
-  text: {fileID: 0}

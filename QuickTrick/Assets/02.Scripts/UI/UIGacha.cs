@@ -25,7 +25,6 @@ public class UIGacha : MonoBehaviour
 
     private void OnEnable()
     {
-        
         PlayGachaAnimation();
     }
 
@@ -94,7 +93,7 @@ public class UIGacha : MonoBehaviour
 
     private void GetMiniGameIndex()
     {
-        //miniGameIndex = MiniGameManager.Instance.selectedGameIndex;
-        miniGameIndex = 2;
+        miniGameIndex = MiniGameManager.Instance.selectedGameIndex;
+
     }
 }

@@ -20,6 +20,8 @@ public class MiniGameManager : MonoBehaviour
     }
     #endregion
 
+    [SerializeField] UIGacha GachaUI;
+
     [SerializeField] MiniGameSO miniGameSO;
     public MiniGameSO _MiniGameSo => miniGameSO;
 
@@ -45,14 +47,9 @@ public class MiniGameManager : MonoBehaviour
     /// </summary>
     private int playerID = 0;
 
-    //test
-    public TextMeshProUGUI text;
-
     public void UpdateSelectedMiniGame(int randomGameIndex)
     {
         selectedGameMode = (Define.GameMode)randomGameIndex;
-        // test
-        text.text = $"updated selectedMiniGame : {selectedGameMode}";
 
         selectedGameIndex = 0; // √ ±‚»≠
         selectedGameIndex = randomGameIndex;
@@ -60,17 +57,14 @@ public class MiniGameManager : MonoBehaviour
 
     public void PlayGachaAnimation()
     {
-        // test
-        text.text = $"playing Gacha animation mode : {selectedGameMode}";
-        waitGachaTime = 5;
+        Instantiate(GachaUI);
+        GachaUI.PlayGachaAnimation();
+        waitGachaTime = 6;
     }
 
     public void UpdateTriggerTime(float triggerTimeFromServer)
     {
         triggerTime = triggerTimeFromServer;
-
-        // test
-        text.text = $"tirgger time : {triggerTime}";
     }
 
     /// <summary>
