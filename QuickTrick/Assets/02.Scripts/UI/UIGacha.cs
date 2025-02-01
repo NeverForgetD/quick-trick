@@ -39,13 +39,22 @@ public class UIGacha : MonoBehaviour
     {
         Sequence seq = DOTween.Sequence();
         GetMiniGameIndex();
+        // 투명화
+        seq.Append(ClosedArmCrane.DOFade(0, 0));
+        seq.Join(leftCapsule.DOFade(0, 0));
+        seq.Join(rightCapsule.DOFade(0, 0));
+        seq.Join(icon00.DOFade(0, 0));
+        seq.Join(icon01.DOFade(0, 0));
+        seq.Join(icon02.DOFade(0, 0));
+        seq.Join(icon03.DOFade(0, 0));
+
         // 집게 내려오고
         seq.Append(pile.transform.DOLocalMoveY(-1000, 0.6f).From());
         seq.Append(OpenArmCrane.transform.DOLocalMoveY(725, 0.6f));
         seq.Append(OpenArmCrane.transform.DOLocalMoveX(-120, 0.6f));
         seq.Append(OpenArmCrane.transform.DOLocalMoveX(120, 0.6f));
         seq.Append(OpenArmCrane.transform.DOLocalMoveX(0, 0.6f));
-        // 무더기 안에 들어가고
+        // 무더기 안에 들어가고 무더기 흔들림
         seq.Append(OpenArmCrane.transform.DOLocalMoveY(330, 0.2f));
         seq.Append(pile.transform.DOShakePosition(0.2f, 30, 3, 2));
 
@@ -71,7 +80,6 @@ public class UIGacha : MonoBehaviour
         // 캡슐 사라짐
         seq.Append(rightCapsule.DOFade(0, 0.6f));
         seq.Join(leftCapsule.DOFade(0, 0.6f));
-        //seq.AppendCallback(() => { MiniGameManager.Instance.GameReady(); });
 
         switch (miniGameIndex)
         {
@@ -88,6 +96,7 @@ public class UIGacha : MonoBehaviour
                 seq.Append(icon03.DOFade(1, 0.2f));
                 break;
         }
+        //seq.AppendCallback(() => { MiniGameManager.Instance.; });
     }
     #endregion
 
