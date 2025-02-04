@@ -158,6 +158,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gacha UI
       objectReference: {fileID: 0}
+    - target: {fileID: 37242908237105528, guid: eb95dac4c6d6cf447bcb8dee4cb9c861, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5764997514930753402, guid: eb95dac4c6d6cf447bcb8dee4cb9c861, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -503,6 +507,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 983706585461152132, guid: 50dbd2ed54035b0498a34c0ac84d2c45, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2208635626844024177, guid: 50dbd2ed54035b0498a34c0ac84d2c45, type: 3}
       propertyPath: m_Name
       value: 02_CarRace

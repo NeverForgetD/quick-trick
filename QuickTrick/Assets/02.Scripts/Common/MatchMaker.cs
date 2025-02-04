@@ -161,7 +161,7 @@ public class MatchMaker : MonoBehaviour
 
         //UI 원래대로
         UIManager.Instance.UpdateRunnerStatus("TITLE");
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     /// <summary>

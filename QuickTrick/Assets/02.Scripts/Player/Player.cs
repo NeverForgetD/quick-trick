@@ -10,7 +10,7 @@ public class Player : NetworkBehaviour
     public static event Action<int, float, bool> OnPlayerClicked;
 
 
-    private const float maxWaitTime = 2f;
+    private const float maxWaitTime = 3f;
 
     private bool isReady => MiniGameManager.Instance.miniGameReady;
     private bool triggerOn => MiniGameManager.Instance.triggerOn;

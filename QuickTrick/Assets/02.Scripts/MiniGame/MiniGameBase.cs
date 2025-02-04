@@ -29,6 +29,11 @@ public abstract class MiniGameBase : MonoBehaviour
     {
         typewritter.ShowText(guideTextValue);
     }
+
+    protected void HideExplanationText()
+    {
+        typewritter.StartDisappearingText();
+    }
     #endregion
 
     #region Virtual_공통 로직

@@ -59,7 +59,7 @@ public class MiniGameManager : MonoBehaviour
     {
         Instantiate(GachaUI);
         GachaUI.PlayGachaAnimation();
-        waitGachaTime = 6;
+        waitGachaTime = 7;
     }
 
     public void UpdateTriggerTime(float triggerTimeFromServer)
@@ -80,8 +80,9 @@ public class MiniGameManager : MonoBehaviour
         _miniGameInstance.OnStandBy();
         // MiniGameBase에서 Standby 끝날 때까지 대기
         await WaitForGameReady();
+        Debug.Log("Ready");
 
-        await RunTrigger();
+        await RunTrigger(triggerTime);
     }
 
     /// <summary>
@@ -99,9 +100,12 @@ public class MiniGameManager : MonoBehaviour
     /// 전달받은 triggerTime 이후에 트리거를 키고, 미니게임인스턴스를 통해 시각화한다.
     /// </summary>
     /// <returns></returns>
-    private async Task RunTrigger()
+    private async Task RunTrigger(float triggerTime)
     {
+        int sec = Mathf.FloorToInt(triggerTime) * 1000;
         await Task.Delay(3000);
+
+        Debug.Log($"{sec} 기다려요");
 
         triggerOn = true;
         _miniGameInstance.OnTriggerEvent();

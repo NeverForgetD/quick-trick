@@ -1,6 +1,7 @@
 using DG.Tweening;
 using Febucci.UI;
 using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 
 public class CarRace02 : MiniGameBase
@@ -18,6 +19,12 @@ public class CarRace02 : MiniGameBase
     [SerializeField] GameObject opponentWin;
     [SerializeField] GameObject playerLose;
     [SerializeField] GameObject opponentLose;
+
+    [SerializeField] GameObject WinSignal;
+    [SerializeField] GameObject LoseSignal;
+
+    [SerializeField] TextMeshProUGUI playerText;
+    [SerializeField] TextMeshProUGUI opponentText;
     #endregion
 
     private void Start()
@@ -27,23 +34,34 @@ public class CarRace02 : MiniGameBase
     }
     public override void OnLocalPlayerClicked(float responseTime)
     {
-        localPlayer.SetActive(false);
-        playerWin.SetActive(true);
-        opponentPlayer.SetActive(false);
-        opponentLose.SetActive(true);
+        //localPlayer.SetActive(false);
+        //playerWin.SetActive(true);
+        //opponentPlayer.SetActive(false);
+        //opponentLose.SetActive(true);
         Debug.Log("LocalPlayerClicked");
 
         // 반응시간 표시
+        Debug.Log($"{responseTime} 결과 나왔어요");
     }
 
     public override void OnLocalPlayerLose(float opponentResponseTime)
     {
-        Debug.Log("Lose");
+        localPlayer.SetActive(false);
+        playerLose.SetActive(true);
+        opponentPlayer.SetActive(false);
+        opponentWin.SetActive(true);
+        LoseSignal.SetActive(true);
+        Debug.Log($"{opponentResponseTime}Lose");
     }
 
     public override void OnLocalPlayerWin(float opponentResponseTime)
     {
-        Debug.Log("Win");
+        localPlayer.SetActive(false);
+        playerWin.SetActive(true);
+        opponentPlayer.SetActive(false);
+        opponentLose.SetActive(true);
+        WinSignal.SetActive(true);
+        Debug.Log($"{opponentResponseTime}Win");
     }
 
     public override async void OnStandBy()
@@ -66,16 +84,14 @@ public class CarRace02 : MiniGameBase
 
         seq.AppendInterval(0.2f);
         seq.AppendCallback(() => { ShowExplanationText(); });
-        seq.AppendInterval(0.8f);
-        // 텍스트 사라지게
-
+        seq.AppendInterval(2f);
+        seq.AppendCallback(() => { HideExplanationText(); });
 
         seq.AppendCallback(() => { MiniGameManager.Instance.GameReady(); });
     }
 
     public override void OnTriggerEvent()
     {
-        // 나중에 색으로 바꾸자
         Lights.SetActive(false);
     }
 

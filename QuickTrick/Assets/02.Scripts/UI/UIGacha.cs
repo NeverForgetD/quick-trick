@@ -42,21 +42,30 @@ public class UIGacha : MonoBehaviour
         // 투명화
         seq.Append(ClosedArmCrane.DOFade(0, 0));
         seq.Join(leftCapsule.DOFade(0, 0));
+
         seq.Join(rightCapsule.DOFade(0, 0));
         seq.Join(icon00.DOFade(0, 0));
         seq.Join(icon01.DOFade(0, 0));
         seq.Join(icon02.DOFade(0, 0));
         seq.Join(icon03.DOFade(0, 0));
 
-        // 집게 내려오고
+        seq.Join(OpenArmCrane.DOFade(1, 0));
+
+        // 무더기 올라옴
         seq.Append(pile.transform.DOLocalMoveY(-1000, 0.6f).From());
+
+        // 집게 내려오고
         seq.Append(OpenArmCrane.transform.DOLocalMoveY(1500, 0.6f).From());
+
+        // 좌우 이동
         seq.Append(OpenArmCrane.transform.DOLocalMoveX(-120, 0.6f));
         seq.Append(OpenArmCrane.transform.DOLocalMoveX(120, 0.6f));
         seq.Append(OpenArmCrane.transform.DOLocalMoveX(0, 0.6f));
+
         // 무더기 안에 들어가고 무더기 흔들림
         seq.Append(OpenArmCrane.transform.DOLocalMoveY(330, 0.2f));
         seq.Append(pile.transform.DOShakePosition(0.2f, 30, 3, 2));
+        seq.Join(OpenArmCrane.transform.DOShakePosition(0.2f, 30, 3, 2));
 
         seq.AppendInterval(0.6f);
         // 집게 교환
@@ -102,7 +111,8 @@ public class UIGacha : MonoBehaviour
 
     private void GetMiniGameIndex()
     {
-        miniGameIndex = MiniGameManager.Instance.selectedGameIndex;
+        //miniGameIndex = MiniGameManager.Instance.selectedGameIndex;
+        miniGameIndex = 2;
 
     }
 }
