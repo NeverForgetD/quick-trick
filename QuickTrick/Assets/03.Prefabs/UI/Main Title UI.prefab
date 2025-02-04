@@ -1237,8 +1237,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _img: {fileID: 6314559315737282299}
-  _x: 1
-  _y: 1
+  _x: 0.02
+  _y: 0.02
 --- !u!1 &8808903521935259944
 GameObject:
   m_ObjectHideFlags: 0

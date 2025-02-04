@@ -133,7 +133,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7748347587519374461
 RectTransform:
   m_ObjectHideFlags: 0
@@ -256,12 +256,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Guid UI
-
-'
+  m_text: "\uC0C1\uB300\uB97C \uCC3E\uACE0 \uC788\uC2B5\uB2C8\uB2E4..."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 78237ec70e0a5c345a8e4ab9c98bf0c0, type: 2}
+  m_sharedMaterial: {fileID: -1507147079476886312, guid: 78237ec70e0a5c345a8e4ab9c98bf0c0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
