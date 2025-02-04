@@ -24,6 +24,10 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
 
     // 매 판 ClearData로 초기화
     private Dictionary<int, float> playersResponseTime = new Dictionary<int, float>();
+
+    private float player1Time;
+    private float player2Time;
+
     private bool isResultSent;
     #endregion
 
@@ -183,7 +187,8 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
     private void RPC_AnnounceWinner()
     {
         int winnerID = DetermineWiiner();
-        MiniGameManager.Instance.EndMiniGame(winnerID, playersResponseTime[1], playersResponseTime[2]);
+        //MiniGameManager.Instance.EndMiniGame(winnerID, playersResponseTime[1], playersResponseTime[2]);
+        MiniGameManager.Instance.EndMiniGame(winnerID, player1Time, player2Time);
     }
     #endregion
 
@@ -211,20 +216,32 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
 
         if (!isValid)
         {
-            playersResponseTime.Add(playerID, -1f);
+            //playersResponseTime.Add(playerID, -1f);
+            if (playerID == 1)
+                player1Time = -1;
+            else
+                player2Time = -1;
+            isResultSent = true;
         }
         else
         {
-            playersResponseTime.Add(playerID, responseTime);
+            //playersResponseTime.Add(playerID, responseTime);
+            if (playerID == 1)
+                player1Time = responseTime;
+            else
+                player2Time = responseTime;
         }
 
         
         //Debug.Log($"count is {playersResponseTime.Count}");
-
+        /*
         if (playersResponseTime.Count == 2 && !isResultSent)
         {
             isResultSent = true;
         }
+        */
+        if (player1Time != 0 && player2Time != 0 && !isResultSent)
+            isResultSent = true;
     }
 
     /// <summary>
@@ -247,6 +264,17 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
     /// <returns></returns>
     int DetermineWiiner()
     {
+        if (player1Time == -1)
+        {
+            player2Score++;
+            return 2;
+        }
+        else if (player2Time == -1)
+        {
+            player1Score++;
+            return 1;
+        }
+        /*
         if (playersResponseTime[1] > playersResponseTime[2]) // player2 win
         {
             player2Score++;
@@ -258,12 +286,32 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
             player1Score++;
             text.text = $"player1 ::: {playersResponseTime[1]} Win!!";
             return 1;
+        }*/
+        else if (player1Time > player2Time)
+        {
+            player2Score++;
+            text.text = $"player2 ::: {player2Time} Win!!";
+            Debug.Log($"player2 ::: {player2Time} Win!! 1:::${player1Time}");
+            return 2;
+        }
+        else if (player1Time < player2Time)
+        {
+            player1Score++;
+            text.text = $"player1 ::: {player1Time} Win!!";
+            Debug.Log($"player1 ::: {player1Time} Win!!2:::${player2Time}");
+            return 1;
+        }
+        else
+        {
+            return 1;
         }
     }
 
     void ClearData()
     {
-        playersResponseTime.Clear();
+        //playersResponseTime.Clear();
+        player1Time = 0;
+        player2Time = 0;
         isResultSent = false;
     }
 

@@ -22,8 +22,8 @@ public class MiniGameManager : MonoBehaviour
 
     [SerializeField] UIGacha GachaUI;
 
-    [SerializeField] MiniGameSO miniGameSO;
     public MiniGameSO _MiniGameSo => miniGameSO;
+    [SerializeField] MiniGameSO miniGameSO;
 
     public bool miniGameReady { get; private set; }
     public bool triggerOn { get; private set; }
@@ -103,9 +103,7 @@ public class MiniGameManager : MonoBehaviour
     private async Task RunTrigger(float triggerTime)
     {
         int sec = Mathf.FloorToInt(triggerTime) * 1000;
-        await Task.Delay(3000);
-
-        Debug.Log($"{sec} 기다려요");
+        await Task.Delay(sec);
 
         triggerOn = true;
         _miniGameInstance.OnTriggerEvent();
