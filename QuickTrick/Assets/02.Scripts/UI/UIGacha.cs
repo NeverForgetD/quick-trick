@@ -40,6 +40,7 @@ public class UIGacha : MonoBehaviour
         Sequence seq = DOTween.Sequence();
         GetMiniGameIndex();
         // ≈ı∏Ì»≠
+        seq.AppendInterval(0.4f);
         seq.Append(ClosedArmCrane.DOFade(0, 0));
         seq.Join(leftCapsule.DOFade(0, 0));
 

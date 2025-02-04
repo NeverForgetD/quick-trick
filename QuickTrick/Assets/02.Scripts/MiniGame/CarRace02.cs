@@ -56,6 +56,7 @@ public class CarRace02 : MiniGameBase
 
         panel.SetActive(true);
         LoseSignal.SetActive(true);
+        LoseSignal.transform.DOMoveX(-1200, 0.4f).From();
         ShowOpponentText(opponentResponseTime);
         Debug.Log($"{opponentResponseTime}Lose");
     }
@@ -72,6 +73,7 @@ public class CarRace02 : MiniGameBase
 
         panel.SetActive(true);
         WinSignal.SetActive(true);
+        WinSignal.transform.DOMoveX(-1200, 0.4f).From();
         ShowOpponentText(opponentResponseTime);
         Debug.Log($"{opponentResponseTime}Win");
     }

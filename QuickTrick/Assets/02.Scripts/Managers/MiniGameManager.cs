@@ -59,7 +59,7 @@ public class MiniGameManager : MonoBehaviour
     {
         Instantiate(GachaUI);
         GachaUI.PlayGachaAnimation();
-        waitGachaTime = 7;
+        waitGachaTime = 8;
     }
 
     public void UpdateTriggerTime(float triggerTimeFromServer)
