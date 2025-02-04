@@ -160,8 +160,8 @@ public class MatchMaker : MonoBehaviour
         _runnerInstance= null;
 
         //UI 원래대로
-        UIManager.Instance.UpdateRunnerStatus("NONE");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        UIManager.Instance.UpdateRunnerStatus("TITLE");
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     /// <summary>

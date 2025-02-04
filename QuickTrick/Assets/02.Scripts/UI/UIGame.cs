@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIGame : MonoBehaviour
 {
@@ -15,15 +16,20 @@ public class UIGame : MonoBehaviour
     [SerializeField, Tooltip("매칭 TIMEOUT UI")]
     private CanvasGroup timeoutUI;
 
+    [SerializeField]
+    private Button ConnectBtn;
+    [SerializeField]
+    private Button DisconnectBtn;
+
 
     // 매칭 정보를 위한 매치메이커 객체 인스턴스
-    [SerializeField, Tooltip("지정안해주면 알아서 찾아옴")]
-    private MatchMaker _matchMakerInstance;
-    [SerializeField, Tooltip("지정안해주면 알아서 찾아옴")]
-    private NetworkRunner _runnerInstance;
+    //[SerializeField, Tooltip("지정안해주면 알아서 찾아옴")]
+    //private MatchMaker _matchMakerInstance;
+    //[SerializeField, Tooltip("지정안해주면 알아서 찾아옴")]
+    //private NetworkRunner _runnerInstance;
     #endregion
 
-    private bool isWaiting = false; // 나중에 대기 시간 UI 로직 개선 필요 이대로 하려면 UI 매니저까지 연결해서 통합해서 하던가 하자
+    //private bool isWaiting = false; // 나중에 대기 시간 UI 로직 개선 필요 이대로 하려면 UI 매니저까지 연결해서 통합해서 하던가 하자
 
     #region EventHandler_RunnerStatus
     private void OnEnable()
@@ -45,28 +51,33 @@ public class UIGame : MonoBehaviour
 
         switch (newState)
         {
-            case Define.RunnerStatus.NONE:
-                isWaiting = false;
+            case Define.RunnerStatus.TITLE:
+                SoundManager.Instance.PlayBGM("MainBGM");
+                ConnectBtn.gameObject.SetActive(true);
+                DisconnectBtn.gameObject.SetActive(false);
+                //isWaiting = false;
                 TurnOfffUI(guideUI);
                 break;
             case Define.RunnerStatus.CONNECTINGSERVER:
+                ConnectBtn.gameObject.SetActive(false);
+                DisconnectBtn.gameObject.SetActive(true);
                 TurnOnUI(guideUI);
-                guideText.text = "Connecting to server...";
+                guideText.text = "서버에 연결중...";
                 break;
             case Define.RunnerStatus.WAITING:
                 TurnOnUI(guideUI);
-                isWaiting = true;
+                guideText.text = "상대를 찾고 있습니다...";
+                //isWaiting = true;
                 break;
             case Define.RunnerStatus.TIMEOUT:
-                //TurnOfffUI(guideUI);
                 TurnOnUI(timeoutUI);
                 break;
             case Define.RunnerStatus.GAME:
-                //TurnOfffUI(guideUI);
+                SoundManager.Instance.StopBGM();
                 break;
             case Define.RunnerStatus.DISCONNECTING:
                 TurnOnUI(guideUI);
-                guideText.text = "Disconnecting...";
+                guideText.text = "돌아가는 중...";
                 break;
         }
     }
@@ -96,6 +107,7 @@ public class UIGame : MonoBehaviour
     }
     #endregion
 
+    /*
     #region elapsedTime
     private void UpdateMathcingTime()
     {
@@ -115,16 +127,6 @@ public class UIGame : MonoBehaviour
             _runnerInstance = FindFirstObjectByType<NetworkRunner>();
             //_runnerInstance = FindObjectOfType<NetworkRunner>();
     }
-
-    void Update()
-    {
-        UpdateMathcingTime();
-    }
     #endregion
-
-    public void OnBackToMenuButtonClicked()
-    {
-        
-    }
-
+    */
 }

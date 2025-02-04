@@ -43,4 +43,9 @@ public class UIManager : MonoBehaviour // UI. 반영 상태를 알려주는 enum을 저장하
             throw new ArgumentException($"Invalid game state: {state}");
 
     }
+
+    private void Start()
+    {
+        UpdateRunnerStatus("TITLE");
+    }
 }
