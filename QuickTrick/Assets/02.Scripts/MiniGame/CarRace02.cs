@@ -23,8 +23,9 @@ public class CarRace02 : MiniGameBase
     [SerializeField] GameObject WinSignal;
     [SerializeField] GameObject LoseSignal;
 
-    [SerializeField] TextMeshProUGUI playerText;
-    [SerializeField] TextMeshProUGUI opponentText;
+    [SerializeField] GameObject CutIn1;
+    [SerializeField] GameObject CutIn2;
+    [SerializeField] GameObject panel;
     #endregion
 
     private void Start()
@@ -34,11 +35,10 @@ public class CarRace02 : MiniGameBase
     }
     public override void OnLocalPlayerClicked(float responseTime)
     {
-        //localPlayer.SetActive(false);
-        //playerWin.SetActive(true);
-        //opponentPlayer.SetActive(false);
-        //opponentLose.SetActive(true);
-        Debug.Log("LocalPlayerClicked");
+        ShowPlayerText(responseTime);
+        Sequence seq = DOTween.Sequence();
+        seq.Append(CutIn1.transform.DOLocalMoveX(-660, 0.1f));
+        seq.Append(CutIn2.transform.DOLocalMoveX(-660, 0.2f));
 
         // 반응시간 표시
         Debug.Log($"{responseTime} 결과 나왔어요");
@@ -46,21 +46,33 @@ public class CarRace02 : MiniGameBase
 
     public override void OnLocalPlayerLose(float opponentResponseTime)
     {
+        CutIn1.SetActive(false);
+        CutIn2.SetActive(false);
+
         localPlayer.SetActive(false);
         playerLose.SetActive(true);
         opponentPlayer.SetActive(false);
         opponentWin.SetActive(true);
+
+        panel.SetActive(true);
         LoseSignal.SetActive(true);
+        ShowOpponentText(opponentResponseTime);
         Debug.Log($"{opponentResponseTime}Lose");
     }
 
     public override void OnLocalPlayerWin(float opponentResponseTime)
     {
+        CutIn1.SetActive(false);
+        CutIn2.SetActive(false);
+
         localPlayer.SetActive(false);
         playerWin.SetActive(true);
         opponentPlayer.SetActive(false);
         opponentLose.SetActive(true);
+
+        panel.SetActive(true);
         WinSignal.SetActive(true);
+        ShowOpponentText(opponentResponseTime);
         Debug.Log($"{opponentResponseTime}Win");
     }
 

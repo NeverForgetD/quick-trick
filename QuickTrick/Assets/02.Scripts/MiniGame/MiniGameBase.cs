@@ -9,6 +9,8 @@ public abstract class MiniGameBase : MonoBehaviour
     private string guideTextValue;
 
     [SerializeField] protected TypewriterByCharacter typewritter;
+    [SerializeField] protected TypewriterByCharacter playerText;
+    [SerializeField] protected TypewriterByCharacter opponentText;
 
     #region Initialize
     private void OnEnable()
@@ -34,6 +36,17 @@ public abstract class MiniGameBase : MonoBehaviour
     {
         typewritter.StartDisappearingText();
     }
+
+    protected void ShowPlayerText(float time)
+    {
+        playerText.ShowText($"<rainb><wave a=0.2>{time}");
+    }
+
+    protected void ShowOpponentText(float time)
+    {
+        opponentText.ShowText($"<rainb><wave a=0.2>{time}</wave>");
+    }
+
     #endregion
 
     #region Virtual_공통 로직
