@@ -40,23 +40,25 @@ public class UIGacha : MonoBehaviour
         Sequence seq = DOTween.Sequence();
         GetMiniGameIndex();
         // 투명화
-        seq.AppendInterval(0.4f);
         seq.Append(ClosedArmCrane.DOFade(0, 0));
-        seq.Join(leftCapsule.DOFade(0, 0));
+        seq.Join(OpenArmCrane.DOFade(0, 0));
+        seq.Join(ClosedArmCrane.transform.DOLocalMoveY(330, 0));
+        seq.Join(OpenArmCrane.transform.DOLocalMoveY(700, 0));
 
+        seq.Join(leftCapsule.DOFade(0, 0));
         seq.Join(rightCapsule.DOFade(0, 0));
         seq.Join(icon00.DOFade(0, 0));
         seq.Join(icon01.DOFade(0, 0));
         seq.Join(icon02.DOFade(0, 0));
         seq.Join(icon03.DOFade(0, 0));
 
-        seq.Join(OpenArmCrane.DOFade(1, 0));
-
+        seq.AppendInterval(0.4f);
         // 무더기 올라옴
         seq.Append(pile.transform.DOLocalMoveY(-1000, 0.6f).From());
 
         // 집게 내려오고
-        seq.Append(OpenArmCrane.transform.DOLocalMoveY(1500, 0.6f).From());
+        seq.Append(OpenArmCrane.DOFade(1, 0));
+        seq.Join(OpenArmCrane.transform.DOLocalMoveY(1500, 0.6f).From());
 
         // 좌우 이동
         seq.Append(OpenArmCrane.transform.DOLocalMoveX(-120, 0.6f));

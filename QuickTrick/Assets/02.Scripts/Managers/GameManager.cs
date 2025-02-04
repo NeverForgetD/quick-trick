@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static Define;
 
 public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
@@ -158,8 +159,9 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
             await WaitForPlayerResultArrive();
 
             RPC_AnnounceWinner();
-            //await WaitForTickTimer(5);
+            await WaitForTickTimer(5);
             //StartRound();
+            RPC_EndGame();
         }
     }
 
@@ -189,6 +191,13 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
         int winnerID = DetermineWiiner();
         //MiniGameManager.Instance.EndMiniGame(winnerID, playersResponseTime[1], playersResponseTime[2]);
         MiniGameManager.Instance.EndMiniGame(winnerID, player1Time, player2Time);
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    private void RPC_EndGame()
+    {
+        UIManager.Instance.UpdateRunnerStatus("TITLE");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     #endregion
 
