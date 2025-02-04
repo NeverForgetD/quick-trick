@@ -11,6 +11,9 @@ public abstract class MiniGameBase : MonoBehaviour
     [SerializeField] protected TypewriterByCharacter typewritter;
     [SerializeField] protected TypewriterByCharacter playerText;
     [SerializeField] protected TypewriterByCharacter opponentText;
+    [SerializeField] protected GameObject panel;
+    [SerializeField] protected GameObject WinSignal;
+    [SerializeField] protected GameObject LoseSignal;
 
     #region Initialize
     private void OnEnable()

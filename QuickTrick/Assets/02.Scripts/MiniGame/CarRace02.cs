@@ -20,12 +20,8 @@ public class CarRace02 : MiniGameBase
     [SerializeField] GameObject playerLose;
     [SerializeField] GameObject opponentLose;
 
-    [SerializeField] GameObject WinSignal;
-    [SerializeField] GameObject LoseSignal;
-
     [SerializeField] GameObject CutIn1;
     [SerializeField] GameObject CutIn2;
-    [SerializeField] GameObject panel;
     #endregion
 
     private void Start()
