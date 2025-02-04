@@ -50,7 +50,7 @@ public class UIGacha : MonoBehaviour
 
         // 집게 내려오고
         seq.Append(pile.transform.DOLocalMoveY(-1000, 0.6f).From());
-        seq.Append(OpenArmCrane.transform.DOLocalMoveY(725, 0.6f));
+        seq.Append(OpenArmCrane.transform.DOLocalMoveY(1500, 0.6f).From());
         seq.Append(OpenArmCrane.transform.DOLocalMoveX(-120, 0.6f));
         seq.Append(OpenArmCrane.transform.DOLocalMoveX(120, 0.6f));
         seq.Append(OpenArmCrane.transform.DOLocalMoveX(0, 0.6f));
@@ -63,7 +63,7 @@ public class UIGacha : MonoBehaviour
         seq.Append(ClosedArmCrane.DOFade(1, 0));
         seq.Join(OpenArmCrane.DOFade(0, 0));
         // 집게 올라옴, 무더기 내려감
-        seq.Join(ClosedArmCrane.transform.DOLocalMoveY(725, 0.6f));
+        seq.Append(ClosedArmCrane.transform.DOLocalMoveY(330, 0.6f).From());
         seq.Join(pile.transform.DOMoveY(-240, 0.8f));
         // 집게 사라짐
         //seq.AppendInterval(0.2f);
@@ -74,8 +74,8 @@ public class UIGacha : MonoBehaviour
         seq.Join(rightCapsule.DOFade(1, 0.2f));
 
         // 캡슐 양쪽으로 움직임
-        seq.Join(leftCapsule.transform.DOLocalMoveX(50, 0.4f).From());
-        seq.Join(rightCapsule.transform.DOLocalMoveX(-50, 0.4f).From());
+        seq.Join(leftCapsule.transform.DOLocalMoveX(0, 0.4f).From());
+        seq.Join(rightCapsule.transform.DOLocalMoveX(0, 0.4f).From());
 
         // 캡슐 사라짐
         seq.Append(rightCapsule.DOFade(0, 0.6f));

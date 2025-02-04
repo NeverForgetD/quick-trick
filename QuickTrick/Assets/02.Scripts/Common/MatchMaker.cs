@@ -103,7 +103,7 @@ public class MatchMaker : MonoBehaviour
 
             yield return new WaitForSeconds(1f);
             elapsedTime += 1f;
-            Debug.Log($"경과 시간 : {elapsedTime}, 참여 인원 : {_runnerInstance.SessionInfo.PlayerCount}");
+            //Debug.Log($"경과 시간 : {elapsedTime}, 참여 인원 : {_runnerInstance.SessionInfo.PlayerCount}");
         }
 
         // 1초 미만의 시간차로 접속이 되면 한 클라이언트만 룸에 참가되는 오류 방지
