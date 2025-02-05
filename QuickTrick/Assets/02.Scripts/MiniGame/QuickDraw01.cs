@@ -23,6 +23,7 @@ public class QuickDraw01 : MiniGameBase
 
     public override void OnLocalPlayerClicked(float responseTime)
     {
+        SoundManager.Instance.PlaySFX("React");
         ShowPlayerText(responseTime);
 
         Sequence seq = DOTween.Sequence();
@@ -80,6 +81,7 @@ public class QuickDraw01 : MiniGameBase
 
     public override void OnTriggerEvent()
     {
+        SoundManager.Instance.PlaySFX("Trigger");
         SunFlash.gameObject.SetActive(true);
     }
 }

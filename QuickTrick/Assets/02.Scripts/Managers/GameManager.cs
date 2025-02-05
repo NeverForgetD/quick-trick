@@ -229,7 +229,6 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
     {
         // test
         text.text = $"player{playerID} :::::: {responseTime}";
-
         if (!isValid)
         {
             //playersResponseTime.Add(playerID, -1f);

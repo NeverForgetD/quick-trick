@@ -9,9 +9,14 @@ public class ExplodingCapsuleGenerator : MonoBehaviour
     public float spawnY = 12f; // Y축 고정 값
     public float spawnInterval = 10f; // 생성 간격 (초)
 
-    void Start()
+    private void OnEnable()
     {
         InvokeRepeating(nameof(SpawnObject), 5f, spawnInterval);
+    }
+
+    private void OnDisable()
+    {
+        CancelInvoke(nameof(SpawnObject));
     }
 
     void SpawnObject()

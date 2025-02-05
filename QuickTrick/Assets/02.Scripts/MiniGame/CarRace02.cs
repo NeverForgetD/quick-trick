@@ -32,6 +32,7 @@ public class CarRace02 : MiniGameBase
     }
     public override void OnLocalPlayerClicked(float responseTime)
     {
+        SoundManager.Instance.PlaySFX("React");
         ShowPlayerText(responseTime);
         Sequence seq = DOTween.Sequence();
         seq.Append(CutIn1.transform.DOLocalMoveX(-660, 0.2f));
@@ -101,6 +102,7 @@ public class CarRace02 : MiniGameBase
 
     public override void OnTriggerEvent()
     {
+        SoundManager.Instance.PlaySFX("Trigger");
         Lights.SetActive(false);
     }
 

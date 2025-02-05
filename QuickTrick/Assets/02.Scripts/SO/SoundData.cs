@@ -6,7 +6,10 @@ public class SoundData : ScriptableObject
     /// <summary>
     /// 사운드 이름
     /// </summary>
-    public string soundName { private set; get; }
+    public string soundName
+    {
+        get => this.name;
+    }
 
     /// <summary>
     /// 재생할 AudioClip
@@ -22,12 +25,4 @@ public class SoundData : ScriptableObject
     /// 피치
     /// </summary>
     [Range(0f, 1f)] public float pitch = 1f;
-
-    private void OnValidate() // 에디터에서 soundName을 파일 이름으로 지정 (편의성)
-    {
-        if (string.IsNullOrEmpty(soundName))
-        {
-            soundName = name;
-        }
-    }
 }

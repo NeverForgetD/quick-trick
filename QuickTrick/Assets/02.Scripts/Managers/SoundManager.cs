@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
@@ -66,7 +67,7 @@ public class SoundManager : MonoBehaviour
             return;
 
         SoundData bgm = FindSound(soundDB.bgmList, bgmName); // 검색
-        if (bgm != null && !isBGMPlaying)
+        if (bgm != null)
         {
             bgmSource.clip = bgm.audioClip;
             bgmSource.volume = bgm.volume;
@@ -114,6 +115,11 @@ public class SoundManager : MonoBehaviour
     /// <returns></returns>
     private SoundData FindSound(SoundData[] soundList, string soundName)
     {
+        if (soundDB == null)
+        {
+            Debug.Log("Can't Find SoundDb");
+        }
+
         foreach (SoundData sound in soundList)
         {
             if (sound.soundName == soundName) // 이름 비교

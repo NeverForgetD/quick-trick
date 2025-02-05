@@ -132,6 +132,7 @@ public class MiniGameManager : MonoBehaviour
         {
             _miniGameInstance.OnLocalPlayerLose(opponentResponseTime);
         }
+        Debug.Log($"1 : {player1ResponseTime} /// 2: {player2ResponseTime}");
     }
 
 

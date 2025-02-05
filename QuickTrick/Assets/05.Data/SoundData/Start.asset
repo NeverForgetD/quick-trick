@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b36627387032cee4db322b457d8497d9, type: 3}
-  m_Name: Pick
+  m_Name: Start
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: 542ec38661106dd48936fea1f76a5670, type: 3}
+  audioClip: {fileID: 8300000, guid: e4c2e75df99986246bb36681b97c3729, type: 3}
   volume: 1
   pitch: 1

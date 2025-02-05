@@ -59,7 +59,9 @@ public class UIGacha : MonoBehaviour
         seq.Join(icon03.DOFade(0, 0));
         seq.Join(pile.transform.DOLocalMoveY(-900, 0));
 
-        seq.AppendCallback(() => { text.ShowText("상대를 찾았습니다!"); });
+        //SoundManager.Instance.PlaySFX("Match");
+        seq.JoinCallback(() => SoundManager.Instance.PlaySFX("Match"));
+        seq.JoinCallback(() => { text.ShowText("상대를 찾았습니다!"); });
         seq.AppendInterval(1f);
         seq.AppendCallback(() => { text.StartDisappearingText(); });
 
@@ -78,6 +80,7 @@ public class UIGacha : MonoBehaviour
         // 무더기 안에 들어가고 무더기 흔들림
         seq.Append(OpenArmCrane.transform.DOLocalMoveY(330, 0.2f));
         seq.Append(pile.transform.DOShakePosition(0.2f, 30, 3, 2));
+        seq.JoinCallback(() => SoundManager.Instance.PlaySFX("Pile"));
         seq.Join(OpenArmCrane.transform.DOShakePosition(0.2f, 30, 3, 2));
 
         seq.AppendInterval(0.6f);
@@ -98,6 +101,7 @@ public class UIGacha : MonoBehaviour
         // 캡슐 양쪽으로 움직임
         seq.Join(leftCapsule.transform.DOLocalMoveX(-400, 0.4f));
         seq.Join(rightCapsule.transform.DOLocalMoveX(400, 0.4f));
+        seq.JoinCallback(() => SoundManager.Instance.PlaySFX("Crack"));
 
         // 캡슐 사라짐
         seq.Append(rightCapsule.DOFade(0, 0.4f));
@@ -124,6 +128,7 @@ public class UIGacha : MonoBehaviour
         }
 
         seq.AppendCallback(() => { text.ShowText("게임을 시작합니다"); });
+        seq.JoinCallback(() => SoundManager.Instance.PlaySFX("Start"));
         seq.AppendInterval(1.5f);
         seq.AppendCallback(() => { text.StartDisappearingText(); });
         //seq.AppendCallback(() => { MiniGameManager.Instance.; });
