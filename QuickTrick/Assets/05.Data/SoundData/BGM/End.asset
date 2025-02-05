@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b36627387032cee4db322b457d8497d9, type: 3}
-  m_Name: GameBGM
+  m_Name: End
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: 092c6eb220ee3e24e970fe72ec0b18dd, type: 3}
-  volume: 0.8
+  audioClip: {fileID: 8300000, guid: 3e4b3973e50bd90499702b048750507f, type: 3}
+  volume: 1
   pitch: 1

@@ -22,6 +22,7 @@ public class MiniGameManager : MonoBehaviour
 
     [SerializeField] UIGacha GachaUI;
     [SerializeField] GameObject effects;
+    [SerializeField] GameObject EndGameUI;
 
     public MiniGameSO _MiniGameSo => miniGameSO;
     [SerializeField] MiniGameSO miniGameSO;
@@ -46,7 +47,7 @@ public class MiniGameManager : MonoBehaviour
     /// <summary>
     /// Runner 기준으로 플레이어의  ID를 저장
     /// </summary>
-    private int playerID = 0;
+    private int playerID;
 
     public void UpdateSelectedMiniGame(int randomGameIndex)
     {
@@ -123,7 +124,10 @@ public class MiniGameManager : MonoBehaviour
     /// </summary>
     public void EndMiniGame(int winnerID, float player1ResponseTime, float player2ResponseTime)
     {
+        SoundManager.Instance.StopBGM();
+        SoundManager.Instance.PlayBGM("End");
         float opponentResponseTime = playerID == 1 ? player2ResponseTime : player1ResponseTime;
+
         if (playerID == winnerID)
         {
             _miniGameInstance.OnLocalPlayerWin(opponentResponseTime);
@@ -135,7 +139,10 @@ public class MiniGameManager : MonoBehaviour
         Debug.Log($"1 : {player1ResponseTime} /// 2: {player2ResponseTime}");
     }
 
-
+    public void EndGame()
+    {
+        EndGameUI.SetActive(true);
+    }
 
 
 
@@ -164,5 +171,6 @@ public class MiniGameManager : MonoBehaviour
     public void SetPlayerID(int runnerPlayerID)
     {
         playerID = runnerPlayerID;
+        Debug.Log($"this com {playerID}");
     }
 }

@@ -193,13 +193,15 @@ public class MatchMaker : MonoBehaviour
 
     public async void OnBackToMenuClicked()
     {
-        Debug.Log("Diconnected Clicked_disconnect¿Í °°À½");
         await Disconnect();
+        SoundManager.Instance.StopBGM();
+        SoundManager.Instance.PlayBGM("MainBGM");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void OnRetryButtonClicked()
     {
-        MatchGame();
+        //StartGame();
     }
     #endregion
 }

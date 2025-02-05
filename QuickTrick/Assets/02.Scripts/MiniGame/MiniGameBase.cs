@@ -42,12 +42,20 @@ public abstract class MiniGameBase : MonoBehaviour
 
     protected void ShowPlayerText(float time)
     {
-        playerText.ShowText($"<rainb><wave a=0.2>{time}");
+        if (time == -1)
+            playerText.ShowText("<rainb><wave a=0.2>too fast...");
+        else if (time != 0)
+        {
+            playerText.ShowText($"<rainb><wave a=0.2>{time}");
+        }
     }
 
     protected void ShowOpponentText(float time)
     {
-        opponentText.ShowText($"<rainb><wave a=0.2>{time}</wave>");
+        if (time == -1)
+            opponentText.ShowText("<rainb><wave a=0.2>too fast...");
+        else if (time != 0)
+            opponentText.ShowText($"<rainb><wave a=0.2>{time}</wave>");
     }
 
     #endregion

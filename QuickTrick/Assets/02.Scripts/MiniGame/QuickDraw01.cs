@@ -69,7 +69,7 @@ public class QuickDraw01 : MiniGameBase
     {
         Sequence seq = DOTween.Sequence();
         seq.Append(tumbleWeed.transform.DOMoveX(-20, 3f).From());
-        seq.Join(tumbleWeed.transform.DORotate(new Vector3(0, 0, 1080), 3f));
+        seq.Join(tumbleWeed.transform.DORotate(new Vector3(0, 0, 350), 3f));
 
         seq.AppendInterval(0.2f);
         seq.AppendCallback(() => { ShowExplanationText(); });

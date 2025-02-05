@@ -15,7 +15,7 @@ MonoBehaviour:
   bgmList:
   - {fileID: 11400000, guid: 05a5de6aec089e040a7746fcb8b2df75, type: 2}
   - {fileID: 11400000, guid: 564a5e929ccfe85479f46a499503101a, type: 2}
-  - {fileID: 11400000, guid: 571370ce0c0cd2d46b8f8ceec23c0d0c, type: 2}
+  - {fileID: 11400000, guid: a4a590a842920e9488bf65845721cff1, type: 2}
   sfxList:
   - {fileID: 11400000, guid: e4cdae40e68cc2b40a84c529edb03cb9, type: 2}
   - {fileID: 11400000, guid: 1fa2e838c29a0ad47ab39cd2613fef98, type: 2}
@@ -25,3 +25,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0ee62dc6b57451749969784179ec212c, type: 2}
   - {fileID: 11400000, guid: 03582d1e78da54342a499f184f1d8923, type: 2}
   - {fileID: 11400000, guid: 6f38db843b05b894a981c3731140dbfb, type: 2}
+  - {fileID: 11400000, guid: ee53b4dfcd8298246914b6765d12bc9a, type: 2}

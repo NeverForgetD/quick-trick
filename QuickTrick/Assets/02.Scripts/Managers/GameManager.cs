@@ -26,8 +26,8 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
     // 매 판 ClearData로 초기화
     private Dictionary<int, float> playersResponseTime = new Dictionary<int, float>();
 
-    private float player1Time;
-    private float player2Time;
+    [Networked] float player1Time { get; set; }
+    [Networked] float player2Time { get; set; }
 
     private bool isResultSent;
     #endregion
@@ -57,8 +57,6 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
 
     public override void Spawned()
     {
-        Debug.Log("GM Spawned--------------------");
-
         if (Object.HasStateAuthority)
         {
             //StartNewGame();
@@ -160,9 +158,10 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
             await WaitForPlayerResultArrive();
 
             RPC_AnnounceWinner();
-            await WaitForTickTimer(5);
+            await WaitForTickTimer(3);
             //StartRound();
             RPC_EndGame();
+
         }
     }
 
@@ -203,8 +202,9 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     private void RPC_EndGame()
     {
-        UIManager.Instance.UpdateRunnerStatus("TITLE");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        MiniGameManager.Instance.EndGame();
+        //UIManager.Instance.UpdateRunnerStatus("TITLE");
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     #endregion
 
@@ -229,13 +229,15 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
     {
         // test
         text.text = $"player{playerID} :::::: {responseTime}";
+
+
         if (!isValid)
         {
             //playersResponseTime.Add(playerID, -1f);
-            if (playerID == 1)
-                player1Time = -1;
-            else
-                player2Time = -1;
+            //if (playerID == 1)
+            //    player1Time = -1;
+            //else
+            //    player2Time = -1;
             isResultSent = true;
         }
         else
@@ -243,12 +245,11 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
             //playersResponseTime.Add(playerID, responseTime);
             if (playerID == 1)
                 player1Time = responseTime;
-            else
+            else // 여기서 playerID 0으로 나오는 오류
                 player2Time = responseTime;
+            Debug.Log($"second player in, id is {playerID} : {responseTime}");
         }
 
-        
-        //Debug.Log($"count is {playersResponseTime.Count}");
         /*
         if (playersResponseTime.Count == 2 && !isResultSent)
         {
@@ -257,6 +258,10 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
         */
         if (player1Time != 0 && player2Time != 0 && !isResultSent)
             isResultSent = true;
+
+        Debug.Log($"{playerID} in! {responseTime}");
+        Debug.Log($"{player1Time} and {player2Time}");
+        Debug.Log($"{isResultSent}");
     }
 
     /// <summary>
@@ -265,8 +270,6 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
     /// <returns></returns>
     async Task WaitForPlayerResultArrive()
     {
-        //tickTimer = TickTimer.CreateFromSeconds(Runner, 2);
-        //|| !tickTimer.Expired(Runner)
         while (!isResultSent)
         {
             await Task.Yield();
@@ -305,26 +308,24 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
         else if (player1Time > player2Time)
         {
             player2Score++;
-            text.text = $"player2 ::: {player2Time} Win!!";
             Debug.Log($"player2 ::: {player2Time} Win!! 1:::${player1Time}");
             return 2;
         }
         else if (player1Time < player2Time)
         {
             player1Score++;
-            text.text = $"player1 ::: {player1Time} Win!!";
             Debug.Log($"player1 ::: {player1Time} Win!!2:::${player2Time}");
             return 1;
         }
         else
         {
+            Debug.Log("Same!");
             return 1;
         }
     }
 
     void ClearData()
     {
-        //playersResponseTime.Clear();
         player1Time = 0;
         player2Time = 0;
         isResultSent = false;

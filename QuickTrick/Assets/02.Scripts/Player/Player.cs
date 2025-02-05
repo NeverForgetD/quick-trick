@@ -25,16 +25,16 @@ public class Player : NetworkBehaviour
     /// <summary>
     /// 플레이어 아이디 번호_호스트1 클라이언트2
     /// </summary>
-    private int playerID;
+    private int localPlayerID;
 
     public override void Spawned()
     {
         if (Object.HasInputAuthority)
         {
             ResetTrigger();
-            playerID = Runner.LocalPlayer.PlayerId;
-            Debug.Log($"this computer ID {Runner.LocalPlayer.PlayerId}");
-            MiniGameManager.Instance.SetPlayerID(playerID);
+            localPlayerID = Runner.LocalPlayer.PlayerId;
+            Debug.Log("works");
+            MiniGameManager.Instance.SetPlayerID(localPlayerID);
         }
     }
 
@@ -109,7 +109,8 @@ public class Player : NetworkBehaviour
         //playerID = playerRef.PlayerId;
 
         //OnPlayerClicked?.Invoke(playerID , responseTime);
-        OnPlayerClicked?.Invoke(playerID, responseTime, isValid);
+        OnPlayerClicked?.Invoke(localPlayerID, responseTime, isValid);
+        Debug.Log($"{localPlayerID} id is sent to server");
     }
 
 

@@ -40,8 +40,6 @@ public class CarRace02 : MiniGameBase
         seq.AppendInterval(1f);
         seq.Append(CutIn1.DOFade(0, 0));
         seq.Join(CutIn2.DOFade(0, 0.4f));
-        // 반응시간 표시
-        Debug.Log($"{responseTime} 결과 나왔어요");
     }
 
     public override void OnLocalPlayerLose(float opponentResponseTime)
