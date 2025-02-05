@@ -28,7 +28,7 @@ public class UIGacha : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayGachaAnimation();
+        //PlayGachaAnimation();
     }
 
     private void OnDisable()
@@ -46,7 +46,7 @@ public class UIGacha : MonoBehaviour
         seq.Append(ClosedArmCrane.DOFade(0, 0));
         seq.Join(OpenArmCrane.DOFade(0, 0));
         seq.Join(ClosedArmCrane.transform.DOLocalMoveY(330, 0));
-        seq.Join(OpenArmCrane.transform.DOLocalMoveY(700, 0));
+        seq.Join(OpenArmCrane.transform.DOLocalMoveY(1500, 0));
 
         seq.Join(leftCapsule.DOFade(0, 0));
         seq.Join(rightCapsule.DOFade(0, 0));
@@ -70,7 +70,7 @@ public class UIGacha : MonoBehaviour
 
         // 집게 내려오고
         seq.Append(OpenArmCrane.DOFade(1, 0));
-        seq.Append(OpenArmCrane.transform.DOLocalMoveY(1500, 0.6f).From());
+        seq.Append(OpenArmCrane.transform.DOLocalMoveY(700, 0.6f));
 
         // 좌우 이동
         seq.Append(OpenArmCrane.transform.DOLocalMoveX(-120, 0.6f));
