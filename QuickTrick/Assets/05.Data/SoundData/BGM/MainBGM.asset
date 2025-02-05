@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: MainBGM
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 9a981e0b99addeb4985bb4bdbdc4de02, type: 3}
-  volume: 1
+  volume: 0.7
   pitch: 1

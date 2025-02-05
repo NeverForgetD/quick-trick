@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minTriggerTime: 2
-  maxTriggerTime: 8
+  maxTriggerTime: 6
   playerPrefab: {fileID: -6041727775666347700, guid: d9f5264d3e93e7844a57dca0e39fa51c, type: 3}
   text: {fileID: 4816265599919104237}
 --- !u!114 &1670903155119631091

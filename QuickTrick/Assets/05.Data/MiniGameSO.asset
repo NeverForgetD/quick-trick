@@ -16,7 +16,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 6411743045229458583, guid: 7f46f4179a563324ba7cb36437345da0, type: 3}
   - {fileID: 3718631805819362042, guid: 50dbd2ed54035b0498a34c0ac84d2c45, type: 3}
+  - {fileID: 9075342821188686877, guid: b22ab7234c3b41d45ba727ad68ede89d, type: 3}
   miniGameGuideTexts:
   - 
   - "\uD0DC\uC591\uC774 \uBC18\uC9DD\uC77C\uB54C <wave a=0.2>\uD074\uB9AD!</wave>"
   - "\uBAA8\uB4E0 \uBD88\uC774 \uAEBC\uC9C0\uBA74 <wave a=0.2>\uD074\uB9AD!</wave>"
+  - "\uAC19\uC740 \uBAA8\uC591\uC758 \uCE74\uB4DC\uAC00 \uB098\uC624\uBA74 <wave
+    a=0.2>\uD074\uB9AD!</wave>"
