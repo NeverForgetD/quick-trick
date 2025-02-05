@@ -1015,6 +1015,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2092042931}
     - target: {fileID: 923676724245844259, guid: a3b5a06c4f285104a9c6121b1a3dfb37, type: 3}
+      propertyPath: effects
+      value: 
+      objectReference: {fileID: 3215360988014476887}
+    - target: {fileID: 923676724245844259, guid: a3b5a06c4f285104a9c6121b1a3dfb37, type: 3}
       propertyPath: miniGameSO
       value: 
       objectReference: {fileID: 11400000, guid: ece9bd2faf826c648b207a7f65301e0f, type: 2}
@@ -2014,6 +2018,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bfb235f4c066f194793ceaf935498caf, type: 3}
+--- !u!1 &3215360988014476887 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 165246478147552796, guid: bfb235f4c066f194793ceaf935498caf, type: 3}
+  m_PrefabInstance: {fileID: 3215360988014476886}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4073607005278968288
 PrefabInstance:
   m_ObjectHideFlags: 0

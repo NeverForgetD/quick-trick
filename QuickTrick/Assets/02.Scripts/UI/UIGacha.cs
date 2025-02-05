@@ -50,17 +50,21 @@ public class UIGacha : MonoBehaviour
 
         seq.Join(leftCapsule.DOFade(0, 0));
         seq.Join(rightCapsule.DOFade(0, 0));
+        seq.Join(leftCapsule.transform.DOLocalMoveX(-150, 0));
+        seq.Join(rightCapsule.transform.DOLocalMoveX(150, 0));
+
         seq.Join(icon00.DOFade(0, 0));
         seq.Join(icon01.DOFade(0, 0));
         seq.Join(icon02.DOFade(0, 0));
         seq.Join(icon03.DOFade(0, 0));
+        seq.Join(pile.transform.DOLocalMoveY(-900, 0));
 
         seq.AppendCallback(() => { text.ShowText("상대를 찾았습니다!"); });
         seq.AppendInterval(1f);
         seq.AppendCallback(() => { text.StartDisappearingText(); });
 
         // 무더기 올라옴
-        seq.Append(pile.transform.DOLocalMoveY(-1000, 0.6f).From());
+        seq.Append(pile.transform.DOLocalMoveY(-250, 0.6f));
 
         // 집게 내려오고
         seq.Append(OpenArmCrane.DOFade(1, 0));
@@ -82,7 +86,7 @@ public class UIGacha : MonoBehaviour
         seq.Join(OpenArmCrane.DOFade(0, 0));
         // 집게 올라옴, 무더기 내려감
         seq.Append(ClosedArmCrane.transform.DOLocalMoveY(700, 0.6f));
-        seq.Join(pile.transform.DOMoveY(-240, 0.8f));
+        seq.Join(pile.transform.DOLocalMoveY(-900, 0.8f));
         // 집게 사라짐
         //seq.AppendInterval(0.2f);
         seq.Append(ClosedArmCrane.DOFade(0, 0.8f));
@@ -92,31 +96,35 @@ public class UIGacha : MonoBehaviour
         seq.Join(rightCapsule.DOFade(1, 0.2f));
 
         // 캡슐 양쪽으로 움직임
-        seq.Join(leftCapsule.transform.DOLocalMoveX(0, 0.4f).From());
-        seq.Join(rightCapsule.transform.DOLocalMoveX(0, 0.4f).From());
+        seq.Join(leftCapsule.transform.DOLocalMoveX(-400, 0.4f));
+        seq.Join(rightCapsule.transform.DOLocalMoveX(400, 0.4f));
 
         // 캡슐 사라짐
-        seq.Append(rightCapsule.DOFade(0, 0.6f));
-        seq.Join(leftCapsule.DOFade(0, 0.6f));
+        seq.Append(rightCapsule.DOFade(0, 0.4f));
+        seq.Join(leftCapsule.DOFade(0, 0.4f));
 
         switch (miniGameIndex)
         {
             case 0:
-                seq.Append(icon00.DOFade(1, 0.2f));
+                seq.Join(icon00.DOFade(1, 0.2f));
+                seq.Append(icon00.transform.DOShakePosition(1, 20, 5, 10));
                 break;
             case 1:
-                seq.Append(icon01.DOFade(1, 0.2f));
+                seq.Join(icon01.DOFade(1, 0.2f));
+                seq.Append(icon01.transform.DOShakePosition(1, 20, 5, 10));
                 break;
             case 2:
-                seq.Append(icon02.DOFade(1, 0.2f));
+                seq.Join(icon02.DOFade(1, 0.2f));
+                seq.Append(icon02.transform.DOShakePosition(1, 20, 5, 10));
                 break;
             case 3:
-                seq.Append(icon03.DOFade(1, 0.2f));
+                seq.Join(icon03.DOFade(1, 0.2f));
+                seq.Append(icon03.transform.DOShakePosition(1, 20, 5, 10));
                 break;
         }
 
         seq.AppendCallback(() => { text.ShowText("게임을 시작합니다"); });
-        seq.AppendInterval(1f);
+        seq.AppendInterval(1.5f);
         seq.AppendCallback(() => { text.StartDisappearingText(); });
         //seq.AppendCallback(() => { MiniGameManager.Instance.; });
     }
@@ -124,8 +132,13 @@ public class UIGacha : MonoBehaviour
 
     private void GetMiniGameIndex()
     {
-        miniGameIndex = MiniGameManager.Instance.selectedGameIndex;
+        if (MiniGameManager.Instance != null)
+            miniGameIndex = MiniGameManager.Instance.selectedGameIndex;
         //miniGameIndex = 2;
+        if (MiniGameManager.Instance == null)
+        {
+            miniGameIndex = 2;
+        }
 
     }
 }

@@ -139,7 +139,7 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
 
             // 랜덤한 미니게임 결정 및 동기화
             randomGameIndex = UnityEngine.Random.Range(0, (int)Define.GameMode.MaxCount);
-            randomGameIndex = 1; // 테스트용 test
+            randomGameIndex = UnityEngine.Random.Range(1, 3);
             RPC_UpdateSelectedGame(randomGameIndex);
 
             // 뽑기 애니메이션 재생

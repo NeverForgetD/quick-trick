@@ -21,6 +21,7 @@ public class MiniGameManager : MonoBehaviour
     #endregion
 
     [SerializeField] UIGacha GachaUI;
+    [SerializeField] GameObject effects;
 
     public MiniGameSO _MiniGameSo => miniGameSO;
     [SerializeField] MiniGameSO miniGameSO;
@@ -77,6 +78,7 @@ public class MiniGameManager : MonoBehaviour
     /// </summary>
     public async void StartMiniGame()
     {
+        effects.gameObject.SetActive(false);
         miniGameReady = false;
         // 미니 게임 띄우는 애니메이션
         MiniGameBase miniGamePrefab = miniGameSO.GetMiniGamePrefab(selectedGameIndex);

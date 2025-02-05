@@ -158,10 +158,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gacha UI
       objectReference: {fileID: 0}
-    - target: {fileID: 37242908237105528, guid: eb95dac4c6d6cf447bcb8dee4cb9c861, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5764997514930753402, guid: eb95dac4c6d6cf447bcb8dee4cb9c861, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -200,6 +196,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5764997514930753402, guid: eb95dac4c6d6cf447bcb8dee4cb9c861, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195804710145016660, guid: eb95dac4c6d6cf447bcb8dee4cb9c861, type: 3}
+      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -448,7 +448,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 438706519756105876, guid: 7f46f4179a563324ba7cb36437345da0, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2337376448690103369, guid: 7f46f4179a563324ba7cb36437345da0, type: 3}
       propertyPath: m_IsActive

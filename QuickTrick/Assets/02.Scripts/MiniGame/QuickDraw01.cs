@@ -28,7 +28,7 @@ public class QuickDraw01 : MiniGameBase
         Sequence seq = DOTween.Sequence();
         cutIn.gameObject.SetActive(true);
 
-        seq.Append(cutIn.transform.DOMoveX(-15, 1).From());
+        seq.Append(cutIn.transform.DOMoveX(-15, 0.4f).From());
         seq.AppendInterval(1f);
         seq.Append(cutIn.DOFade(0, 0.4f));
 
