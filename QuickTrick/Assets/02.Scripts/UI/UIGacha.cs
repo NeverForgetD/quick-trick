@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using Febucci.UI;
 
 public class UIGacha : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class UIGacha : MonoBehaviour
     [SerializeField] Image icon01;
     [SerializeField] Image icon02;
     [SerializeField] Image icon03;
+
+    [SerializeField] TypewriterByCharacter text;
     #endregion
 
     private int miniGameIndex;
@@ -52,13 +55,16 @@ public class UIGacha : MonoBehaviour
         seq.Join(icon02.DOFade(0, 0));
         seq.Join(icon03.DOFade(0, 0));
 
-        seq.AppendInterval(0.4f);
+        seq.AppendCallback(() => { text.ShowText("상대를 찾았습니다!"); });
+        seq.AppendInterval(1f);
+        seq.AppendCallback(() => { text.StartDisappearingText(); });
+
         // 무더기 올라옴
         seq.Append(pile.transform.DOLocalMoveY(-1000, 0.6f).From());
 
         // 집게 내려오고
         seq.Append(OpenArmCrane.DOFade(1, 0));
-        seq.Join(OpenArmCrane.transform.DOLocalMoveY(1500, 0.6f).From());
+        seq.Append(OpenArmCrane.transform.DOLocalMoveY(1500, 0.6f).From());
 
         // 좌우 이동
         seq.Append(OpenArmCrane.transform.DOLocalMoveX(-120, 0.6f));
@@ -75,7 +81,7 @@ public class UIGacha : MonoBehaviour
         seq.Append(ClosedArmCrane.DOFade(1, 0));
         seq.Join(OpenArmCrane.DOFade(0, 0));
         // 집게 올라옴, 무더기 내려감
-        seq.Append(ClosedArmCrane.transform.DOLocalMoveY(330, 0.6f).From());
+        seq.Append(ClosedArmCrane.transform.DOLocalMoveY(700, 0.6f));
         seq.Join(pile.transform.DOMoveY(-240, 0.8f));
         // 집게 사라짐
         //seq.AppendInterval(0.2f);
@@ -108,6 +114,10 @@ public class UIGacha : MonoBehaviour
                 seq.Append(icon03.DOFade(1, 0.2f));
                 break;
         }
+
+        seq.AppendCallback(() => { text.ShowText("게임을 시작합니다"); });
+        seq.AppendInterval(1f);
+        seq.AppendCallback(() => { text.StartDisappearingText(); });
         //seq.AppendCallback(() => { MiniGameManager.Instance.; });
     }
     #endregion

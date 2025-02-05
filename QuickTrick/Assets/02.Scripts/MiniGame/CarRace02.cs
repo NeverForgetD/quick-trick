@@ -3,6 +3,7 @@ using Febucci.UI;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CarRace02 : MiniGameBase
 {
@@ -20,8 +21,8 @@ public class CarRace02 : MiniGameBase
     [SerializeField] GameObject playerLose;
     [SerializeField] GameObject opponentLose;
 
-    [SerializeField] GameObject CutIn1;
-    [SerializeField] GameObject CutIn2;
+    [SerializeField] Image CutIn1;
+    [SerializeField] Image CutIn2;
     #endregion
 
     private void Start()
@@ -33,18 +34,17 @@ public class CarRace02 : MiniGameBase
     {
         ShowPlayerText(responseTime);
         Sequence seq = DOTween.Sequence();
-        seq.Append(CutIn1.transform.DOLocalMoveX(-660, 0.1f));
-        seq.Append(CutIn2.transform.DOLocalMoveX(-660, 0.2f));
-
+        seq.Append(CutIn1.transform.DOLocalMoveX(-660, 0.2f));
+        seq.Append(CutIn2.transform.DOLocalMoveX(-660, 0.4f));
+        seq.AppendInterval(1f);
+        seq.Append(CutIn1.DOFade(0, 0));
+        seq.Join(CutIn2.DOFade(0, 0.4f));
         // 반응시간 표시
         Debug.Log($"{responseTime} 결과 나왔어요");
     }
 
     public override void OnLocalPlayerLose(float opponentResponseTime)
     {
-        CutIn1.SetActive(false);
-        CutIn2.SetActive(false);
-
         localPlayer.SetActive(false);
         playerLose.SetActive(true);
         opponentPlayer.SetActive(false);
@@ -59,9 +59,6 @@ public class CarRace02 : MiniGameBase
 
     public override void OnLocalPlayerWin(float opponentResponseTime)
     {
-        CutIn1.SetActive(false);
-        CutIn2.SetActive(false);
-
         localPlayer.SetActive(false);
         playerWin.SetActive(true);
         opponentPlayer.SetActive(false);

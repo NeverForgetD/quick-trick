@@ -145,6 +145,7 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
             // 뽑기 애니메이션 재생
             RPC_PlayGachaAnimation();
             await WaitForTickTimer(MiniGameManager.Instance.waitGachaTime);
+            RPC_EndGachaAnimation();
 
             // 트리거 시간 결정
             triggerTime = UnityEngine.Random.Range(minTriggerTime, maxTriggerTime);
@@ -176,6 +177,12 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
     private void RPC_PlayGachaAnimation()
     {
         MiniGameManager.Instance.PlayGachaAnimation();
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    private void RPC_EndGachaAnimation()
+    {
+        MiniGameManager.Instance.EndGachaAnimation();
     }
 
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]

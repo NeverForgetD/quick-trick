@@ -793,6 +793,9 @@ MonoBehaviour:
   typewritter: {fileID: 3361214076772695870}
   playerText: {fileID: 703245724381672424}
   opponentText: {fileID: 4472946298754276865}
+  panel: {fileID: 6127016859048072022}
+  WinSignal: {fileID: 1184979533274324753}
+  LoseSignal: {fileID: 8599856943885719633}
   signal: {fileID: 3030055558265375598}
   localPlayer: {fileID: 6703670485062951249}
   opponentPlayer: {fileID: 6165415594095041548}
@@ -802,11 +805,8 @@ MonoBehaviour:
   opponentWin: {fileID: 4878538601941611477}
   playerLose: {fileID: 2253494236886661908}
   opponentLose: {fileID: 7870579307281701202}
-  WinSignal: {fileID: 1184979533274324753}
-  LoseSignal: {fileID: 8599856943885719633}
-  CutIn1: {fileID: 2140809191244090244}
-  CutIn2: {fileID: 1714965416926763515}
-  panel: {fileID: 6127016859048072022}
+  CutIn1: {fileID: 7029550014026527027}
+  CutIn2: {fileID: 5621303224932020106}
 --- !u!1 &2253494236886661908
 GameObject:
   m_ObjectHideFlags: 0

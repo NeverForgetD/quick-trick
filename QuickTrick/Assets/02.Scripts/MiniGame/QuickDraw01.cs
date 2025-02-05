@@ -23,13 +23,20 @@ public class QuickDraw01 : MiniGameBase
 
     public override void OnLocalPlayerClicked(float responseTime)
     {
+        ShowPlayerText(responseTime);
+
+        Sequence seq = DOTween.Sequence();
         cutIn.gameObject.SetActive(true);
-        cutIn.transform.DOMoveX(10, 1).From();
+
+        seq.Append(cutIn.transform.DOMoveX(-15, 1).From());
+        seq.AppendInterval(1f);
+        seq.Append(cutIn.DOFade(0, 0.4f));
+
     }
 
     public override void OnLocalPlayerLose(float opponentResponseTime)
     {
-        cutIn.gameObject.SetActive(false);
+        //cutIn.gameObject.SetActive(false);
         playerIdle.gameObject.SetActive(false);
         enemyIdle.gameObject.SetActive(false);
         playerLose.gameObject.SetActive(true);
@@ -43,7 +50,7 @@ public class QuickDraw01 : MiniGameBase
 
     public override void OnLocalPlayerWin(float opponentResponseTime)
     {
-        cutIn.gameObject.SetActive(false);
+        //cutIn.gameObject.SetActive(false);
         playerIdle.gameObject.SetActive(false);
         enemyIdle.gameObject.SetActive(false);
         playerWin.gameObject.SetActive(true);

@@ -57,9 +57,14 @@ public class MiniGameManager : MonoBehaviour
 
     public void PlayGachaAnimation()
     {
-        Instantiate(GachaUI);
+        GachaUI.gameObject.SetActive(true);
         GachaUI.PlayGachaAnimation();
-        waitGachaTime = 8;
+        waitGachaTime = 11;
+    }
+
+    public void EndGachaAnimation()
+    {
+        GachaUI.gameObject.SetActive(false);
     }
 
     public void UpdateTriggerTime(float triggerTimeFromServer)
