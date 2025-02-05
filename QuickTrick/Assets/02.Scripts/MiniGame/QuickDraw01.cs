@@ -36,6 +36,7 @@ public class QuickDraw01 : MiniGameBase
 
     public override void OnLocalPlayerLose(float opponentResponseTime)
     {
+        SoundManager.Instance.PlaySFX("Lose");
         //cutIn.gameObject.SetActive(false);
         playerIdle.gameObject.SetActive(false);
         enemyIdle.gameObject.SetActive(false);
@@ -50,6 +51,7 @@ public class QuickDraw01 : MiniGameBase
 
     public override void OnLocalPlayerWin(float opponentResponseTime)
     {
+        SoundManager.Instance.PlaySFX("Win");
         //cutIn.gameObject.SetActive(false);
         playerIdle.gameObject.SetActive(false);
         enemyIdle.gameObject.SetActive(false);

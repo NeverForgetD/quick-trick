@@ -45,6 +45,7 @@ public class CarRace02 : MiniGameBase
 
     public override void OnLocalPlayerLose(float opponentResponseTime)
     {
+        SoundManager.Instance.PlaySFX("Lose");
         localPlayer.SetActive(false);
         playerLose.SetActive(true);
         opponentPlayer.SetActive(false);
@@ -59,6 +60,7 @@ public class CarRace02 : MiniGameBase
 
     public override void OnLocalPlayerWin(float opponentResponseTime)
     {
+        SoundManager.Instance.PlaySFX("Win");
         localPlayer.SetActive(false);
         playerWin.SetActive(true);
         opponentPlayer.SetActive(false);

@@ -78,6 +78,8 @@ public class MiniGameManager : MonoBehaviour
     /// </summary>
     public async void StartMiniGame()
     {
+        SoundManager.Instance.StopBGM();
+        SoundManager.Instance.PlayBGM("GameBGM");
         effects.gameObject.SetActive(false);
         miniGameReady = false;
         // 미니 게임 띄우는 애니메이션

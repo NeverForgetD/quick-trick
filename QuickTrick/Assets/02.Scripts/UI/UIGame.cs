@@ -74,7 +74,6 @@ public class UIGame : MonoBehaviour
                 break;
             case Define.RunnerStatus.GAME:
                 DisconnectBtn.gameObject.SetActive(false);
-                SoundManager.Instance.StopBGM();
                 break;
             case Define.RunnerStatus.DISCONNECTING:
                 TurnOnUI(guideUI);

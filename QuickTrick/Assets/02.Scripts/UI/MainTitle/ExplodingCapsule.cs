@@ -10,8 +10,8 @@ public class ExplodingCapsul : MonoBehaviour
     [Header("Popcorn Effect Settings")]
     public GameObject spawnPrefab; // 팝콘처럼 생성될 오브젝트 프리팹
     public int minSpawnCount = 15; // 최소 소환 개수
-    public int maxSpawnCount = 15; // 최대 소환 개수
-    public float explosionForce = 20f; // 팝콘처럼 터지는 힘
+    public int maxSpawnCount = 20; // 최대 소환 개수
+    public float explosionForce = 30f; // 팝콘처럼 터지는 힘
     public float fadeDuration = 0.5f; // 소환된 오브젝트 사라지는 시간
 
     private Vector3 originalScale;
@@ -44,6 +44,7 @@ public class ExplodingCapsul : MonoBehaviour
 
     void TriggerExplosion()
     {
+        SoundManager.Instance.PlaySFX("Crack");
         int spawnCount = Random.Range(minSpawnCount, maxSpawnCount);
         Vector3 spawnPosition = transform.position;
 

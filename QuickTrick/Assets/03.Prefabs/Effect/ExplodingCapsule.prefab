@@ -169,7 +169,7 @@ MonoBehaviour:
   maxScale: 2
   animationDuration: 0.2
   spawnPrefab: {fileID: 6640488067819300204, guid: 5f28177b4dde4634590983e08d9e9850, type: 3}
-  minSpawnCount: 5
-  maxSpawnCount: 10
-  explosionForce: 20
+  minSpawnCount: 15
+  maxSpawnCount: 20
+  explosionForce: 30
   fadeDuration: 0.5
