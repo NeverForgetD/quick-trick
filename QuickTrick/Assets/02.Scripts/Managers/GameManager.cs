@@ -137,7 +137,8 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
 
             // 랜덤한 미니게임 결정 및 동기화
             randomGameIndex = UnityEngine.Random.Range(0, (int)Define.GameMode.MaxCount);
-            randomGameIndex = UnityEngine.Random.Range(1, 4);
+            //randomGameIndex = UnityEngine.Random.Range(1, 4);
+            randomGameIndex = 1;
             RPC_UpdateSelectedGame(randomGameIndex);
 
             // 뽑기 애니메이션 재생
@@ -234,10 +235,10 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
         if (!isValid)
         {
             //playersResponseTime.Add(playerID, -1f);
-            //if (playerID == 1)
-            //    player1Time = -1;
-            //else
-            //    player2Time = -1;
+            if (playerID == 1)
+                player1Time = -1;
+            else
+                player2Time = -1;
             isResultSent = true;
         }
         else

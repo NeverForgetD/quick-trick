@@ -68,8 +68,8 @@ public class QuickDraw01 : MiniGameBase
     public override void OnStandBy()
     {
         Sequence seq = DOTween.Sequence();
-        seq.Append(tumbleWeed.transform.DOMoveX(-20, 3f).From());
-        seq.Join(tumbleWeed.transform.DORotate(new Vector3(0, 0, 350), 3f));
+        seq.Append(tumbleWeed.transform.DOMoveX(-5, 3f).From());
+        //seq.Join(tumbleWeed.transform.DOShakePosition(3f, 5, 5, 10));
 
         seq.AppendInterval(0.2f);
         seq.AppendCallback(() => { ShowExplanationText(); });

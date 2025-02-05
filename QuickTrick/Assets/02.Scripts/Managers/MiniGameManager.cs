@@ -59,6 +59,8 @@ public class MiniGameManager : MonoBehaviour
 
     public void PlayGachaAnimation()
     {
+        SoundManager.Instance.StopBGM();
+        SoundManager.Instance.PlayBGM("Wait");
         GachaUI.gameObject.SetActive(true);
         GachaUI.PlayGachaAnimation();
         waitGachaTime = 11;
