@@ -27,205 +27,121 @@ Quick Trick!은
 
 ### 🔹 매치메이킹 및 세션 흐름 관리
 - 플레이어 매칭부터 게임 시작까지의 전체 흐름 설계
+<details>
+<summary>💡Code</summary>
+
+```{csharp}
+
+```
+</details>
+
 
 ### 🔹 멀티플레이 게임 흐름 동기화 (RPC 기반)
 - 입력 허용 시점과 결과 판정을 서버 기준으로 동기화
+<details>
+<summary>💡Code</summary>
+
+```{csharp}
+
+```
+</details>
 
 ### 🔹 확장 가능한 미니게임 구조 설계 (객체지향)
 - 공통 인터페이스 기반의 미니게임 확장 구조
+<details>
+<summary>💡Code</summary>
+
+```{csharp}
+
+```
+</details>
 
 ### 🔹 ScriptableObject 기반 데이터 중심 설계
 - 사운드 및 미니게임 설정을 데이터로 분리 관리
+<details>
+<summary>💡Code</summary>
+
+```{csharp}
+
+```
+</details>
 
 ### 🔹 런타임 시각 효과 및 물리 상호작용 구현
 - 랜덤성과 물리를 결합한 동적 연출 구현
-
-전체 구현 코드는 [Scripts 폴더](./Assets/Scripts)를 참고해주세요.
-
 <details>
-<summary>💡 C# 코드 보기</summary>
-  
-```csharp
-test code
-using Fusion;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using TMPro;
-using UnityEngine;
+<summary>💡Code</summary>
 
-public class MiniGameManager : MonoBehaviour
+```{csharp}
+public class PopcornEffect : MonoBehaviour
 {
-    #region Singleton
-    public static MiniGameManager Instance;
-    // DontDestory가 필요하면 나중에 넣자
-    private void Awake()
+    public GameObject ballPrefab; // 하나의 공 프리팹
+    public Sprite[] ballSprites;  // 16개의 공 이미지 배열
+
+    [Header("Ball Count Range")]
+    public int minBallCount = 2;   // 최소 공 개수 (Inspector에서 설정)
+    public int maxBallCount = 6;  // 최대 공 개수 (Inspector에서 설정)
+
+    public float explosionForce = 15f;  // 폭발력 (Inspector에서 설정)
+    public float animationDuration = 1.5f; // 애니메이션 지속 시간
+    public float fadeDuration = 0.5f;  // 페이드 아웃 시간
+
+    void Update()
     {
-        if (Instance == null)
-            Instance = this;
-        else
-            Destroy(gameObject);
-    }
-    #endregion
-
-    [SerializeField] UIGacha GachaUI;
-    [SerializeField] GameObject effects;
-    [SerializeField] GameObject EndGameUI;
-
-    public MiniGameSO _MiniGameSo => miniGameSO;
-    [SerializeField] MiniGameSO miniGameSO;
-
-    public bool miniGameReady { get; private set; }
-    public bool triggerOn { get; private set; }
-
-    public float triggerTime { get; private set; }
-
-    public MiniGameBase _miniGameInstance {get; private set;}
-
-    /// <summary>
-    /// 지금은 MGM에서 GM에게 전달해주지만, 이러면 2번 전송된다. GM 자체적으로 운영될 수 있도록 수정해야한다.
-    /// </summary>
-    public int waitGachaTime { get; private set; }
-    /// <summary>
-    /// 나중에 필요없으면 인덱스로만 저장하자
-    /// </summary>
-    public Define.GameMode selectedGameMode { get; private set; }
-    public int selectedGameIndex { get; private set; }
-
-    /// <summary>
-    /// Runner 기준으로 플레이어의  ID를 저장
-    /// </summary>
-    private int playerID;
-
-    public void UpdateSelectedMiniGame(int randomGameIndex)
-    {
-        selectedGameMode = (Define.GameMode)randomGameIndex;
-
-        selectedGameIndex = 0; // 초기화
-        selectedGameIndex = randomGameIndex;
-    }
-
-    public void PlayGachaAnimation()
-    {
-        SoundManager.Instance.StopBGM();
-        SoundManager.Instance.PlayBGM("Wait");
-        //Instantiate(GachaUI);
-        GachaUI.gameObject.SetActive(true);
-        GachaUI.PlayGachaAnimation();
-        waitGachaTime = 11;
-    }
-
-    public void EndGachaAnimation()
-    {
-        GachaUI.gameObject.SetActive(false);
-    }
-
-    public void UpdateTriggerTime(float triggerTimeFromServer)
-    {
-        triggerTime = triggerTimeFromServer;
-    }
-
-    /// <summary>
-    /// 서버에서 게임 시작 RPC가 호출된 이후부터 미니게임 루틴을 책임지는 메서드
-    /// </summary>
-    public async void StartMiniGame()
-    {
-        SoundManager.Instance.StopBGM();
-        SoundManager.Instance.PlayBGM("GameBGM");
-        effects.gameObject.SetActive(false);
-        miniGameReady = false;
-        // 미니 게임 띄우는 애니메이션
-        MiniGameBase miniGamePrefab = miniGameSO.GetMiniGamePrefab(selectedGameIndex);
-        _miniGameInstance = Instantiate(miniGamePrefab);
-
-        _miniGameInstance.OnStandBy();
-        // MiniGameBase에서 Standby 끝날 때까지 대기
-        await WaitForGameReady();
-        Debug.Log("Ready");
-
-        await RunTrigger(triggerTime);
-    }
-
-    /// <summary>
-    /// Standby 작업이 끝날 때 까지 대기하는 Task
-    /// </summary>
-    private async Task WaitForGameReady()
-    {
-        while (!miniGameReady)
+        if (Input.GetMouseButtonDown(0))  // 마우스 클릭 감지
         {
-            await Task.Yield();
+            Vector3 clickPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            clickPosition.z = 0;  // 2D 환경에서는 Z축을 0으로 설정
+
+            CreateExplosion(clickPosition);
         }
     }
 
-    /// <summary>
-    /// 전달받은 triggerTime 이후에 트리거를 키고, 미니게임인스턴스를 통해 시각화한다.
-    /// </summary>
-    /// <returns></returns>
-    private async Task RunTrigger(float triggerTime)
+    public void CreateExplosion(Vector3 position)
     {
-        int sec = Mathf.FloorToInt(triggerTime) * 1000;
-        await Task.Delay(sec);
+        SoundManager.Instance.PlaySFX("Bloop");
+        // Inspector에서 지정한 범위 내에서 랜덤한 공 개수 설정
+        int ballCount = Random.Range(minBallCount, maxBallCount + 1);
 
-        triggerOn = true;
-        _miniGameInstance.OnTriggerEvent();
-    }
-
-    /// <summary>
-    /// 미니게임 입력처리가 끝난 후, 결과 발표 단계
-    /// </summary>
-    public void EndMiniGame(int winnerID, float player1ResponseTime, float player2ResponseTime)
-    {
-        SoundManager.Instance.StopBGM();
-        SoundManager.Instance.PlayBGM("End");
-        float opponentResponseTime = playerID == 1 ? player2ResponseTime : player1ResponseTime;
-
-        if (playerID == winnerID)
+        for (int i = 0; i < ballCount; i++)
         {
-            _miniGameInstance.OnLocalPlayerWin(opponentResponseTime);
+            // 공 오브젝트 생성
+            GameObject ball = Instantiate(ballPrefab, position, Quaternion.identity);
+            SpriteRenderer spriteRenderer = ball.GetComponent<SpriteRenderer>();
+
+            // 랜덤 스프라이트 적용
+            int randomIndex = Random.Range(0, ballSprites.Length);
+            spriteRenderer.sprite = ballSprites[randomIndex];
+
+            // Rigidbody2D 추가 및 force 적용
+            Rigidbody2D rb = ball.GetComponent<Rigidbody2D>();
+            if (rb == null)
+                rb = ball.AddComponent<Rigidbody2D>();
+            
+            // Collider2D 비활성화 후 일정 시간 후 활성화
+            Collider2D col = ball.GetComponent<Collider2D>();
+            if (col == null)
+                col = ball.AddComponent<CircleCollider2D>();  // 원하는 Collider 종류 선택
+            col.enabled = false;  // 생성 시 충돌 비활성화
+
+            DOVirtual.DelayedCall(0.4f, () =>
+            {
+                col.enabled = true;  // n초 후 충돌 활성화
+            });
+
+            // 랜덤 방향으로 force 적용 (Inspector의 explosionForce 값 사용)
+            Vector2 randomDirection = Random.insideUnitCircle.normalized;
+            rb.AddForce(randomDirection * explosionForce, ForceMode2D.Impulse);
+
+            // 투명도 조정 후 제거
+            spriteRenderer.DOFade(0, fadeDuration)
+                .SetDelay(animationDuration)
+                .OnComplete(() => Destroy(ball));
         }
-        else
-        {
-            _miniGameInstance.OnLocalPlayerLose(opponentResponseTime);
-        }
-        Debug.Log($"1 : {player1ResponseTime} /// 2: {player2ResponseTime}");
-    }
-
-    public void EndGame()
-    {
-        EndGameUI.SetActive(true);
-    }
-
-
-
-
-
-    /// <summary>
-    /// MiniGameBase에서 Standby 애니메이션 작업 끝나면 호출, Player에게 전달
-    /// </summary>
-    public void GameReady()
-    {
-        miniGameReady = true;
-    }
-
-    /// <summary>
-    /// Player에서 호출. 클릭 허용하지 않게 변경
-    /// </summary>
-    public void GameDone()
-    {
-        miniGameReady = false;
-    }
-
-    /// <summary>
-    /// player가 스폰될 때 플레이어가 호스트인지 클라이언트인지 확인해주는 인덱스 발급
-    /// </summary>
-    /// <param name="runnerPlayerID"></param>
-    public void SetPlayerID(int runnerPlayerID)
-    {
-        playerID = runnerPlayerID;
-        Debug.Log($"this com {playerID}");
     }
 }
-</details> ```
+```
+</details>
+
+전체 구현 코드는 [Scripts 폴더](./Assets/Scripts)를 참고해주세요.
 
 
