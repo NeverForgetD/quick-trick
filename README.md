@@ -142,6 +142,7 @@ public class PopcornEffect : MonoBehaviour
 ```
 </details>
 
-전체 구현 코드는 [Scripts 폴더](./Assets/Scripts)를 참고해주세요.
+전체 구현 코드는 [Scripts 폴더](QuickTrick/Assets/02.Scripts)를 참고해주세요.
+
 
 
