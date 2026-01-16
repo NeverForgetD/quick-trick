@@ -23,124 +23,209 @@ Quick Trick!은
 
 ---
 
-## 2. 문제 정의
+## 🧩 세부 구현 내용
 
-이 프로젝트에서 가장 중요하게 다뤘던 문제는 다음과 같습니다.
+### 🔹 매치메이킹 및 세션 흐름 관리
+- 플레이어 매칭부터 게임 시작까지의 전체 흐름 설계
 
-- 멀티플레이 환경에서 **반응속도를 어떻게 공정하게 비교할 것인가**
-- 네트워크 지연(ping) 차이가 결과에 영향을 주지 않도록 할 수 있는가
-- 설명 없이도 규칙이 이해되는 게임을 만들 수 있는가
+### 🔹 멀티플레이 게임 흐름 동기화 (RPC 기반)
+- 입력 허용 시점과 결과 판정을 서버 기준으로 동기화
 
-겉보기에는 단순한 게임이지만,  
-실제로는 **네트워크 구조와 판정 기준이 핵심**이 되는 문제였습니다.
+### 🔹 확장 가능한 미니게임 구조 설계 (객체지향)
+- 공통 인터페이스 기반의 미니게임 확장 구조
 
----
+### 🔹 ScriptableObject 기반 데이터 중심 설계
+- 사운드 및 미니게임 설정을 데이터로 분리 관리
 
-## 3. 설계 목표
+### 🔹 런타임 시각 효과 및 물리 상호작용 구현
+- 랜덤성과 물리를 결합한 동적 연출 구현
 
-위 문제를 바탕으로 다음과 같은 목표를 설정했습니다.
+전체 구현 코드는 [Scripts 폴더](./Assets/Scripts)를 참고해주세요.
 
-- 네트워크 지연이 결과에 미치는 영향 최소화
-- 1~2초 설명만으로 이해 가능한 규칙
-- 오프라인 행사 환경에서도 빠른 매칭과 진행
-- 구현보다 **판단 근거를 설명할 수 있는 구조**
+<details>
+<summary>💡 C# 코드 보기</summary>
+  
+```csharp
+test code
+using Fusion;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using TMPro;
+using UnityEngine;
 
----
+public class MiniGameManager : MonoBehaviour
+{
+    #region Singleton
+    public static MiniGameManager Instance;
+    // DontDestory가 필요하면 나중에 넣자
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
+    }
+    #endregion
 
-## 4. 핵심 설계 결정 (Key Decisions)
+    [SerializeField] UIGacha GachaUI;
+    [SerializeField] GameObject effects;
+    [SerializeField] GameObject EndGameUI;
 
-### 4.1 멀티플레이 선택 이유
+    public MiniGameSO _MiniGameSo => miniGameSO;
+    [SerializeField] MiniGameSO miniGameSO;
 
-오프라인 행사에서 중요한 요소는  
-**사람이 몰리고, 바로 참여할 수 있는 구조**라고 판단했습니다.
+    public bool miniGameReady { get; private set; }
+    public bool triggerOn { get; private set; }
 
-- 1인 플레이: 회전율 낮음
-- 멀티플레이: 대기·관전·참여 흐름 형성
+    public float triggerTime { get; private set; }
 
-이에 따라 Quick Trick!은 처음부터 멀티플레이를 전제로 기획되었습니다.
+    public MiniGameBase _miniGameInstance {get; private set;}
 
----
+    /// <summary>
+    /// 지금은 MGM에서 GM에게 전달해주지만, 이러면 2번 전송된다. GM 자체적으로 운영될 수 있도록 수정해야한다.
+    /// </summary>
+    public int waitGachaTime { get; private set; }
+    /// <summary>
+    /// 나중에 필요없으면 인덱스로만 저장하자
+    /// </summary>
+    public Define.GameMode selectedGameMode { get; private set; }
+    public int selectedGameIndex { get; private set; }
 
-### 4.2 네트워크 구조 선택 – Photon Fusion
+    /// <summary>
+    /// Runner 기준으로 플레이어의  ID를 저장
+    /// </summary>
+    private int playerID;
 
-초기에는 서버를 직접 구현하는 방안도 고려했습니다.  
-그러나 공모전 일정상 빠른 프로토타입과 안정성이 더 중요하다고 판단해  
-상용 네트워크 솔루션인 **Photon Fusion**을 선택했습니다.
+    public void UpdateSelectedMiniGame(int randomGameIndex)
+    {
+        selectedGameMode = (Define.GameMode)randomGameIndex;
 
-- 출시 초기로 레퍼런스 부족
-- 공식 문서를 중심으로 구조 학습
-- 기능 사용보다 **동작 원리 이해에 집중**
+        selectedGameIndex = 0; // 초기화
+        selectedGameIndex = randomGameIndex;
+    }
 
-이 과정에서  
-**네트워크 구조를 이해하지 못하면 멀티플레이 게임을 설계하기 어렵다**는 한계를 체감했습니다.
+    public void PlayGachaAnimation()
+    {
+        SoundManager.Instance.StopBGM();
+        SoundManager.Instance.PlayBGM("Wait");
+        //Instantiate(GachaUI);
+        GachaUI.gameObject.SetActive(true);
+        GachaUI.PlayGachaAnimation();
+        waitGachaTime = 11;
+    }
 
----
+    public void EndGachaAnimation()
+    {
+        GachaUI.gameObject.SetActive(false);
+    }
 
-### 4.3 반응속도 판정 기준
+    public void UpdateTriggerTime(float triggerTimeFromServer)
+    {
+        triggerTime = triggerTimeFromServer;
+    }
 
-단순히 먼저 클릭한 플레이어를 승자로 판단하지 않고,
+    /// <summary>
+    /// 서버에서 게임 시작 RPC가 호출된 이후부터 미니게임 루틴을 책임지는 메서드
+    /// </summary>
+    public async void StartMiniGame()
+    {
+        SoundManager.Instance.StopBGM();
+        SoundManager.Instance.PlayBGM("GameBGM");
+        effects.gameObject.SetActive(false);
+        miniGameReady = false;
+        // 미니 게임 띄우는 애니메이션
+        MiniGameBase miniGamePrefab = miniGameSO.GetMiniGamePrefab(selectedGameIndex);
+        _miniGameInstance = Instantiate(miniGamePrefab);
 
-- 서버 기준 타임스탬프
-- 네트워크 지연 고려
-- 일관된 판정 기준 유지
+        _miniGameInstance.OnStandBy();
+        // MiniGameBase에서 Standby 끝날 때까지 대기
+        await WaitForGameReady();
+        Debug.Log("Ready");
 
-를 중심으로 승패를 결정하도록 설계했습니다.
+        await RunTrigger(triggerTime);
+    }
 
-공정성은 체감의 문제가 아니라  
-**설계 기준의 문제**라고 판단했습니다.
+    /// <summary>
+    /// Standby 작업이 끝날 때 까지 대기하는 Task
+    /// </summary>
+    private async Task WaitForGameReady()
+    {
+        while (!miniGameReady)
+        {
+            await Task.Yield();
+        }
+    }
 
----
+    /// <summary>
+    /// 전달받은 triggerTime 이후에 트리거를 키고, 미니게임인스턴스를 통해 시각화한다.
+    /// </summary>
+    /// <returns></returns>
+    private async Task RunTrigger(float triggerTime)
+    {
+        int sec = Mathf.FloorToInt(triggerTime) * 1000;
+        await Task.Delay(sec);
 
-## 5. 전체 게임 흐름
+        triggerOn = true;
+        _miniGameInstance.OnTriggerEvent();
+    }
 
-1. 플레이어 매칭
-2. 랜덤 대기 시간
-3. 입력 허용 시점 동기화
-4. 서버 기준 반응속도 판정
-5. 결과 표시 및 다음 라운드 진행
+    /// <summary>
+    /// 미니게임 입력처리가 끝난 후, 결과 발표 단계
+    /// </summary>
+    public void EndMiniGame(int winnerID, float player1ResponseTime, float player2ResponseTime)
+    {
+        SoundManager.Instance.StopBGM();
+        SoundManager.Instance.PlayBGM("End");
+        float opponentResponseTime = playerID == 1 ? player2ResponseTime : player1ResponseTime;
 
-짧은 플레이 루프를 통해  
-행사 환경에서도 빠른 회전이 가능하도록 구성했습니다.
+        if (playerID == winnerID)
+        {
+            _miniGameInstance.OnLocalPlayerWin(opponentResponseTime);
+        }
+        else
+        {
+            _miniGameInstance.OnLocalPlayerLose(opponentResponseTime);
+        }
+        Debug.Log($"1 : {player1ResponseTime} /// 2: {player2ResponseTime}");
+    }
 
----
+    public void EndGame()
+    {
+        EndGameUI.SetActive(true);
+    }
 
-## 6. 기술적 선택과 이유
 
-- **상용 네트워크 솔루션 사용**  
-  → 안정성과 일정 관리 우선
 
-- **단순한 규칙, 명확한 판정 기준**  
-  → 플레이어 납득도 향상
 
-- **엔진 기능 의존 최소화**  
-  → 구조 이해 중심 개발
 
----
+    /// <summary>
+    /// MiniGameBase에서 Standby 애니메이션 작업 끝나면 호출, Player에게 전달
+    /// </summary>
+    public void GameReady()
+    {
+        miniGameReady = true;
+    }
 
-## 7. 한계와 개선 방향
+    /// <summary>
+    /// Player에서 호출. 클릭 허용하지 않게 변경
+    /// </summary>
+    public void GameDone()
+    {
+        miniGameReady = false;
+    }
 
-현재 구조의 한계는 다음과 같습니다.
+    /// <summary>
+    /// player가 스폰될 때 플레이어가 호스트인지 클라이언트인지 확인해주는 인덱스 발급
+    /// </summary>
+    /// <param name="runnerPlayerID"></param>
+    public void SetPlayerID(int runnerPlayerID)
+    {
+        playerID = runnerPlayerID;
+        Debug.Log($"this com {playerID}");
+    }
+}
+</details> ```
 
-- 네트워크 환경이 극단적으로 불안정할 경우 보정 한계
-- 2인 플레이에 최적화된 구조
 
-향후에는 다음을 고려하고 있습니다.
-
-- 입력 보정 알고리즘 개선
-- 플레이어 수 확장에 따른 구조 재설계
-
----
-
-## 8. 이 프로젝트를 통해 얻은 점
-
-- 멀티플레이 게임에서 **공정성은 설계 문제**라는 인식
-- 엔진을 사용하는 것과 **이해하는 것의 차이**
-- 완성보다 **판단 근거를 설명할 수 있는 개발**의 중요성
-
----
-
-## 9. 링크
-
-- GitHub Repository: (현재 저장소)
-- Demo Video: (영상 링크)
-- Portfolio (Notion): (노션 링크)
