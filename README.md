@@ -27,8 +27,9 @@ Quick Trick!은
 
 ### 🔹 매치메이킹 및 세션 흐름 관리
 - 플레이어 매칭부터 게임 시작까지의 전체 흐름 설계
+
 <details>
-<summary>💡Code</summary>
+<summary>구현 코드 보기</summary>
 
 ```{csharp}
 using Fusion;
@@ -370,11 +371,12 @@ public class GameManager : NetworkBehaviour, IPlayerJoined, IPlayerLeft
 ```
 </details>
 
+<br>
 
 ### 🔹 멀티플레이 게임 흐름 동기화 (RPC 기반)
 - 입력 허용 시점과 결과 판정을 서버 기준으로 동기화
 <details>
-<summary>💡Code</summary>
+<summary>구현 코드 보기</summary>
 
 ```{csharp}
 using Fusion;
@@ -549,10 +551,12 @@ public class MiniGameManager : MonoBehaviour
 ```
 </details>
 
+<br>
+
 ### 🔹 확장 가능한 미니게임 구조 설계 (객체지향)
 - 공통 인터페이스 기반의 미니게임 확장 구조
 <details>
-<summary>💡Code</summary>
+<summary>구현 코드 보기</summary>
 
 ```{csharp}
 public abstract class MiniGameBase : MonoBehaviour
@@ -652,10 +656,12 @@ public abstract class MiniGameBase : MonoBehaviour
 ```
 </details>
 
+<br>
+
 ### 🔹 ScriptableObject 기반 데이터 중심 설계
 - 사운드 및 미니게임 설정을 데이터로 분리 관리
 <details>
-<summary>💡Code</summary>
+<summary>구현 코드 보기</summary>
 
 ```{csharp}
 [CreateAssetMenu(fileName = "MiniGameSO", menuName = "Scriptable Objects/MiniGameSO")]
@@ -727,10 +733,12 @@ public class SoundData : ScriptableObject
 ```
 </details>
 
+<br>
+
 ### 🔹 런타임 시각 효과 및 물리 상호작용 구현
 - 랜덤성과 물리를 결합한 동적 연출 구현
 <details>
-<summary>💡Code</summary>
+<summary>구현 코드 보기</summary>
 
 ```{csharp}
 public class PopcornEffect : MonoBehaviour
@@ -802,6 +810,9 @@ public class PopcornEffect : MonoBehaviour
 }
 ```
 </details>
+
+<br>
+---
 
 전체 구현 코드는 [Scripts 폴더](QuickTrick/Assets/02.Scripts)를 참고해주세요.
 
