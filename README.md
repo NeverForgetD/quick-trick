@@ -9,7 +9,7 @@
 
 ## 1. 프로젝트 개요
 
-- **플랫폼**: PC (오프라인 행사 기준)
+- **플랫폼**: PC, Windows
 - **엔진**: Unity
 - **네트워크**: Photon Fusion
 - **장르**: 멀티플레이 / 캐주얼 / 반응속도
@@ -812,6 +812,7 @@ public class PopcornEffect : MonoBehaviour
 </details>
 
 <br>
+
 ---
 
 전체 구현 코드는 [Scripts 폴더](QuickTrick/Assets/02.Scripts)를 참고해주세요.
