@@ -3,6 +3,8 @@
 > 네트워크 환경에서도 공정한 반응속도 대결을 목표로 설계·구현한  
 > **멀티플레이 캐주얼 게임 프로젝트**입니다.
 
+<img width="4378" height="866" alt="QuickTrick_banner" src="https://github.com/user-attachments/assets/7b970c64-b90e-49c5-ba68-e63579eb1259" />
+
 ---
 
 ## 1. 프로젝트 개요
