@@ -21,7 +21,7 @@ Quick Trick!은
 짧은 시간 안에 누가 더 빠르게 반응했는지를 겨루는 게임으로,  
 오프라인 행사 환경에서도 처음 접한 플레이어가 즉시 이해하고 참여할 수 있도록 설계했습니다.
 
-[플레이 영상](https://youtu.be/l9BJzEqFgyA)
+[플레이 영상](https://youtu.be/l9BJzEqFgyA) / [빌드 zip](https://drive.google.com/drive/folders/1GeiIas0hRtJFY9sshF0yrQBFz__MVitg?usp=sharing)
 
 ---
 
